@@ -9,7 +9,7 @@ module.exports = function(config) {
     reporters: ['progress', 'coverage'],
 
     preprocessors: {
-      'src/**/!(*.spec).js': ['coverage']
+      'app/scripts/*/**/*.js': ['coverage']
     },
 
     coverageReporter: {
