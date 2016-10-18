@@ -16,13 +16,30 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
+    cdnify: 'grunt-google-cdn',
+    karma: 'coveralls',
+    ngconstant: 'grunt-ng-constant'
   });
+
+  var loadConfig = function() {
+    var config = {};
+
+    if (grunt.file.exists('config.json')) {
+      config = grunt.file.readJSON('config.json');
+    } else {
+      config = grunt.file.readJSON('config.dist.json');
+    }
+
+    return {
+      appConfig: config
+    };
+  };
 
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist',
+    basePath: loadConfig().appConfig.basePath || '/'
   };
 
   // Define the configuration for all the tasks
@@ -88,6 +105,10 @@ module.exports = function (grunt) {
               connect().use(
                 '/app/styles',
                 connect.static('./app/styles')
+              ),
+              connect().use(
+                '/node_modules',
+                connect.static('./node_modules')
               ),
               connect.static(appConfig.app)
             ];
@@ -475,10 +496,22 @@ module.exports = function (grunt) {
         coverageDir: 'coverage/',
         recursive: true
       }
+    },
+
+    // Custom configuration.
+    ngconstant: {
+      options: {
+        name: 'config',
+        dest: '<%= yeoman.app %>/scripts/config.js'
+      },
+      dist: {
+        constants: loadConfig
+      },
+      dev: {
+        constants: loadConfig
+      }
     }
   });
-
-  grunt.loadNpmTasks('grunt-karma-coveralls');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -489,6 +522,7 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
+      'ngconstant:dev',
       'postcss:server',
       'connect:livereload',
       'watch'
@@ -504,6 +538,7 @@ module.exports = function (grunt) {
     'clean:server',
     'wiredep',
     'concurrent:test',
+    'ngconstant:dev',
     'postcss',
     'connect:test',
     'karma'
@@ -511,6 +546,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:dist',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',

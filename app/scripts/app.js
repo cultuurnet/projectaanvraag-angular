@@ -1,30 +1,41 @@
 'use strict';
-
+console.log('app loaded');
 /**
  * @ngdoc overview
- * @name projectaanvraagAngularApp
+ * @name projectaanvraagApp
  * @description
- * # projectaanvraagAngularApp
+ * # Angular application for project aanvraag
  *
  * Main module of the application.
  */
 angular
-  .module('projectaanvraagAngularApp', [
+  .module('projectaanvraagApp', [
+    'config',
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.router',
+    'cultuurnet.uitid'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+  .config(function ($stateProvider, $httpProvider) {
+
+    var loginState = {
+      name: 'login',
+      url: 'login',
+      component: 'loginComponent',
+    };
+    $stateProvider.state(loginState);
+
+    var dashboardState = {
+      name: 'dashboard',
+      url: '',
+      component: 'dashboardComponent',
+      requireAuth: true
+    };
+    $stateProvider.state(dashboardState);
+
+    $httpProvider.defaults.withCredentials = true;
+});
