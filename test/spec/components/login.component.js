@@ -26,7 +26,7 @@ describe('Component: loginComponent', function () {
   it('redirects to the authentication page with current destination', function () {
 
     spyOn($location, 'absUrl').and.returnValue('http://www.example.com');
-    loginController.login()
+    loginController.login();
     expect(uitidService.login).toHaveBeenCalledWith('http://www.example.com');
   });
 
@@ -38,9 +38,9 @@ describe('Component: loginComponent', function () {
     $state.current.name = 'login';
     spyOn($state, 'href').and.returnValue('http://www.example2.com');
 
-    loginController.login()
+    loginController.login();
 
-    expect($state.href).toHaveBeenCalledWith('dashboard', {}, {absolute: true})
+    expect($state.href).toHaveBeenCalledWith('dashboard', {}, {absolute: true});
     expect(uitidService.login).toHaveBeenCalledWith('http://www.example2.com');
   });
 });

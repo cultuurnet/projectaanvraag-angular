@@ -24,7 +24,7 @@ describe('Controller: AppController', function () {
     var user = {
       name: 'Nils'
     };
-    AppController.setUser(user)
+    AppController.setUser(user);
     expect(AppController.user).toBe(user);
   });
 
@@ -78,9 +78,9 @@ describe('Controller: AppController', function () {
 
   });
 
-  it("skips authentictation checks for states that don't require it", function () {
+  it('skips authentictation checks for states that don\'t require it', function () {
 
-    spyOn(uitid, 'getUser')
+    spyOn(uitid, 'getUser');
 
     $state.go('login');
     expect(uitid.getUser).not.toHaveBeenCalled();

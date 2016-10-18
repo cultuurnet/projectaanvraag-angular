@@ -1,5 +1,5 @@
 'use strict';
-console.log('app loaded');
+
 /**
  * @ngdoc overview
  * @name projectaanvraagApp
