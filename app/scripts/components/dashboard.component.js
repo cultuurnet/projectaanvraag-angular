@@ -18,8 +18,6 @@
   /* @ngInject */
   function dashboardController() {
 
-    /*jshint validthis: true */
-    var ctrl = this;
   }
 
 })();
