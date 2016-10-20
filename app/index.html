@@ -26,7 +26,7 @@
 
     <ui-view></ui-view>
 
-    <ng-include src="'views/footer.html'"></ng-include>
+    <footer-component></footer-component>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -48,9 +48,21 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/config.js"></script>
+
+    <!-- Controllers -->
     <script src="scripts/controllers/app.controller.js"></script>
+
+    <!-- Components -->
+    <script src="scripts/components/footer.component.js"></script>
     <script src="scripts/components/login.component.js"></script>
     <script src="scripts/components/dashboard.component.js"></script>
+
+    <!-- Services -->
+    <script src="scripts/services/projectaanvraag-api.service.js"></script>
+
+    <!-- factories -->
+    <script src="scripts/factories/integration-type.factory.js"></script>
+
     <!-- endbuild -->
 </body>
 </html>
