@@ -24,16 +24,6 @@ function integrationTypeFactory() {
 
   IntegrationType.prototype = {
 
-    init: function() {
-      this.id = '';
-      this.name = '';
-      this.description = '';
-      this.price = 0;
-      this.url = '';
-      this.extraInfo = [];
-      this.groupId = 0;
-    },
-
     /**
      * Parse the integration type based on a parsed json object.
      * @param jsonObject

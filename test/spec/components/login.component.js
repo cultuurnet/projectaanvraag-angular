@@ -27,7 +27,7 @@ describe('Component: loginComponent', function () {
 
     spyOn($location, 'absUrl').and.returnValue('http://www.example.com');
     loginController.login();
-    expect(uitidService.login).toHaveBeenCalledWith('http://www.example.com');
+    expect(uitidService.login).toHaveBeenCalledWith('http://www.example.com', true);
   });
 
   /**
@@ -41,6 +41,6 @@ describe('Component: loginComponent', function () {
     loginController.login();
 
     expect($state.href).toHaveBeenCalledWith('dashboard', {}, {absolute: true});
-    expect(uitidService.login).toHaveBeenCalledWith('http://www.example2.com');
+    expect(uitidService.login).toHaveBeenCalledWith('http://www.example2.com', true);
   });
 });

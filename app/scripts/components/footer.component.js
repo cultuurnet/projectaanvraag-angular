@@ -19,6 +19,12 @@
 
         /*jshint validthis: true */
         var ctrl = this;
+
+        ctrl.integrationTypes = [];
+
+        /**
+         * Load the integration types and assign it to scope.
+         */
         projectaanvraagApiService.getIntegrationTypes().then(function(integrationTypes) {
             ctrl.integrationTypes = integrationTypes;
         });
