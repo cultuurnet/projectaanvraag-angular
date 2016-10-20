@@ -31,7 +31,7 @@
       if ($state.current.name === 'login') {
         destination = $state.href('dashboard', {}, {absolute: true});
       }
-      uitidService.login(destination);
+      uitidService.login(destination, true);
     };
   }
 
