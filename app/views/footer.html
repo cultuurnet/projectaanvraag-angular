@@ -9,11 +9,11 @@
             <div class="well">
               <h4 ng-bind="integrationType.name"></h4>
               <p ng-bind="integrationType.description"></p>
-              <ul>
+              <ul ng-if="integrationType.extraInfo.length > 0">
                 <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
               </ul>
               <p class="text-center"><strong>vanaf {{ integrationType.price }} per jaar</strong></p>
-              <p class="text-center"><a class="btn btn-default" ng-href="integrationType.url">Meer info</a></p>
+              <p class="text-center"><a class="btn btn-default" ng-href="{{ integrationType.url }}">Meer info</a></p>
             </div>
           </div>
 
