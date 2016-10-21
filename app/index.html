@@ -26,7 +26,9 @@
 
     <ng-include src="'views/header.html'"></ng-include>
 
-    <ui-view></ui-view>
+    <div class="container">
+      <ui-view></ui-view>
+    </div>
 
     <footer-component></footer-component>
 
@@ -62,6 +64,7 @@
     <script src="scripts/components/login.component.js"></script>
     <script src="scripts/components/dashboard.component.js"></script>
     <script src="scripts/components/dashboard-item.component.js"></script>
+    <script src="scripts/components/add_project.component.js"></script>
 
     <!-- Services -->
     <script src="scripts/services/projectaanvraag-api.service.js"></script>

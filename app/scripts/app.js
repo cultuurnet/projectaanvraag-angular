@@ -24,8 +24,8 @@ angular
 
     var loginState = {
       name: 'login',
-      url: 'login',
-      component: 'loginComponent',
+      url: '/login',
+      component: 'loginComponent'
     };
     $stateProvider.state(loginState);
 
@@ -36,6 +36,14 @@ angular
       requireAuth: true
     };
     $stateProvider.state(dashboardState);
+
+    var addProjectState = {
+      name: 'addProject',
+      url: '/projects/add',
+      component: 'addProjectComponent',
+      requireAuth: true
+    };
+    $stateProvider.state(addProjectState);
 
     $httpProvider.defaults.withCredentials = true;
 });
