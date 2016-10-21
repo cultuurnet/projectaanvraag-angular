@@ -1,0 +1,59 @@
+<form name="addProject" ng-controller="addProjectController">
+    <div class="form-group">
+        <label for="project_name">Naam van het project</label>
+        <input type="text" class="form-control" id="project_name">
+    </div>
+    <div class="form-group">
+        <label for="project_summary">Doel van het project</label>
+        <input type="text" class="form-control" id="project_summary">
+    </div>
+    <div class="form-group">
+        <label>Type integratie</label>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row" ng-repeat="integrationType in $ctrl.integrationTypes">
+                <div class="col-xs-1">
+                    <input type="radio" name="integrationType" ng-value="integrationType.id">
+                </div>
+                <div class="col-xs-8">
+                    <p>{{ integrationType.name }}<br/>
+                        <span class="text-muted">{{ integrationType.description }}
+                            <a ng-href="{{ integrationType.url }}">meer info</a>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <p class="text-right">vanaf {{ integrationType.price }} per jaar</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="alert alert-info">
+                <p>Je betaalt pas wanneer je gebruik wil maken van echte data. Je probeert eerst alle mogelijkheden met
+                    testevenementen.</p>
+            </div>
+        </div>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value="" class="js-check-coupon"> Ik heb een coupon
+        </label>
+    </div>
+    <section class="js-section-coupon" style="display: none">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="project_summary">Code</label>
+                    <input type="text" class="form-control" id="project_summary">
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value=""> Ik ga akkoord met de <a href="http://www.cultuurnet.be/terms">gebruiksvoorwaarden</a>
+        </label>
+    </div>
+    <a type="submit" class="btn btn-primary" href="projecten.html">Indienen</a>
+</form>
