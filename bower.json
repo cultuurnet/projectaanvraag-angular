@@ -13,7 +13,8 @@
     "angular-uitid-service": "cultuurnet/angular-uitid-service"
   },
   "devDependencies": {
-    "angular-mocks": "^1.4.0"
+    "angular-mocks": "^1.4.0",
+    "karma-read-json": "^1.1.0"
   },
   "appPath": "app",
   "moduleName": "projectaanvraagAngularApp",

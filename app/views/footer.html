@@ -5,37 +5,17 @@
         <p class="block-title">Mogelijkheden</p>
         <div class="row">
 
-
-          <div class="col-sm-4">
+          <div class="col-sm-4" ng-repeat="integrationType in $ctrl.integrationTypes">
             <div class="well">
-              <h4>Widgets</h4>
-              <p>Kant en klare html-modules die je in je website kan inpassen</p>
-              <ul><li>HTML, CSS, JS</li><li>Geschikt voor basisoplossingen</li></ul>
-              <p class="text-center"><strong>vanaf 110 euro / jaar</strong></p>
-              <p class="text-center"><a class="btn btn-default" href="http://www.cultuurnet.be/widgets">Meer info</a></p>
+              <h4 ng-bind="integrationType.name"></h4>
+              <p ng-bind="integrationType.description"></p>
+              <ul ng-if="integrationType.extraInfo.length > 0">
+                <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
+              </ul>
+              <p class="text-center"><strong>vanaf {{ integrationType.price }} per jaar</strong></p>
+              <p class="text-center"><a class="btn btn-default" ng-href="{{ integrationType.url }}">Meer info</a></p>
             </div>
           </div>
-
-          <div class="col-sm-4">
-            <div class="well">
-              <h4>Culturefeed</h4>
-              <p>Modules waarmee je een UiTagenda integreert in een Drupal-site</p>
-              <ul><li>Specifiek voor Drupal-sites</li><li>Je kan rekenen op de open-source gemeenschap</li></ul>
-              <p class="text-center"><strong>vanaf 80 euro / jaar</strong></p>
-              <p class="text-center"><a class="btn btn-default" href="http://www.cultuurnet.be/culturefeed">Meer info</a></p>
-            </div>
-          </div>
-
-          <div class="col-sm-4">
-            <div class="well">
-              <h4>API</h4>
-              <p>Met deze API krijg je toegang tot de zoekengine van de UiTdatabank</p>
-              <ul><li>Platformonafhankelijk</li><li>Individuele oplossingen op maat zijn mogelijk</li></ul>
-              <p class="text-center"><strong>vanaf 80 euro / jaar</strong></p>
-              <p class="text-center"><a class="btn btn-default" href="http://www.cultuurnet.be/api">Meer info</a></p>
-            </div>
-          </div>
-
 
         </div>
       </div>

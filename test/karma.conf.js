@@ -43,12 +43,19 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-uitid-service/src/uitid.module.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/karma-read-json/karma-read-json.js',
       // endbower
       'node_modules/angular-ui-router/release/angular-ui-router.js',
       'app/scripts/app.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/**/*.js',
+      {
+        pattern: 'test/json/*.json',
+        included: false,
+        watched:  true,
+        served:   true
+      },
     ],
 
     // list of files / patterns to exclude
