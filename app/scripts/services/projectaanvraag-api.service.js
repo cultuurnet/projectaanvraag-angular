@@ -1,13 +1,25 @@
 'use strict';
 
 /**
- * An error object return by the projectaanvraag API.
+ * An response object returned by the projectaanvraag API.
+ * @typedef {Object} ApiResponse
+ * @property {ApiMessage[]} messages    - The reponse messages.
+ * @property {ApiError[]} errors        - The reponse errors.
+ * @property {Array} data               - The response data.
+ *
+ * A message object returned by the projectaanvraag API.
+ * @typedef {Object} ApiMessage
+ * @property {string} message   - A human readable error message.
+ * @property {string} type      - The type of the message.
+ *
+ * An error object returned by the projectaanvraag API.
  * @typedef {Object} ApiError
  * @property {string} code      - An error code, eg: YOU_BROKE_IT.
- * @property {string} message   - A mostly readable error message.
+ * @property {string} message   - A human readable error message.
  * @property {string} exception - The actual exception that occurred.
  * @property {string} type      - The type of the error.
  */
+
 /**
  * @ngdoc service
  * @name projectaanvraagApp.projectaanvraagApiService
@@ -28,6 +40,12 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     service.cache = {
         projects: {},
         projectDetails: {}
+    };
+
+    var postConfig = {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+        }
     };
 
     /**
@@ -125,6 +143,22 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                     defer.reject('unable to retrieve the project');
                 });
         }
+    };
+
+    /**
+     * @returns {Promise}
+     *   A promise with a response.
+     */
+    service.addProject = function (formData) {
+        var defer = $q.defer();
+
+        $http.post(apiUrl + 'projects/add', $.param(formData), postConfig)
+            .success(function (data, status, headers, config) {
+                defer.resolve(data);
+            })
+            .error(function (data, status, header, config) {
+                defer.reject('Unable to add a new project');
+            });
 
         return defer.promise;
     };
