@@ -36,9 +36,12 @@
     // process the form
     $scope.processForm = function() {
       projectaanvraagApiService.addProject($scope.formData).then(function(response) {
-        //$state.go('dashboard', {name: 'Eric' });
         if (response.messages) {
           ctrl.messages = response.messages;
+        }
+
+        if (response.type == 'success') {
+          $state.go('dashboard');
         }
       });
     };
