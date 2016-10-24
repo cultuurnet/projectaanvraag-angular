@@ -3,6 +3,7 @@
 /**
  * An response object returned by the projectaanvraag API.
  * @typedef {Object} ApiResponse
+ * @property {string} type              - The response type (success or error).
  * @property {ApiMessage[]} messages    - The reponse messages.
  * @property {ApiError[]} errors        - The reponse errors.
  * @property {Array} data               - The response data.
