@@ -46,4 +46,4 @@ angular
     $stateProvider.state(addProjectState);
 
     $httpProvider.defaults.withCredentials = true;
-});
+  });
