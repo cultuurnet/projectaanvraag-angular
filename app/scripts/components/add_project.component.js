@@ -14,7 +14,7 @@
     });
 
   /* @ngInject */
-  function addProjectController($scope, $state, projectaanvraagApiService) {
+  function addProjectController($scope, $state, projectaanvraagApiService, Messages) {
     /*jshint validthis: true */
     var ctrl = this;
 
@@ -35,14 +35,12 @@
 
     // process the form
     $scope.processForm = function() {
+      //messages.danger.push('test2');
       projectaanvraagApiService.addProject($scope.formData).then(function(response) {
-        if (response.messages) {
-          ctrl.messages = response.messages;
-        }
-
-        if (response.type == 'success') {
-          $state.go('dashboard');
-        }
+        Messages.clearMessages();
+        Messages.addMessage('success', 'hooray');
+      }, function(reason) {
+        Messages.addMessage('danger', 'Something went wrong, please try again later.');
       });
     };
 

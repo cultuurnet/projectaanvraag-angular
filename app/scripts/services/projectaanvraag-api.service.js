@@ -1,27 +1,6 @@
 'use strict';
 
 /**
- * An response object returned by the projectaanvraag API.
- * @typedef {Object} ApiResponse
- * @property {string} type              - The response type (success or error).
- * @property {ApiMessage[]} messages    - The reponse messages.
- * @property {ApiError[]} errors        - The reponse errors.
- * @property {Array} data               - The response data.
- *
- * A message object returned by the projectaanvraag API.
- * @typedef {Object} ApiMessage
- * @property {string} message   - A human readable error message.
- * @property {string} type      - The type of the message.
- *
- * An error object returned by the projectaanvraag API.
- * @typedef {Object} ApiError
- * @property {string} code      - An error code, eg: YOU_BROKE_IT.
- * @property {string} message   - A human readable error message.
- * @property {string} exception - The actual exception that occurred.
- * @property {string} type      - The type of the error.
- */
-
-/**
  * @ngdoc service
  * @name projectaanvraagApp.projectaanvraagApiService
  * @description
@@ -81,12 +60,12 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType) {
     service.addProject = function (formData) {
         var defer = $q.defer();
 
-        $http.post(apiUrl + 'projects/add', $.param(formData), postConfig)
-            .success(function (data, status, headers, config) {
+        $http.post(apiUrl + 'projects/', formData, postConfig)
+            .success(function (data) {
                 defer.resolve(data);
             })
-            .error(function (data, status, header, config) {
-                defer.reject('Unable to add a new project');
+            .error(function (data) {
+                defer.reject(data);
             });
 
         return defer.promise;

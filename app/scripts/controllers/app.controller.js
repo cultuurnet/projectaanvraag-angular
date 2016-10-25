@@ -10,12 +10,13 @@ angular
   .controller('AppController', appController);
 
 /* @ngInject */
-function appController($transitions, $state, uitidService) {
+function appController($scope, $transitions, $state, uitidService, Messages) {
 
   /*jshint validthis: true */
   var app = this;
 
   app.user = undefined;
+  app.Messages = Messages;
 
   /**
    * Set the current user.
