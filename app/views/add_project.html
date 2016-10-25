@@ -1,13 +1,15 @@
-<form name="addProject" ng-submit="processForm()">
-    <div class="form-group required">
+<form name="addProject" ng-submit="processForm(addProject.$valid)" novalidate>
+    <div class="form-group required" ng-class="{'has-error' : addProject.name.$invalid && (!addProject.name.$pristine || addProject.$submitted) }">
         <label for="project_name" class="control-label">Naam van het project</label>
-        <input type="text" id="project_name" class="form-control" ng-model="formData.name" required>
+        <input type="text" id="project_name" class="form-control" name="name" ng-model="formData.name" required>
+        <p ng-show="addProject.name.$invalid && (!addProject.name.$pristine || addProject.$submitted)" class="help-block">Project naam is verplicht.</p>
     </div>
-    <div class="form-group required">
+    <div class="form-group required" ng-class="{'has-error' : addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted) }">
         <label for="project_summary" class="control-label">Doel van het project</label>
-        <input type="text" id="project_summary" class="form-control" ng-model="formData.summary" required>
+        <input type="text" name="summary" id="project_summary" class="form-control" ng-model="formData.summary" required>
+        <p ng-show="addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted)" class="help-block">Doel van het project is verplicht.</p>
     </div>
-    <div class="form-group required">
+    <div class="form-group required" ng-class="{'has-error' : addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted) }">
         <label class="control-label">Type integratie</label>
     </div>
     <div class="row">
@@ -27,6 +29,9 @@
                     <p class="text-right">vanaf {{ integrationType.price }} per jaar</p>
                 </div>
             </div>
+            <div class="form-group required has-error" ng-show="addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted)">
+                <p class="help-block">Gelieve een optie te selecteren.</p>
+            </div>
         </div>
         <div class="col-sm-4">
             <div class="alert alert-info">
@@ -43,17 +48,19 @@
     <section class="js-section-coupon" ng-show="formData.coupon">
         <div class="panel panel-default">
             <div class="panel-body">
-                <div class="form-group">
+                <div class="form-group required" ng-class="{'has-error' : addProject.coupon_code.$invalid && (!addProject.coupon_code.$pristine || addProject.$submitted) }">
                     <label for="coupon_code">Code</label>
-                    <input type="text" id="coupon_code" class="form-control"  ng-model="formData.couponCode">
+                    <input type="text" id="coupon_code" name="coupon_code" class="form-control"  ng-model="formData.couponCode" ng-required="formData.coupon">
+                    <p ng-show="addProject.coupon_code.$invalid && (!addProject.coupon_code.$pristine || addProject.$submitted)" class="help-block">Gelieve een geldige code in te vullen.</p>
                 </div>
             </div>
         </div>
     </section>
-    <div class="checkbox form-group required">
+    <div class="checkbox form-group required" ng-class="{'has-error' : addProject.terms_and_conditions.$invalid && (!addProject.terms_and_conditions.$pristine || addProject.$submitted) }">
         <label>
-            <input type="checkbox" value="" ng-model="formData.termsAndConditions" required> Ik ga akkoord met de <a href="http://www.cultuurnet.be/terms">gebruiksvoorwaarden</a>
+            <input type="checkbox" name="terms_and_conditions" value="" ng-model="formData.termsAndConditions" required> Ik ga akkoord met de <a href="http://www.cultuurnet.be/terms">gebruiksvoorwaarden</a>
         </label>
+        <p ng-show="addProject.terms_and_conditions.$invalid && (!addProject.terms_and_conditions.$pristine || addProject.$submitted)" class="help-block">Je dient akkoord te gaan met de gebruiksvoorwaarden.</p>
     </div>
-    <input type="submit" class="btn btn-primary" value="Indienen" />
+    <button type="submit" class="btn btn-primary" ng-disabled="addProject.$invalid">Versturen</button>
 </form>

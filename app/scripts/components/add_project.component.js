@@ -34,14 +34,19 @@
     $scope.formData = {};
 
     // process the form
-    $scope.processForm = function() {
-      //messages.danger.push('test2');
-      projectaanvraagApiService.addProject($scope.formData).then(function(response) {
-        Messages.clearMessages();
-        Messages.addMessage('success', 'hooray');
-      }, function(reason) {
-        Messages.addMessage('danger', 'Something went wrong, please try again later.');
-      });
+    $scope.processForm = function($isValid) {
+      Messages.clearMessages();
+
+      if ($isValid) {
+        projectaanvraagApiService.addProject($scope.formData).then(function(response) {
+          Messages.addMessage('success', 'hooray');
+        }, function(reason) {
+          Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
+        });
+      }else {
+        Messages.addMessage('danger', 'Gelieve de verplichte velden in te vullen.');
+      }
+
     };
 
   }

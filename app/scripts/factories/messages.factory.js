@@ -18,7 +18,7 @@ function messagesFactory($rootScope) {
    * @constructor
    */
   var Messages = function () {
-    this.messages = [];
+    this.messages = {};
   };
 
   Messages.prototype = {
@@ -40,7 +40,9 @@ function messagesFactory($rootScope) {
         this.messages[type] = [];
       }
 
-      this.messages[type].push(message);
+      if(this.messages[type].indexOf(message) == -1) {
+        this.messages[type].push(message);
+      }
     }
   };
 
