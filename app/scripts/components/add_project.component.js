@@ -39,11 +39,11 @@
       Messages.clearMessages();
 
       if ($isValid) {
-        projectaanvraagApiService.addProject($scope.formData).then(function(response) {
+        projectaanvraagApiService.addProject($scope.formData).then(function() {
           // Show success message and redirect to the dashboard
           Messages.addMessage('success', 'Je project is aangemaakt. Je vindt het hieronder in de lijst terug.');
           $state.go('dashboard');
-        }, function(reason) {
+        }, function() {
           Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
         });
       }else {
