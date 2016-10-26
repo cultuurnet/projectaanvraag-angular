@@ -35,11 +35,14 @@
 
     // process the form
     $scope.processForm = function($isValid) {
+      // Clear all previously set messages
       Messages.clearMessages();
 
       if ($isValid) {
         projectaanvraagApiService.addProject($scope.formData).then(function(response) {
-          Messages.addMessage('success', 'hooray');
+          // Show success message and redirect to the dashboard
+          Messages.addMessage('success', 'Je project is aangemaakt. Je vindt het hieronder in de lijst terug.');
+          $state.go('dashboard');
         }, function(reason) {
           Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
         });
