@@ -16,7 +16,19 @@
     });
 
   /* @ngInject */
-  function dashboardController() {
+  function dashboardController(projectaanvraagApiService) {
+
+      /*jshint validthis: true */
+      var ctrl = this;
+
+      ctrl.projects = [];
+
+      /**
+       * Load the projects
+       */
+      projectaanvraagApiService.getProjects().then(function(projects) {
+          ctrl.projects = projects;
+      });
 
   }
 

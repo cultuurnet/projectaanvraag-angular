@@ -1,3 +1,8 @@
+<div class="well" ng-show="projects.length === 0">
+    <p class="text-center lead">Je hebt nog geen projecten. <a href="#">Aan de slag</a></p>
+    <p class="text-center text-muted">Maak een project aan en probeer alles gratis uit met testevenementen.</p>
+</div>
 
-
-:)
+<div ng-repeat="project in $ctrl.projects">
+    <dashboard-item-component id="project.id"></dashboard-item-component>
+</div>

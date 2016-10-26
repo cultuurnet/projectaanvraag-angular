@@ -1,0 +1,61 @@
+<div class="panel panel-default" ng-hide="$ctrl.fetching">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="panel-title">{{ $ctrl.project.name }}
+                    <small ng-bind="$ctrl.project.group.name"></small>
+                </h3>
+            </div>
+            <div class="col-sm-6">
+                <ul class="list-inline pull-right">
+                    <li><a href="#" data-toggle="modal" data-target="#contentfilter">Contentfilter</a></li>
+
+                    <li><a href="#" data-toggle="modal" data-target="#verwijderen">Verwijderen</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+
+            <dt>Test</dt>
+            <dd>
+
+                <ul class="list-unstyled" ng-show="!$ctrl.project.group.link && $ctrl.project.testConsumerKey">
+                    <li>Key <code ng-bind="$ctrl.project.testConsumerKey"></code></li>
+                    <li ng-show="$ctrl.project.testSecret">Secret <code ng-bind="$ctrl.project.testSecret"></code></li>
+                </ul>
+
+                <p ng-show="$ctrl.project.group.link">
+                    <a ng-href="{{ $ctrl.project.group.link.url }}{{ $ctrl.project.id}}" class="btn btn-default">$ctrl.project.group.link.text</a>
+                </p>
+
+            </dd>
+
+            <dt>Live</dt>
+            <dd>
+
+
+                <p><span class="state state-inactive">Niet actief</span></p>
+                <p>Aan de slag met echte data en evenementen?<br>Activeer je project (110 euro per jaar - tarieven en
+                    voorwaarden)</p>
+                <p>
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#activatie_aanvragen">Activeren</a>
+                </p>
+
+
+            </dd>
+        </dl>
+        <section>
+            <dl class="dl-horizontal">
+                <dt>Beheer</dt>
+                <dd>
+                    <ul class="list-inline">
+                        <li><a href="">Zet live met jaarlijks abonnement</a></li>
+                        <li><a href="">Blokkeren</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </section>
+    </div>
+</div>
