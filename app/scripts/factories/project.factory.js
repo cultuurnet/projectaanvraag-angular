@@ -32,7 +32,9 @@ function cultuurnetProjectFactory(IntegrationType, ProjectStatuses) {
       this.id = jsonObject.id;
       this.name = jsonObject.name;
       this.testConsumerKey = jsonObject.testConsumerKey || '';
+      this.testConsumerSecret = jsonObject.testConsumerSecret || '';
       this.liveConsumerKey = jsonObject.liveConsumerKey || '';
+      this.liveConsumerSecret = jsonObject.liveConsumerSecret || '';
 
       if (jsonObject.status && ProjectStatuses[jsonObject.status.toUpperCase()]) {
         jsonObject.status = ProjectStatuses[jsonObject.status.toUpperCase()];

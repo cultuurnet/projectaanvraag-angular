@@ -1,0 +1,16 @@
+{
+  "id": "widgets",
+  "name": "Widgets",
+  "description": "Kant en klare html-modules die je in je website kan inpassen",
+  "price": 110,
+  "url": "http:\/\/www.test.com",
+  "extraInfo": [
+    "HTML, CSS, JS",
+    "Geschikt voor basisoplossingen"
+  ],
+  "groupId": "group_id",
+  "actionButton": {
+    "testUrl": "test",
+    "text": "text"
+  }
+}

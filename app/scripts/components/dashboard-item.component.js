@@ -32,6 +32,8 @@
         projectaanvraagApiService.getProject(ctrl.project.id).then(function(project) {
             ctrl.project = project;
             ctrl.fetching = false;
+        }, function() {
+            ctrl.fetching = false;
         });
 
         /**
@@ -39,11 +41,7 @@
          * @return bool
          */
         ctrl.isLive = function() {
-            if (ctrl.project) {
-                return ctrl.project.status.code == ProjectStatuses.ACTIVE.code;
-            }
-
-            return false;
+            return ctrl.project.status.code == ProjectStatuses.ACTIVE.code;
         }
 
         /**
@@ -51,10 +49,7 @@
          * @return bool
          */
         ctrl.isInactive = function() {
-            if (ctrl.project) {
-                return ctrl.project.status.code == ProjectStatuses.APPLICATION_SENT.code;
-            }
-            return false;
+            return ctrl.project.status.code == ProjectStatuses.APPLICATION_SENT.code;
         }
     }
 

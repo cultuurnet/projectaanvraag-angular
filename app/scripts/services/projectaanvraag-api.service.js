@@ -95,8 +95,8 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     service.getProject = function (id) {
         var defer = $q.defer();
 
-        if (service.cache.projectDetails.id) {
-            defer.resolve(service.cache.projects);
+        if (service.cache.projectDetails[id]) {
+            defer.resolve(service.cache.projectDetails[id]);
         } else {
             $http
                 .get(apiUrl + 'project/' + id)
