@@ -50,7 +50,7 @@
                 </div>
 
                 <div ng-show="$ctrl.isLive()">
-
+                    
                     <ul class="list-unstyled" ng-show="!$ctrl.project.group.actionButton && $ctrl.project.liveConsumerKey">
                         <li>Key <code ng-bind="$ctrl.project.testConsumerKey"></code></li>
                         <li ng-show="$ctrl.project.liveSecret">Secret <code ng-bind="$ctrl.project.liveSecret"></code></li>
@@ -69,7 +69,7 @@
                 <dt>Beheer</dt>
                 <dd>
                     <ul class="list-inline">
-                        <li><a href="" ng-hide="$ctrl.isLive()">Zet live met jaarlijks abonnement</a></li>
+                        <li ng-if="!$ctrl.isLive()"><a href="">Zet live met jaarlijks abonnement</a></li>
                         <li><a href="">Blokkeren</a></li>
                     </ul>
                 </dd>
