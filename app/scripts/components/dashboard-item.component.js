@@ -38,19 +38,19 @@
 
         /**
          * Is the current project live.
-         * @return bool
+         * @return boolean
          */
         ctrl.isLive = function() {
-            return ctrl.project.status.code == ProjectStatuses.ACTIVE.code;
-        }
+            return ctrl.project.status.code === ProjectStatuses.ACTIVE.code;
+        };
 
         /**
          * Is the current project inactive.
-         * @return bool
+         * @return boolean
          */
         ctrl.isInactive = function() {
-            return ctrl.project.status.code == ProjectStatuses.APPLICATION_SENT.code;
-        }
+            return ctrl.project.status.code === ProjectStatuses.APPLICATION_SENT.code;
+        };
     }
 
 })();
