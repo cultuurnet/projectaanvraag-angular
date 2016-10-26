@@ -21,6 +21,7 @@
       /*jshint validthis: true */
       var ctrl = this;
 
+      ctrl.loading = true;
       ctrl.projects = [];
 
       /**
@@ -28,6 +29,10 @@
        */
       projectaanvraagApiService.getProjects().then(function(projects) {
           ctrl.projects = projects;
+          ctrl.loading = false;
+      }, function() {
+          // @todo show message.
+          ctrl.loading = false;
       });
 
   }

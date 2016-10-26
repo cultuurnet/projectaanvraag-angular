@@ -11,7 +11,7 @@ angular
   .factory('CultuurnetProject', cultuurnetProjectFactory);
 
 /* @ngInject */
-function cultuurnetProjectFactory(IntegrationType) {
+function cultuurnetProjectFactory(IntegrationType, ProjectStatuses) {
 
   /**
    * @class CultuurnetProject
@@ -33,6 +33,14 @@ function cultuurnetProjectFactory(IntegrationType) {
       this.name = jsonObject.name;
       this.testConsumerKey = jsonObject.testConsumerKey || '';
       this.liveConsumerKey = jsonObject.liveConsumerKey || '';
+
+      if (jsonObject.status && ProjectStatuses[jsonObject.status.toUpperCase()]) {
+        jsonObject.status = ProjectStatuses[jsonObject.status.toUpperCase()];
+      }
+      else {
+        jsonObject.status = {};
+      }
+
       this.status = jsonObject.status || '';
       if (jsonObject.group) {
         this.group = new IntegrationType(jsonObject.group);

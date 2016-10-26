@@ -2,3 +2,13 @@
   color: #222;
   font-weight: bold;
 }
+
+.loader {
+  font-size: 80px;
+  text-align: center;
+}
+
+// Angular ng-hide has problem with fontawesome animations (it only hides them after x seconds). Add important.
+.ng-hide {
+  display: none !important;
+}
