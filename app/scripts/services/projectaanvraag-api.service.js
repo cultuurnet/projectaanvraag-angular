@@ -134,7 +134,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     service.addProject = function (formData) {
         var defer = $q.defer();
 
-        $http.post(apiUrl + 'projects/', formData, postConfig)
+        $http.post(apiUrl + 'project/', formData, postConfig)
             .success(function (data) {
                 defer.resolve(data);
             })
