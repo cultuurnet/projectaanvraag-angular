@@ -1,0 +1,24 @@
+{
+  "id": 3,
+  "userId": "9c9ad617-dc24-4831-ae06-8926f17ba5fc",
+  "name": "project name",
+  "testConsumerKey": "test key",
+  "testConsumerSecret": "test secret",
+  "liveConsumerKey": "live key",
+  "liveConsumerSecret": "live secret",
+  "status": "waiting_for_payment",
+  "created": -62169984000,
+  "updated": -62169984000,
+  "group": {
+    "id": 22677,
+    "name": "API",
+    "description": "Met deze API krijg je toegang tot de zoekengine van de UiTdatabank",
+    "price": 80,
+    "url": "http:\/\/www.culturefeed.be\/api",
+    "extraInfo": [
+      "Platformonafhankelijk",
+      "Individuele oplossingen op maat zijn mogelijk"
+    ],
+    "groupId": "group_id"
+  }
+}

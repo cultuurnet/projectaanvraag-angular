@@ -36,6 +36,11 @@ function integrationTypeFactory() {
       this.url = jsonObject.url;
       this.extraInfo = jsonObject.extraInfo;
       this.groupId = jsonObject.groupId;
+
+      if (jsonObject.actionButton) {
+        this.actionButton = jsonObject.actionButton;
+      }
+
     }
   };
 

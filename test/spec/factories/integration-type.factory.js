@@ -19,7 +19,7 @@ describe('Service: projectaanvraagApiService', function () {
     /**
      * Check if it the type gets parsed.
      */
-    it('requests the integration types', function () {
+    it('parses an integration type', function () {
 
         var response = readJSON('test/json/integration_types.json');
         var integrationType = new IntegrationType(response.widgets);
@@ -34,5 +34,15 @@ describe('Service: projectaanvraagApiService', function () {
             'Geschikt voor basisoplossingen'
         ]);
         expect(integrationType.groupId).toEqual('group_id');
+    });
+
+    /**
+     * Check if it the type gets parsed with his action button.
+     */
+    it('parses an integration type with action button', function () {
+
+        var response = readJSON('test/json/integration_type_action_button.json');
+        var integrationType = new IntegrationType(response);
+        expect(integrationType.actionButton).toEqual(response.actionButton);
     });
 });
