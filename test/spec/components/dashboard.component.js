@@ -4,19 +4,21 @@ describe('Component: dashboardComponent', function () {
 
     beforeEach(module('projectaanvraagApp'));
 
-    var dashboardController, projectaanvraagApiService, defer, $scope;
+    var dashboardController, projectaanvraagApiService, defer, $scope, $state;
 
-    beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_) {
+    beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_, _$state_) {
 
         $scope = _$rootScope_.$new();
         projectaanvraagApiService = jasmine.createSpyObj('projectaanvraagApiService', ['getProjects']);
         defer = _$q_.defer();
+        $state = _$state_;
 
         var promise = defer.promise;
         projectaanvraagApiService.getProjects.and.returnValue(promise);
 
         dashboardController = _$componentController_('dashboardComponent', {
-            projectaanvraagApiService : projectaanvraagApiService
+            projectaanvraagApiService : projectaanvraagApiService,
+            $state: _$state_
         }, null);
 
     }));
@@ -25,12 +27,13 @@ describe('Component: dashboardComponent', function () {
      * Test if the dashboard loads the projects.
      */
     it('loads the projects', function () {
+
         expect(dashboardController.loading).toBeTruthy();
-
         expect(projectaanvraagApiService.getProjects).toHaveBeenCalled();
-        defer.resolve('projects');
 
+        defer.resolve('projects');
         $scope.$digest();
+
         expect(dashboardController.loading).toBeFalsy();
         expect(dashboardController.projects).toEqual('projects');
     });
@@ -40,9 +43,17 @@ describe('Component: dashboardComponent', function () {
      */
     it('show an error message when having a problem the projects', function () {
         defer.reject();
-
         $scope.$digest();
         expect(dashboardController.loading).toBeFalsy();
+    });
+
+    /**
+     * Test if the user is redirected to the create project page.
+     */
+    it('redirects to create project', function () {
+        spyOn($state, 'go')
+        dashboardController.redirectToCreate();
+        expect($state.go).toHaveBeenCalledWith('addProject');
     });
 
 });

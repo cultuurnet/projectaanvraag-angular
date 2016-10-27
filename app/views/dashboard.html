@@ -1,4 +1,22 @@
 
+<div class="row">
+    <div class="col-xs-12 col-sm-5">
+        <p class="block-title projectheader--title">Projecten</p>
+    </div>
+    <div class="col-xs-7 col-sm-5">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Projectnaam" ng-model="$ctrl.nameFilter">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="$ctrl.searchProjects()">Zoeken</button>
+            </span>
+        </div>
+
+    </div>
+    <div class="col-xs-5 col-sm-2">
+        <p class="text-right"><a class="btn btn-primary btn-block" href="#" ng-click="$ctrl.redirectToCreate()" role="button">Nieuw project</a></p>
+    </div>
+</div>
+
 <div class="loader">
     <i class="fa fa-spinner fa-spin loader" ng-show="$ctrl.loading"></i>
 </div>

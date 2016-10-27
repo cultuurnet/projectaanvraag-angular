@@ -26,6 +26,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     /*jshint validthis: true */
     var service = this;
     service.cache = {
+        projects: {},
         projectDetails: {}
     };
 
@@ -63,20 +64,35 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
      * @returns {Promise}
      *   A promise for the list of projects.
      */
-    service.getProjects = function () {
+    service.getProjects = function (name, page) {
         var defer = $q.defer();
 
-        if (service.cache.projects) {
-            defer.resolve(service.cache.projects);
+        if (service.cache.projects[name] && service.cache.projects[name][page]) {
+            defer.resolve(service.cache.projects[name][page]);
         } else {
+
+            var params = {};
+            if (name) {
+                params['name'] = name;
+            }
+
+            params['start'] = page * 20;
+
             $http
-                .get(apiUrl + 'project')
+                .get(apiUrl + 'project/', {
+                    params: params
+                })
                 .success(function (data) {
                     var projects = [];
                     angular.forEach(data, function (item) {
                         projects.push(new CultuurnetProject(item));
                     });
-                    service.cache.projects = projects;
+
+                    if (service.cache.projects[name] === undefined) {
+                        service.cache.projects[name] = {};
+                    }
+
+                    service.cache.projects[name][page] = projects;
                     defer.resolve(projects);
                 })
                 .error(function () {
