@@ -123,6 +123,8 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                     defer.reject('unable to retrieve the project');
                 });
         }
+
+        return defer.promise;
     };
 
     /**
