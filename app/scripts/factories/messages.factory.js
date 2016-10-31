@@ -40,7 +40,7 @@ function messagesFactory($rootScope) {
         this.messages[type] = [];
       }
 
-      if(this.messages[type].indexOf(message) == -1) {
+      if(this.messages[type].indexOf(message) === -1) {
         this.messages[type].push(message);
       }
     }
