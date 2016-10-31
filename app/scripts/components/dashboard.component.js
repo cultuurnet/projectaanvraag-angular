@@ -24,7 +24,9 @@
       ctrl.loading = true;
       ctrl.projects = [];
       ctrl.nameFilter = '';
-      ctrl.currentPage = 0;
+      ctrl.currentPage = 1;
+      ctrl.totalProjects = 0;
+      ctrl.itemsPerPage = 20;
 
       /**
        * Redirect to the create project page.
@@ -37,8 +39,9 @@
        * Search projects.
        */
       ctrl.searchProjects = function() {
-          projectaanvraagApiService.getProjects(ctrl.nameFilter, ctrl.currentPage).then(function(projects) {
-              ctrl.projects = projects;
+          projectaanvraagApiService.getProjects(ctrl.nameFilter, ctrl.currentPage, ctrl.itemsPerPage).then(function(result) {
+              ctrl.projects = result.projects;
+              ctrl.totalProjects = result.total;
               ctrl.loading = false;
           }, function() {
               // @todo show message.

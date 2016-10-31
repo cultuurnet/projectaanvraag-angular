@@ -62,11 +62,11 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
      * @returns {Promise}
      *   A promise for the list of projects.
      */
-    service.getProjects = function (name, page) {
+    service.getProjects = function (name, page, maxResults) {
         var defer = $q.defer();
 
-        if (service.cache.projects[name] && service.cache.projects[name][page]) {
-            defer.resolve(service.cache.projects[name][page]);
+        if (service.cache.projects[name] && service.cache.projects[name][maxResults] && service.cache.projects[name][maxResults][page]) {
+            defer.resolve(service.cache.projects[name][maxResults][page]);
         } else {
 
             var params = {};
@@ -74,7 +74,8 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                 params['name'] = name;
             }
 
-            params['start'] = page * 20;
+            params['start'] = (page - 1 ) * maxResults;
+            params['max'] = maxResults;
 
             $http
                 .get(apiUrl + 'project/', {
@@ -82,7 +83,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                 })
                 .success(function (data) {
                     var projects = [];
-                    angular.forEach(data, function (item) {
+                    angular.forEach(data.results, function (item) {
                         projects.push(new CultuurnetProject(item));
                     });
 
@@ -90,8 +91,15 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                         service.cache.projects[name] = {};
                     }
 
-                    service.cache.projects[name][page] = projects;
-                    defer.resolve(projects);
+                    if (service.cache.projects[name][maxResults] === undefined) {
+                        service.cache.projects[name][maxResults] = {};
+                    }
+
+                    service.cache.projects[name][maxResults][page] = {
+                        total: data.total,
+                        projects: projects
+                    };
+                    defer.resolve(service.cache.projects[name][maxResults][page]);
                 })
                 .error(function () {
                     defer.reject('unable to retrieve the projects');

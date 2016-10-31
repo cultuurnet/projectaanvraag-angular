@@ -68,7 +68,7 @@ describe('Service: projectaanvraagApiService', function () {
     });
 
     /**
-     * Test if the service correctly requests the integration types.
+     * Test if the service correctly requests the projects.
      */
     it('requests the projects', function () {
 
@@ -78,18 +78,18 @@ describe('Service: projectaanvraagApiService', function () {
             expect(result).toEqual('cache');
         };
 
-        var checkRequest = function (result) {
-            expect(result[0] instanceof CultuurnetProject).toBeTruthy();
-            expect(result[0].name).toEqual('UiTdatabank.be');
-            projectaanvraagApiService.cache.projects = 'cache';
-            projectaanvraagApiService.getProjects().then(checkCache);
+        var checkRequest = function (data) {
+            expect(data.projects[0] instanceof CultuurnetProject).toBeTruthy();
+            expect(data.projects[0].name).toEqual('UiTdatabank.be');
+            projectaanvraagApiService.cache.projects['test'][20][1] = 'cache'
+            projectaanvraagApiService.getProjects('test', 1, 20).then(checkCache);
         };
 
         $httpBackend
-            .expectGET(apiUrl + 'project')
+            .expectGET(apiUrl + 'project/?max=20&name=test&start=0')
             .respond(200, response);
 
-        projectaanvraagApiService.getProjects().then(checkRequest);
+        projectaanvraagApiService.getProjects('test', 1, 20).then(checkRequest);
         $httpBackend.flush();
     });
 
@@ -129,10 +129,10 @@ describe('Service: projectaanvraagApiService', function () {
         };
 
         $httpBackend
-            .expectGET(apiUrl + 'project')
+            .expectGET(apiUrl + 'project/?max=20&name=test&start=0')
             .respond(404);
 
-        projectaanvraagApiService.getProjects().catch(checkError);
+        projectaanvraagApiService.getProjects('test', 1, 20).catch(checkError);
         $httpBackend.flush();
     });
 

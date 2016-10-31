@@ -18,7 +18,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'cultuurnet.uitid'
+    'cultuurnet.uitid',
+    'ui.bootstrap'
   ])
   .config(function ($stateProvider, $httpProvider) {
 
