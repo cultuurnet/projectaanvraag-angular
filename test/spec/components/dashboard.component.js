@@ -81,7 +81,7 @@ describe('Component: dashboardComponent', function () {
      * Test if the user is redirected to the create project page.
      */
     it('redirects to create project', function () {
-        spyOn($state, 'go')
+        spyOn($state, 'go');
         dashboardController.redirectToCreate();
         expect($state.go).toHaveBeenCalledWith('addProject');
     });

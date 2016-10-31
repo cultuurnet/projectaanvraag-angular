@@ -81,7 +81,7 @@ describe('Service: projectaanvraagApiService', function () {
         var checkRequest = function (data) {
             expect(data.projects[0] instanceof CultuurnetProject).toBeTruthy();
             expect(data.projects[0].name).toEqual('UiTdatabank.be');
-            projectaanvraagApiService.cache.projects['test'][20][1] = 'cache'
+            projectaanvraagApiService.cache.projects.test[20][1] = 'cache';
             projectaanvraagApiService.getProjects('test', 1, 20).then(checkCache);
         };
 

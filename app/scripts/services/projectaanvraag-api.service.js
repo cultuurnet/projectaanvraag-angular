@@ -28,12 +28,6 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         }
     };
 
-    var postConfig = {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-        }
-    };
-
     /**
      * Get the integration types.
      * @returns {Promise}

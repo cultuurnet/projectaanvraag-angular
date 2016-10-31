@@ -11,7 +11,7 @@ angular
   .factory('Messages', messagesFactory);
 
 /* @ngInject */
-function messagesFactory($rootScope) {
+function messagesFactory() {
 
   /**
    * @class Messages
