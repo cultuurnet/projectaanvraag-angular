@@ -16,7 +16,7 @@
     });
 
   /* @ngInject */
-  function dashboardController(projectaanvraagApiService, $state) {
+  function dashboardController(projectaanvraagApiService, $state, Messages) {
 
       /*jshint validthis: true */
       var ctrl = this;
@@ -44,7 +44,8 @@
               ctrl.totalProjects = result.total;
               ctrl.loading = false;
           }, function() {
-              // @todo show message.
+              Messages.clearMessages();
+              Messages.addMessage('danger', 'Er ging iets fout bij het laden van je projecten. Probeer het later opnieuw.');
               ctrl.loading = false;
           });
       };
