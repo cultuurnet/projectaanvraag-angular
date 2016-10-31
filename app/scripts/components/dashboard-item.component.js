@@ -15,11 +15,12 @@
             controller: dashboardItemController,
             bindings: {
                 data: '=',
+                onDelete: '&'
             }
         });
 
     /* @ngInject */
-    function dashboardItemController(projectaanvraagApiService, ProjectStatuses) {
+    function dashboardItemController(projectaanvraagApiService, ProjectStatuses, $uibModal, Messages) {
 
         /*jshint validthis: true */
         var ctrl = this;
@@ -50,6 +51,34 @@
          */
         ctrl.isInactive = function() {
             return ctrl.project.status.code === ProjectStatuses.APPLICATION_SENT.code;
+        };
+
+        ctrl.removeItem = function () {
+            var confirmationModal = $uibModal.open({
+                animation: true,
+                component: 'confirmationComponent',
+                resolve: {
+                    title: function () {
+                        return 'Project verwijderen';
+                    },
+                    message: function () {
+                        return 'Ben je zeker dat je project definitief wil verwijderen? Je kan deze actie niet ongedaan maken.';
+                    }
+                }
+            });
+
+            confirmationModal.result.then(function() {
+                Messages.clearMessages();
+
+                // Delete the project
+                projectaanvraagApiService.deleteProject(ctrl.project.id).then(function(data) {
+                    projectaanvraagApiService.cache.projects = {};
+                    ctrl.onDelete();
+                    Messages.addMessage('success', 'Het project "'+ctrl.project.name+'" werd correct verwijderd.');
+                }, function() {
+                    Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
+                });
+            });
         };
     }
 
