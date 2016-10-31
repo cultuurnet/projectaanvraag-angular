@@ -19,7 +19,6 @@
     var ctrl = this;
 
     ctrl.integrationTypes = [];
-    ctrl.messages = [];
 
     /**
      * Load the integration types and assign it to scope.
@@ -35,15 +34,19 @@
 
     // process the form
     $scope.processForm = function($isValid) {
+
+      // Clear all previously set messages
       Messages.clearMessages();
 
       if ($isValid) {
-        projectaanvraagApiService.addProject($scope.formData).then(function(response) {
-          Messages.addMessage('success', 'hooray');
-        }, function(reason) {
+        projectaanvraagApiService.addProject($scope.formData).then(function() {
+          // Show success message and redirect to the dashboard
+          Messages.addMessage('success', 'Je project is aangemaakt. Je vindt het hieronder in de lijst terug.');
+          $state.go('dashboard');
+        }, function() {
           Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
         });
-      }else {
+      } else {
         Messages.addMessage('danger', 'Gelieve de verplichte velden in te vullen.');
       }
 
