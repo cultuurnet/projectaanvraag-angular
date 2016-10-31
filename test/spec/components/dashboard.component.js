@@ -26,16 +26,46 @@ describe('Component: dashboardComponent', function () {
     /**
      * Test if the dashboard loads the projects.
      */
-    it('loads the projects', function () {
+    it('searches projects at load', function () {
 
         expect(dashboardController.loading).toBeTruthy();
         expect(projectaanvraagApiService.getProjects).toHaveBeenCalled();
 
-        defer.resolve('projects');
+        defer.resolve({
+            total: 30,
+            projects: 'projects'
+        });
         $scope.$digest();
 
         expect(dashboardController.loading).toBeFalsy();
+        expect(dashboardController.totalProjects).toEqual(30);
         expect(dashboardController.projects).toEqual('projects');
+    });
+
+    /**
+     * Test if the dashboard paging is done.
+     */
+    it('searches projects', function () {
+
+        defer.resolve({
+            total: 30,
+            projects: 'projects'
+        });
+
+        dashboardController.nameFilter = 'test';
+        dashboardController.currentPage = 2;
+
+        dashboardController.searchProjects();
+
+        defer.resolve({
+            total: 30,
+            projects: 'projects'
+        });
+
+        $scope.$digest();
+        expect(projectaanvraagApiService.getProjects).toHaveBeenCalledWith('test', 2, 20);
+
+
     });
 
     /**
@@ -51,7 +81,7 @@ describe('Component: dashboardComponent', function () {
      * Test if the user is redirected to the create project page.
      */
     it('redirects to create project', function () {
-        spyOn($state, 'go')
+        spyOn($state, 'go');
         dashboardController.redirectToCreate();
         expect($state.go).toHaveBeenCalledWith('addProject');
     });
