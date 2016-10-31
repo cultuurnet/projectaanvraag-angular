@@ -4,21 +4,32 @@ describe('Component: dashboardItemComponent', function () {
 
     beforeEach(module('projectaanvraagApp'));
 
-    var dashboardItemController, projectaanvraagApiService, defer, $scope;
+    var dashboardItemController, projectaanvraagApiService, defer, $q, $scope, $rootScope, modal, modalInstance, $httpBackend;
 
-    beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_) {
+    beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_, _$uibModal_) {
 
         $scope = _$rootScope_.$new();
-        projectaanvraagApiService = jasmine.createSpyObj('projectaanvraagApiService', ['getProject']);
+        $rootScope = _$rootScope_;
+        projectaanvraagApiService = jasmine.createSpyObj('projectaanvraagApiService', ['getProject', 'deleteProject']);
         defer = _$q_.defer();
+        $q = _$q_;
 
         var promise = defer.promise;
         projectaanvraagApiService.getProject.and.returnValue(promise);
 
+        //modal = new FakeModal();
+        modal = _$uibModal_;
+        var original = modal.open;
+        spyOn(modal, 'open').and.callFake(function () {
+            modalInstance = original.apply(null, arguments);
+            return modalInstance;
+        });
+
         dashboardItemController = _$componentController_(
             'dashboardItemComponent',
             {
-                projectaanvraagApiService : projectaanvraagApiService
+                projectaanvraagApiService : projectaanvraagApiService,
+                $uibModal: modal
             },
             {
                 data: {'id': 1}
@@ -94,4 +105,22 @@ describe('Component: dashboardItemComponent', function () {
         };
         expect(dashboardItemController.isInactive()).toBeFalsy();
     });
+
+    it('correctly opens the modal', function() {
+        dashboardItemController.removeItem();
+        expect(modal.open).toHaveBeenCalled();
+    });
+
+    /*
+    it('correctly handles the modal close', function() {
+
+        dashboardItemController.removeItem();
+        $scope.digest();
+
+        console.log(modalInstance);
+        modalInstance.close();
+        $scope.$digest();
+
+        expect(projectaanvraagApiService.deleteProject).toHaveBeenCalled();
+    });*/
 });
