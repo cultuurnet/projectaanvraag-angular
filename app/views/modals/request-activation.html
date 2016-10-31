@@ -1,0 +1,62 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="$ctrl.dismiss();"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Activatie aanvragen</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="messages" ng-show="$ctrl.error">
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>Er ging iets fout tijdens het versturen van de aanvraag.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="text-right"><a class="js-coupon" ng-click="$ctrl.toggleCoupon()">Activatie <span>met</span> coupon</a></p>
+            </div>
+        </div>
+        <section class="with-coupon js-section-with-coupon" ng-show="$ctrl.showCoupon">
+            <form name="$ctrl.couponForm">
+                <div class="form-group">
+                    <label for="coupon">Code</label>
+                    <input type="text" class="form-control" id="coupon" name="coupon" ng-model="$ctrl.formData.coupon" required>
+                    <p ng-show="$ctrl.couponForm.coupon.$touched && $ctrl.couponForm.coupon.$error.required" class="help-block">Code is verplicht.</p>
+                </div>
+            </form>
+        </section>
+
+        <section class="no-coupon js-section-no-coupon" ng-hide="$ctrl.showCoupon">
+            <div class="row">
+                <div class="col-xs-3">
+                    <p>Bedrag</p>
+                </div>
+                <div class="col-xs-5">
+                    <p>Totaalbedrag {{ $ctrl.project.group.price }}EUR</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p>Geldig</p>
+                </div>
+                <div class="col-xs-9">
+                    <p>Eén jaar</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p>Contact</p>
+                </div>
+                <div class="col-xs-9">
+                    <facturation-details-form-component parent-ctrl="$ctrl" form-data="$ctrl.formData"></facturation-details-form-component>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss();">Annuleren</button>
+        <button type="button" class="btn btn-primary" ng-disabled="(!$ctrl.showCoupon && $ctrl.facturationDetails.$invalid) || ($ctrl.showCoupon && $ctrl.couponForm.$invalid)" ng-click="$ctrl.requestActivation();">Bevestigen</button>
+    </div>
+</div><!-- /.modal-content -->

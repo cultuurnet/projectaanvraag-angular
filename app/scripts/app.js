@@ -47,4 +47,8 @@ angular
     $stateProvider.state(addProjectState);
 
     $httpProvider.defaults.withCredentials = true;
+    /*$httpProvider.defaults.headers.post = {
+        'Content-Type': 'application/json'
+    };*/
+
   });

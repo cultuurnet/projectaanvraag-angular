@@ -19,7 +19,7 @@
         });
 
     /* @ngInject */
-    function dashboardItemController(projectaanvraagApiService, ProjectStatuses) {
+    function dashboardItemController(projectaanvraagApiService, ProjectStatuses, $uibModal, Messages) {
 
         /*jshint validthis: true */
         var ctrl = this;
@@ -50,6 +50,24 @@
          */
         ctrl.isInactive = function() {
             return ctrl.project.status.code === ProjectStatuses.APPLICATION_SENT.code;
+        };
+
+        /**
+         * Open the modal to request the activation.
+         */
+        ctrl.requestActivation = function() {
+            var modalInstance = $uibModal.open({
+                component: 'requestActivationComponent',
+                resolve: {
+                    project: function () {
+                        return ctrl.project;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                Messages.addMessage('success', 'Je aanvraag tot activate werd succesvol verstuurd.');
+            });
         };
     }
 
