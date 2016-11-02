@@ -7,7 +7,7 @@
         <p>{{ $ctrl.message }}</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss()">Annuleren</button>
-        <button type="button" class="btn btn-danger" ng-click="$ctrl.close()">Verwijderen</button>
+        <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss()">{{ $ctrl.cancel }}</button>
+        <button type="button" class="btn btn-danger" ng-click="$ctrl.close()">{{ $ctrl.confirm }}</button>
     </div>
 </div>
