@@ -71,7 +71,7 @@
                 Messages.clearMessages();
 
                 // Delete the project
-                projectaanvraagApiService.deleteProject(ctrl.project.id).then(function(data) {
+                projectaanvraagApiService.deleteProject(ctrl.project.id).then(function() {
                     projectaanvraagApiService.cache.projects = {};
                     ctrl.onDelete();
                     Messages.addMessage('success', 'Het project "'+ctrl.project.name+'" werd correct verwijderd.');
