@@ -53,6 +53,9 @@
             return ctrl.project.status.code === ProjectStatuses.APPLICATION_SENT.code;
         };
 
+        /**
+         * Remove the project.
+         */
         ctrl.removeItem = function () {
             var confirmationModal = $uibModal.open({
                 animation: true,
@@ -63,6 +66,12 @@
                     },
                     message: function () {
                         return 'Ben je zeker dat je project definitief wil verwijderen? Je kan deze actie niet ongedaan maken.';
+                    },
+                    cancel: function () {
+                        return 'Annuleren';
+                    },
+                    confirm: function () {
+                        return 'Verwijderen';
                     }
                 }
             });
@@ -75,6 +84,43 @@
                     projectaanvraagApiService.cache.projects = {};
                     ctrl.onDelete();
                     Messages.addMessage('success', 'Het project "'+ctrl.project.name+'" werd correct verwijderd.');
+                }, function() {
+                    Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
+                });
+            });
+        };
+
+        /**
+         * Block the project.
+         */
+        ctrl.blockItem = function () {
+            var confirmationModal = $uibModal.open({
+                animation: true,
+                component: 'confirmationComponent',
+                resolve: {
+                    title: function () {
+                        return 'Project blokkeren';
+                    },
+                    message: function () {
+                        return 'Ben je zeker dat je dit project wil blokkeren?';
+                    },
+                    cancel: function () {
+                        return 'Annuleren';
+                    },
+                    confirm: function () {
+                        return 'Blokkeren';
+                    }
+                }
+            });
+
+            confirmationModal.result.then(function() {
+                Messages.clearMessages();
+
+                // Delete the project
+                projectaanvraagApiService.blockProject(ctrl.project.id).then(function() {
+                    projectaanvraagApiService.cache.projects = {};
+                    ctrl.onDelete();
+                    Messages.addMessage('success', 'Het project "'+ctrl.project.name+'" werd correct geblokkeerd.');
                 }, function() {
                     Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
                 });
