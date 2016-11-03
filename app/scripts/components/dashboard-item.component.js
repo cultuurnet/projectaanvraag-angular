@@ -66,7 +66,7 @@
             });
 
             modalInstance.result.then(function () {
-                Messages.addMessage('success', 'Je aanvraag tot activate werd succesvol verstuurd.');
+                Messages.addMessage('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
             });
         };
     }
