@@ -187,6 +187,24 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         return defer.promise;
     };
 
+    /**
+     * Activate a project.
+     * @returns {Promise}
+     *   A promise with a response.
+     */
+    service.activateProject = function (id) {
+        var defer = $q.defer();
+
+        $http.get(apiUrl + 'project/' + id + '/activate')
+            .success(function (data) {
+                defer.resolve(data);
+            })
+            .error(function (data) {
+                defer.reject(data);
+            });
+
+        return defer.promise;
+    };
 
     /**
      * Request the activation of a project.
