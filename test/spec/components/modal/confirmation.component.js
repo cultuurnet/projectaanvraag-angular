@@ -10,7 +10,10 @@ describe('Component: confirmationComponent', function () {
         var bindings = {
             resolve: {
                 title: 'title',
-                message: 'message'
+                message: 'message',
+                type: 'danger',
+                confirm: 'confirm',
+                cancel: 'cancel'
             }
         }
         confirmationController = _$componentController_('confirmationComponent', {}, bindings);
@@ -22,6 +25,9 @@ describe('Component: confirmationComponent', function () {
     it('loads the confirmation text', function () {
         expect(confirmationController.title).toEqual('title');
         expect(confirmationController.message).toEqual('message');
+        expect(confirmationController.type).toEqual('danger');
+        expect(confirmationController.confirm).toEqual('confirm');
+        expect(confirmationController.cancel).toEqual('cancel');
     });
 
 });
