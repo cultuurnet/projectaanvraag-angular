@@ -149,7 +149,6 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     };
 
     /**
-<<<<<<< HEAD
      * Delete a project.
      * @returns {Promise}
      *   A promise with a response.
