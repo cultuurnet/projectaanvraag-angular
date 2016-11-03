@@ -151,4 +151,34 @@ describe('Service: projectaanvraagApiService', function () {
         projectaanvraagApiService.getProject(1).catch(checkError);
         $httpBackend.flush();
     });
+
+    /**
+     * Test if the service correctly activates a project
+     */
+    it('activates a project', function () {
+        var response = {};
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/activate')
+            .respond(200, response);
+
+        projectaanvraagApiService.activateProject(1);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the activate projects request handles errors
+     */
+    it('rejects failed activate project', function () {
+        var checkError = function (error) {
+            expect(error).toEqual('unable to activate the project');
+        };
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/activate')
+            .respond(404);
+
+        projectaanvraagApiService.activateProject(1).catch(checkError);
+        $httpBackend.flush();
+    });
 });

@@ -199,8 +199,8 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
             .success(function (data) {
                 defer.resolve(data);
             })
-            .error(function (data) {
-                defer.reject(data);
+            .error(function () {
+                defer.reject('unable to activate the project');
             });
 
         return defer.promise;
