@@ -181,7 +181,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     service.blockProject = function (id) {
         var defer = $q.defer();
 
-        $http.put(apiUrl + 'project/' + id + '/block')
+        $http.get(apiUrl + 'project/' + id + '/block')
             .success(function (data) {
                 defer.resolve(data);
             })
