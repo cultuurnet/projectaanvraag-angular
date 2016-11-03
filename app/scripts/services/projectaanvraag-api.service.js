@@ -153,4 +153,42 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
 
         return defer.promise;
     };
+
+    /**
+     * Delete a project.
+     * @returns {Promise}
+     *   A promise with a response.
+     */
+    service.deleteProject = function (id) {
+        var defer = $q.defer();
+
+        $http.delete(apiUrl + 'project/' + id)
+            .success(function (data) {
+                defer.resolve(data);
+            })
+            .error(function (data) {
+                defer.reject(data);
+            });
+
+        return defer.promise;
+    };
+
+    /**
+     * Block a project.
+     * @returns {Promise}
+     *   A promise with a response.
+     */
+    service.blockProject = function (id) {
+        var defer = $q.defer();
+
+        $http.put(apiUrl + 'project/' + id + '/block')
+            .success(function (data) {
+                defer.resolve(data);
+            })
+            .error(function (data) {
+                defer.reject(data);
+            });
+
+        return defer.promise;
+    };
 }

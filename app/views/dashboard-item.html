@@ -13,7 +13,7 @@
                 <ul class="list-inline pull-right" ng-hide="$ctrl.fetching">
                     <li><a href="#" data-toggle="modal" data-target="#contentfilter">Contentfilter</a></li>
 
-                    <li><a href="#" data-toggle="modal" data-target="#verwijderen">Verwijderen</a></li>
+                    <li><a href="#" ng-click="$ctrl.removeItem()">Verwijderen</a></li>
                 </ul>
             </div>
         </div>
@@ -70,7 +70,7 @@
                 <dd>
                     <ul class="list-inline">
                         <li ng-if="!$ctrl.isLive()"><a href="">Zet live met jaarlijks abonnement</a></li>
-                        <li><a href="">Blokkeren</a></li>
+                        <li><a href="#" ng-click="$ctrl.blockItem()">Blokkeren</a></li>
                     </ul>
                 </dd>
             </dl>
