@@ -167,7 +167,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                 defer.resolve(data);
             })
             .error(function (data) {
-                defer.reject(data);
+                defer.reject('unable to delete the project');
             });
 
         return defer.promise;
@@ -186,7 +186,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                 defer.resolve(data);
             })
             .error(function (data) {
-                defer.reject(data);
+                defer.reject('unable to block the project');
             });
 
         return defer.promise;
