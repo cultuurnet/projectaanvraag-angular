@@ -4,7 +4,7 @@ describe('Component: dashboardItemComponent', function () {
 
     beforeEach(module('projectaanvraagApp'));
 
-    var dashboardItemController, projectaanvraagApiService, defer, $q, $scope, $rootScope, modal, modalInstance, $httpBackend;
+    var dashboardItemController, projectaanvraagApiService, defer, $q, $scope, $rootScope, modal, modalInstance;
 
     beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_, _$uibModal_) {
 
