@@ -45,14 +45,14 @@
                     <p ng-show="$ctrl.isInactive()">Aan de slag met echte data en evenementen?<br>Activeer je project ({{ $ctrl.project.group.price }} euro per jaar - tarieven en
                         voorwaarden)</p>
                     <p ng-show="$ctrl.isInactive()">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#activatie_aanvragen">Activeren</a>
+                        <a class="btn btn-primary" ng-click="$ctrl.requestActivation();">Activeren</a>
                     </p>
                 </div>
 
                 <div ng-show="$ctrl.isLive()">
 
                     <ul class="list-unstyled" ng-show="!$ctrl.project.group.actionButton && $ctrl.project.liveConsumerKey">
-                        <li>Key <code ng-bind="$ctrl.project.testConsumerKey"></code></li>
+                        <li>Key <code ng-bind="$ctrl.project.liveConsumerKey"></code></li>
                         <li ng-show="$ctrl.project.liveSecret">Secret <code ng-bind="$ctrl.project.liveSecret"></code></li>
                     </ul>
 

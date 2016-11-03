@@ -22,12 +22,6 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         projectDetails: {}
     };
 
-    var postConfig = {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-        }
-    };
-
     /**
      * Get the integration types.
      * @returns {Promise}
@@ -143,7 +137,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     service.addProject = function (formData) {
         var defer = $q.defer();
 
-        $http.post(apiUrl + 'project/', formData, postConfig)
+        $http.post(apiUrl + 'project/', formData)
             .success(function (data) {
                 defer.resolve(data);
             })
@@ -155,6 +149,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     };
 
     /**
+<<<<<<< HEAD
      * Delete a project.
      * @returns {Promise}
      *   A promise with a response.
@@ -184,6 +179,26 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         $http.put(apiUrl + 'project/' + id + '/block')
             .success(function (data) {
                 defer.resolve(data);
+            })
+            .error(function (data) {
+                defer.reject(data);
+            });
+
+        return defer.promise;
+    };
+
+
+    /**
+     * Request the activation of a project.
+     * @returns {Promise}
+     *   A promise with a response.
+     */
+    service.requestActivation = function (id, formData) {
+        var defer = $q.defer();
+
+        $http.post(apiUrl + 'project/' + id + '/request-activation', formData)
+            .success(function () {
+                defer.resolve();
             })
             .error(function (data) {
                 defer.reject(data);

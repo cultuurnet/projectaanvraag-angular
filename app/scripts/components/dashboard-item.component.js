@@ -57,7 +57,7 @@
          * Remove the project.
          */
         ctrl.removeItem = function () {
-            var confirmationModal = $uibModal.open({
+            var modalInstance = $uibModal.open({
                 animation: true,
                 component: 'confirmationComponent',
                 resolve: {
@@ -76,7 +76,7 @@
                 }
             });
 
-            confirmationModal.result.then(function() {
+            modalInstance.result.then(function() {
                 Messages.clearMessages();
 
                 // Delete the project
@@ -91,10 +91,29 @@
         };
 
         /**
+         * Open the modal to request the activation.
+         */
+        ctrl.requestActivation = function() {
+            var modalInstance = $uibModal.open({
+                component: 'requestActivationComponent',
+                resolve: {
+                    project: function () {
+                        return ctrl.project;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                Messages.clearMessages();
+                Messages.addMessage('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
+            });
+        };
+
+        /**
          * Block the project.
          */
         ctrl.blockItem = function () {
-            var confirmationModal = $uibModal.open({
+            var modalInstance = $uibModal.open({
                 animation: true,
                 component: 'confirmationComponent',
                 resolve: {
@@ -113,7 +132,7 @@
                 }
             });
 
-            confirmationModal.result.then(function() {
+            modalInstance.result.then(function() {
                 Messages.clearMessages();
 
                 // Delete the project
@@ -124,6 +143,7 @@
                 }, function() {
                     Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
                 });
+
             });
         };
     }
