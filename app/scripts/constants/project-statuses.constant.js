@@ -30,5 +30,10 @@ angular
                 label: 'Actief',
                 code: 'active',
                 class: 'state-active',
+            },
+            'BLOCKED': {
+                label: 'Geblokkeerd',
+                code: 'blocked',
+                class: 'state-blocked'
             }
         });
