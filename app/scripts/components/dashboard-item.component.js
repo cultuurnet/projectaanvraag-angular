@@ -67,11 +67,11 @@
                     message: function () {
                         return 'Ben je zeker dat je project definitief wil verwijderen? Je kan deze actie niet ongedaan maken.';
                     },
-                    cancel: function () {
-                        return 'Annuleren';
-                    },
                     confirm: function () {
                         return 'Verwijderen';
+                    },
+                    type: function () {
+                        return 'danger';
                     }
                 }
             });
@@ -104,11 +104,11 @@
                     message: function () {
                         return 'Ben je zeker dat je dit project wil blokkeren?';
                     },
-                    cancel: function () {
-                        return 'Annuleren';
-                    },
                     confirm: function () {
                         return 'Blokkeren';
+                    },
+                    type: function () {
+                        return 'danger';
                     }
                 }
             });
