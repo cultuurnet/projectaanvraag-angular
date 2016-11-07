@@ -100,12 +100,12 @@ describe('Service: projectaanvraagApiService', function () {
 
         var response = readJSON('test/json/projects.json');
 
-        projectaanvraagApiService.cache.projects['test'] = {};
-        projectaanvraagApiService.cache.projects['test'][20] = {};
+        projectaanvraagApiService.cache.projects.test = {};
+        projectaanvraagApiService.cache.projects.test[20] = {};
 
-        var checkRequest = function (data) {
-            expect(projectaanvraagApiService.cache.projects['test'][20][1].total).toEqual(20);
-        }
+        var checkRequest = function () {
+            expect(projectaanvraagApiService.cache.projects.test[20][1].total).toEqual(20);
+        };
 
         $httpBackend
             .expectGET(apiUrl + 'project/?max=20&name=test&start=0')
