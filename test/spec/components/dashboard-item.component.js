@@ -4,26 +4,48 @@ describe('Component: dashboardItemComponent', function () {
 
     beforeEach(module('projectaanvraagApp'));
 
-    var dashboardItemController, projectaanvraagApiService, defer, $q, $scope, $rootScope, modal, modalInstance;
+    var dashboardItemController, projectaanvraagApiService, defer, $q, $scope, modal;
+
+    var fakeModal = {
+        result: {
+            then: function (confirmCallback, cancelCallback) {
+                this.confirmCallBack = confirmCallback;
+                this.cancelCallback = cancelCallback;
+                return this;
+            },
+            catch: function (cancelCallback) {
+                this.cancelCallback = cancelCallback;
+                return this;
+            },
+            finally: function (finallyCallback) {
+                this.finallyCallback = finallyCallback;
+                return this;
+            }
+        },
+        close: function (item) {
+            this.result.confirmCallBack(item);
+        },
+        dismiss: function (item) {
+            this.result.cancelCallback(item);
+        },
+        finally: function () {
+            this.result.finallyCallback();
+        }
+    };
 
     beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_, _$uibModal_) {
 
         $scope = _$rootScope_.$new();
-        $rootScope = _$rootScope_;
         projectaanvraagApiService = jasmine.createSpyObj('projectaanvraagApiService', ['getProject', 'deleteProject']);
         defer = _$q_.defer();
         $q = _$q_;
 
         var promise = defer.promise;
         projectaanvraagApiService.getProject.and.returnValue(promise);
+        projectaanvraagApiService.deleteProject.and.returnValue(promise);
 
-        //modal = new FakeModal();
         modal = _$uibModal_;
-        var original = modal.open;
-        spyOn(modal, 'open').and.callFake(function () {
-            modalInstance = original.apply(null, arguments);
-            return modalInstance;
-        });
+        spyOn(modal, 'open').and.returnValue(fakeModal);
 
         dashboardItemController = _$componentController_(
             'dashboardItemComponent',
@@ -111,16 +133,10 @@ describe('Component: dashboardItemComponent', function () {
         expect(modal.open).toHaveBeenCalled();
     });
 
-    /*
+
     it('correctly handles the modal close', function() {
-
         dashboardItemController.removeItem();
-        $scope.digest();
-
-        console.log(modalInstance);
-        modalInstance.close();
-        $scope.$digest();
-
+        fakeModal.close();
         expect(projectaanvraagApiService.deleteProject).toHaveBeenCalled();
-    });*/
+    });
 });
