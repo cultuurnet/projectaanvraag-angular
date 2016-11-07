@@ -47,6 +47,14 @@
         };
 
         /**
+         * Is the current project blocked.
+         * @return boolean
+         */
+        ctrl.isBlocked = function() {
+            return ctrl.project.status.code === ProjectStatuses.BLOCKED.code;
+        };
+
+        /**
          * Is the current project inactive.
          * @return boolean
          */

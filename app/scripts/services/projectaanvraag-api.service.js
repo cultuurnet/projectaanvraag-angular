@@ -141,8 +141,8 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
             .success(function (data) {
                 defer.resolve(data);
             })
-            .error(function (data) {
-                defer.reject(data);
+            .error(function () {
+                defer.reject('unable to add the project');
             });
 
         return defer.promise;
@@ -160,8 +160,8 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
             .success(function (data) {
                 defer.resolve(data);
             })
-            .error(function (data) {
-                defer.reject(data);
+            .error(function () {
+                defer.reject('unable to delete the project');
             });
 
         return defer.promise;
@@ -175,14 +175,14 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     service.blockProject = function (id) {
         var defer = $q.defer();
 
-        $http.put(apiUrl + 'project/' + id + '/block')
+        $http.get(apiUrl + 'project/' + id + '/block')
             .success(function (data) {
                 var project = new CultuurnetProject(data);
                 service.cache.projectDetails.id = project;
                 defer.resolve(project);
             })
-            .error(function (data) {
-                defer.reject(data);
+            .error(function () {
+                defer.reject('unable to block the project');
             });
 
         return defer.promise;

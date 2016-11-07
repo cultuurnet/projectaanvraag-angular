@@ -163,6 +163,19 @@ describe('Service: projectaanvraagApiService', function () {
             .respond(200, response);
 
         projectaanvraagApiService.activateProject(1);
+    });
+
+    /**
+     * Test if the service correctly blocks a project
+     */
+    it('blocks a project', function () {
+        var response = {};
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/block')
+            .respond(200, response);
+
+        projectaanvraagApiService.blockProject(1);
         $httpBackend.flush();
     });
 
@@ -179,6 +192,51 @@ describe('Service: projectaanvraagApiService', function () {
             .respond(404);
 
         projectaanvraagApiService.activateProject(1).catch(checkError);
+    });
+
+    /**
+     * Test if the block project request handles errors
+     */
+    it('rejects failed block project', function () {
+        var checkError = function (error) {
+            expect(error).toEqual('unable to block the project');
+        };
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/block')
+            .respond(404);
+
+        projectaanvraagApiService.blockProject(1).catch(checkError);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the service correctly deletes a project
+     */
+    it('deletes a project', function () {
+        var response = {};
+
+        $httpBackend
+            .expectDELETE(apiUrl + 'project/1')
+            .respond(200, response);
+
+        projectaanvraagApiService.deleteProject(1);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the delete project request handles errors
+     */
+    it('rejects failed delete project', function () {
+        var checkError = function (error) {
+            expect(error).toEqual('unable to delete the project');
+        };
+
+        $httpBackend
+            .expectDELETE(apiUrl + 'project/1')
+            .respond(403);
+
+        projectaanvraagApiService.deleteProject(1).catch(checkError);
         $httpBackend.flush();
     });
 });
