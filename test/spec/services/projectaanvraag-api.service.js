@@ -153,6 +153,19 @@ describe('Service: projectaanvraagApiService', function () {
     });
 
     /**
+     * Test if the service correctly activates a project
+     */
+    it('activates a project', function () {
+        var response = {};
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/activate')
+            .respond(200, response);
+
+        projectaanvraagApiService.activateProject(1);
+    });
+
+    /**
      * Test if the service correctly blocks a project
      */
     it('blocks a project', function () {
@@ -164,6 +177,21 @@ describe('Service: projectaanvraagApiService', function () {
 
         projectaanvraagApiService.blockProject(1);
         $httpBackend.flush();
+    });
+
+    /**
+     * Test if the activate projects request handles errors
+     */
+    it('rejects failed activate project', function () {
+        var checkError = function (error) {
+            expect(error).toEqual('unable to activate the project');
+        };
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/activate')
+            .respond(404);
+
+        projectaanvraagApiService.activateProject(1).catch(checkError);
     });
 
     /**

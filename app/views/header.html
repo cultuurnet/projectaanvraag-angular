@@ -6,9 +6,9 @@
       </div>
       <div class="col-xs-4">
         <!-- Single button -->
-        <div class="btn-group pull-right" ng-show="app.user">
+        <div class="btn-group pull-right" ng-show="app.uitidService.user">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ app.user.displayName }} <span class="caret"></span>
+            {{ app.uitidService.user.displayName }} <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-right">
             <li><a href="#" ng-click="app.logout()">Afmelden</a></li>
