@@ -50,7 +50,7 @@
             // Request the activation.
             ctrl.error = false;
             Messages.clearMessages();
-            projectaanvraagApiService.requestActivation(ctrl.project.id, ctrl.formData).then(function() {
+            projectaanvraagApiService.requestActivation(ctrl.project.id, ctrl.formData).then(function(project) {
 
                 if (ctrl.formData.coupon) {
                     Messages.addMessage('success', 'Je project werd succesvol geactiveerd.');
@@ -59,7 +59,7 @@
                     Messages.addMessage('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
                 }
 
-                ctrl.close();
+                ctrl.close({$value: project});
 
             }, function() {
                 ctrl.error = true;

@@ -149,7 +149,6 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     };
 
     /**
-<<<<<<< HEAD
      * Delete a project.
      * @returns {Promise}
      *   A promise with a response.
@@ -178,7 +177,9 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
 
         $http.put(apiUrl + 'project/' + id + '/block')
             .success(function (data) {
-                defer.resolve(data);
+                var project = new CultuurnetProject(data);
+                service.cache.projectDetails.id = project;
+                defer.resolve(project);
             })
             .error(function (data) {
                 defer.reject(data);
@@ -197,8 +198,10 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         var defer = $q.defer();
 
         $http.post(apiUrl + 'project/' + id + '/request-activation', formData)
-            .success(function () {
-                defer.resolve();
+            .success(function (data) {
+                var project = new CultuurnetProject(data);
+                service.cache.projectDetails.id = project;
+                defer.resolve(project);
             })
             .error(function (data) {
                 defer.reject(data);
