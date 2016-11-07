@@ -81,9 +81,31 @@ describe('Service: projectaanvraagApiService', function () {
         var checkRequest = function (data) {
             expect(data.projects[0] instanceof CultuurnetProject).toBeTruthy();
             expect(data.projects[0].name).toEqual('UiTdatabank.be');
-            projectaanvraagApiService.cache.projects.test[20][1] = 'cache';
-            projectaanvraagApiService.getProjects('test', 1, 20).then(checkCache);
+            projectaanvraagApiService.cache.projects[''][20][1] = 'cache';
+            projectaanvraagApiService.getProjects('', 1, 20).then(checkCache);
         };
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/?max=20&start=0')
+            .respond(200, response);
+
+        projectaanvraagApiService.getProjects('', 1, 20).then(checkRequest);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the service correctly requests the projects.
+     */
+    it('searches projects by name', function () {
+
+        var response = readJSON('test/json/projects.json');
+
+        projectaanvraagApiService.cache.projects['test'] = {};
+        projectaanvraagApiService.cache.projects['test'][20] = {};
+
+        var checkRequest = function (data) {
+            expect(projectaanvraagApiService.cache.projects['test'][20][1].total).toEqual(20);
+        }
 
         $httpBackend
             .expectGET(apiUrl + 'project/?max=20&name=test&start=0')
@@ -149,6 +171,41 @@ describe('Service: projectaanvraagApiService', function () {
             .respond(404);
 
         projectaanvraagApiService.getProject(1).catch(checkError);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the service correctly creates a project
+     */
+    it('creates projects', function () {
+
+        var formData = {
+            name: 'name'
+        };
+        $httpBackend
+            .expectPOST(apiUrl + 'project/', formData)
+            .respond(200, '');
+
+        projectaanvraagApiService.addProject(formData);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the creation of a project handles errors
+     */
+    it('rejects failed project creation request', function () {
+        var checkError = function (error) {
+            expect(error).toEqual('unable to add the project');
+        };
+
+        var formData = {
+            name: 'name'
+        };
+        $httpBackend
+            .expectPOST(apiUrl + 'project/', formData)
+            .respond(403);
+
+        projectaanvraagApiService.addProject(formData).catch(checkError);
         $httpBackend.flush();
     });
 
@@ -237,6 +294,85 @@ describe('Service: projectaanvraagApiService', function () {
             .respond(403);
 
         projectaanvraagApiService.deleteProject(1).catch(checkError);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the service correctly activates a project
+     */
+    it('activates a project', function () {
+        var response = readJSON('test/json/project.json');
+
+        var checkRequest = function (project) {
+            expect(project instanceof CultuurnetProject).toBeTruthy();
+            expect(project.name).toEqual('project name');
+            expect(projectaanvraagApiService.cache.projectDetails[1]).toEqual(project);
+        };
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/activate')
+            .respond(200, response);
+
+        projectaanvraagApiService.activateProject(1).then(checkRequest);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the activation of a project handles errors
+     */
+    it('rejects failed activation', function () {
+        var checkError = function (error) {
+            expect(error).toEqual('unable to activate the project');
+        };
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/activate')
+            .respond(403);
+
+        projectaanvraagApiService.activateProject(1).catch(checkError);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the service correctly activates a project
+     */
+    it('requests activation', function () {
+        var response = readJSON('test/json/project.json');
+
+        var formData = {
+            coupon: 'coupon'
+        };
+        var checkRequest = function (project) {
+            expect(project instanceof CultuurnetProject).toBeTruthy();
+            expect(project.name).toEqual('project name');
+            expect(projectaanvraagApiService.cache.projectDetails[1]).toEqual(project);
+        };
+
+        $httpBackend
+            .expectPOST(apiUrl + 'project/1/request-activation', formData)
+            .respond(200, response);
+
+        projectaanvraagApiService.requestActivation(1, formData).then(checkRequest);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the activation of a project handles errors
+     */
+    it('rejects failed activation request', function () {
+        var checkError = function (error) {
+            expect(error).toEqual('unable to request activation for the project');
+        };
+
+        var formData = {
+            coupon: 'coupon'
+        };
+
+        $httpBackend
+            .expectPOST(apiUrl + 'project/1/request-activation', formData)
+            .respond(403);
+
+        projectaanvraagApiService.requestActivation(1, formData).catch(checkError);
         $httpBackend.flush();
     });
 });

@@ -178,7 +178,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         $http.get(apiUrl + 'project/' + id + '/block')
             .success(function (data) {
                 var project = new CultuurnetProject(data);
-                service.cache.projectDetails.id = project;
+                service.cache.projectDetails[id] = project;
                 defer.resolve(project);
             })
             .error(function () {
@@ -199,7 +199,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         $http.get(apiUrl + 'project/' + id + '/activate')
             .success(function (data) {
                 var project = new CultuurnetProject(data);
-                service.cache.projectDetails.id = project;
+                service.cache.projectDetails[id] = project;
                 defer.resolve(project);
             })
             .error(function () {
@@ -220,11 +220,11 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         $http.post(apiUrl + 'project/' + id + '/request-activation', formData)
             .success(function (data) {
                 var project = new CultuurnetProject(data);
-                service.cache.projectDetails.id = project;
+                service.cache.projectDetails[id] = project;
                 defer.resolve(project);
             })
             .error(function (data) {
-                defer.reject(data);
+                defer.reject('unable to request activation for the project');
             });
 
         return defer.promise;
