@@ -87,12 +87,11 @@
 
             modalInstance.result.then(function() {
                 Messages.clearMessages();
-
                 // Delete the project
                 projectaanvraagApiService.deleteProject(ctrl.project.id).then(function() {
                     projectaanvraagApiService.cache.projects = {};
                     ctrl.onUpdate();
-                    Messages.addMessage('success', 'Het project "'+ctrl.project.name+'" werd correct verwijderd.');
+                    Messages.addMessage('success', 'Het project "' + ctrl.project.name + '" werd correct verwijderd.');
                 }, function() {
                     Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
                 });
@@ -146,10 +145,9 @@
                 Messages.clearMessages();
 
                 // Delete the project
-                projectaanvraagApiService.blockProject(ctrl.project.id).then(function() {
-                    projectaanvraagApiService.cache.projects = {};
-                    ctrl.onUpdate();
-                    Messages.addMessage('success', 'Het project "'+ctrl.project.name+'" werd correct geblokkeerd.');
+                projectaanvraagApiService.blockProject(ctrl.project.id).then(function(project) {
+                    ctrl.project = project;
+                    Messages.addMessage('success', 'Het project "' + ctrl.project.name + '" werd correct geblokkeerd.');
                 }, function() {
                     Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
                 });
@@ -181,10 +179,9 @@
                 Messages.clearMessages();
 
                 // Delete the project
-                projectaanvraagApiService.activateProject(ctrl.project.id).then(function() {
-                    projectaanvraagApiService.cache.projects = {};
-                    ctrl.onUpdate();
-                    Messages.addMessage('success', 'Het project "'+ctrl.project.name+'" werd correct geactiveerd.');
+                projectaanvraagApiService.activateProject(ctrl.project.id).then(function(project) {
+                    ctrl.project = project;
+                    Messages.addMessage('success', 'Het project "' + ctrl.project.name + '" werd correct geactiveerd.');
                 }, function() {
                     Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
                 });
