@@ -111,7 +111,8 @@
                 }
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function (project) {
+                ctrl.project = project;
                 Messages.clearMessages();
                 Messages.addMessage('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
             });
