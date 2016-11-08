@@ -63,6 +63,14 @@
         };
 
         /**
+         * The coupon used for the project, if any.
+         * @return string
+         */
+        ctrl.couponUsed = function() {
+            return ctrl.project.coupon;
+        };
+
+        /**
          * Remove the project.
          */
         ctrl.removeItem = function () {
