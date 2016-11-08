@@ -35,6 +35,7 @@ function cultuurnetProjectFactory(IntegrationType, ProjectStatuses) {
       this.testConsumerSecret = jsonObject.testConsumerSecret || '';
       this.liveConsumerKey = jsonObject.liveConsumerKey || '';
       this.liveConsumerSecret = jsonObject.liveConsumerSecret || '';
+      this.coupon = jsonObject.coupon;
 
       if (jsonObject.status && ProjectStatuses[jsonObject.status.toUpperCase()]) {
         jsonObject.status = ProjectStatuses[jsonObject.status.toUpperCase()];

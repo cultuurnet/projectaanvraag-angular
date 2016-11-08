@@ -11,7 +11,7 @@ angular.module('projectaanvraagApp')
     .service('projectaanvraagApiService', projectaanvraagApiService);
 
 /* @ngInject */
-function projectaanvraagApiService($q, $http, appConfig, IntegrationType, CultuurnetProject) {
+function projectaanvraagApiService($q, $http, appConfig, IntegrationType, CultuurnetProject, InsightlyOrganisation) {
 
     var apiUrl = appConfig.apiUrl;
 
@@ -19,7 +19,8 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     var service = this;
     service.cache = {
         projects: {},
-        projectDetails: {}
+        projectDetails: {},
+        organisations: {}
     };
 
     /**
@@ -202,6 +203,28 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
             })
             .error(function (data) {
                 defer.reject(data);
+            });
+
+        return defer.promise;
+    };
+
+    /**
+     * Get the organisation linked to a project.
+     * @returns {Promise}
+     *   A promise for a list
+     */
+    service.getOrganisationByProject = function (id) {
+        var defer = $q.defer();
+
+        $http
+            .get(apiUrl + 'project/' + id + '/organisation')
+            .success(function (data) {
+                var organisation = new InsightlyOrganisation(data);
+                service.cache.organisations[id] = organisation;
+                defer.resolve(organisation);
+            })
+            .error(function () {
+                defer.reject('unable to retrieve the organisation');
             });
 
         return defer.promise;
