@@ -21,7 +21,7 @@
 </div>
 
 <div class="well" ng-show="$ctrl.totalProjects === 0 && !$ctrl.loading">
-    <p class="text-center lead">Je hebt nog geen projecten. <a href="#">Aan de slag</a></p>
+    <p class="text-center lead">Je hebt nog geen projecten. <a ng-click="$ctrl.redirectToCreate()">Aan de slag</a></p>
     <p class="text-center text-muted">Maak een project aan en probeer alles gratis uit met testevenementen.</p>
 </div>
 

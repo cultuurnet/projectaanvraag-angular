@@ -90,7 +90,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                     }
 
                     service.cache.projects[name][maxResults][page] = {
-                        total: data.total,
+                        total: parseInt(data.total),
                         projects: projects
                     };
                     defer.resolve(service.cache.projects[name][maxResults][page]);
