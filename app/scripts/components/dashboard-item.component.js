@@ -213,6 +213,25 @@
             modalInstance.result.then(function (project) {
                 ctrl.project = project;
             });
+        }
+
+        /**
+         * Change billing information.
+         */
+        ctrl.updateBillingInformation = function() {
+            var modalInstance = $uibModal.open({
+                component: 'billingInformationComponent',
+                resolve: {
+                    project: function () {
+                        return ctrl.project;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                Messages.clearMessages();
+                Messages.addMessage('success', 'Je facturatiegegevens werden succesvol aangepast.');
+            });
         };
     }
 

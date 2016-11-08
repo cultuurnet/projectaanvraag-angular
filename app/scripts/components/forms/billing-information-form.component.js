@@ -11,7 +11,7 @@
     angular
         .module('projectaanvraagApp')
         .component('billingInformationDetailsFormComponent', {
-            templateUrl: 'views/modals/billing-information-form.html',
+            templateUrl: 'views/forms/billing-information-form.html',
             bindings: {
                 parentCtrl: '='
             }

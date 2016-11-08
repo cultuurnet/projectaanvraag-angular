@@ -1,4 +1,9 @@
 {
   "apiUrl": "http://culpas-silex.dev/",
-  "basePath": "/"
+  "basePath": "/",
+  "insightly": {
+    "customFields": {
+      "vat": "ORGANISATION_FIELD_1"
+    }
+  }
 }

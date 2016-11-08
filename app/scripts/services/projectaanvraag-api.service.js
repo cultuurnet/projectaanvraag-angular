@@ -259,8 +259,9 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     
     /**
      * Get the organisation linked to a project.
+     *
      * @returns {Promise}
-     *   A promise for a list
+     *   A promise with a response.
      */
     service.getOrganisationByProject = function (id) {
         var defer = $q.defer();
@@ -274,6 +275,28 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
             })
             .error(function () {
                 defer.reject('unable to retrieve the organisation');
+            });
+
+        return defer.promise;
+    };
+
+    /**
+     * Update the organisation linked to a project.
+     *
+     * @returns {Promise}
+     *   A promise with a response.
+     */
+    service.updateOrganisationByProject = function (id, organisation) {
+        var defer = $q.defer();
+
+        $http.put(apiUrl + 'project/' + id + '/organisation', organisation)
+            .success(function (data) {
+                var project = new CultuurnetProject(data);
+                service.cache.projectDetails[id] = project;
+                defer.resolve(project);
+            })
+            .error(function () {
+                defer.reject('unable to update the organisation of the project');
             });
 
         return defer.promise;

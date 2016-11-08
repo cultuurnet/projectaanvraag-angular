@@ -1,0 +1,30 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="$ctrl.dismiss();"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Facturatiegegevens</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="messages" ng-show="$ctrl.error || $ctrl.apiError">
+            <div ng-show="$ctrl.error" class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>Er ging iets fout tijdens het versturen van de aanvraag.</p>
+            </div>
+
+            <div ng-show="$ctrl.apiError" class="alert alert-danger" role="alert">
+                <p>Er ging iets fout tijdens het ophalen van uw gegevens. Probeer het later opnieuw.</p>
+            </div>
+        </div>
+
+        <div class="loader">
+            <i class="fa fa-spinner fa-spin loader" ng-show="$ctrl.loading"></i>
+        </div>
+
+        <billing-information-details-form-component ng-if="!$ctrl.apiError" ng-show="!$ctrl.loading" parent-ctrl="$ctrl" form-data="$ctrl.formData"></billing-information-details-form-component>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss();">Annuleren</button>
+        <button type="button" class="btn btn-primary" ng-if="!$ctrl.apiError" ng-disabled="$ctrl.billingInformation.$invalid" ng-click="$ctrl.updateBillingInformation();">Bevestigen</button>
+    </div>
+</div><!-- /.modal-content -->
