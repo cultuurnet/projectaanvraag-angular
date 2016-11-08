@@ -52,6 +52,13 @@
 
     };
 
+    /**
+     * Redirect to the dashboard page.
+     */
+    ctrl.redirectToDashboard = function() {
+      $state.go('dashboard');
+    };
+
   }
 
 })();
