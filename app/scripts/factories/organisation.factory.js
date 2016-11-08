@@ -11,7 +11,7 @@ angular
   .factory('InsightlyOrganisation', insightlyOrganisationFactory);
 
 /* @ngInject */
-function insightlyOrganisationFactory(InsightlyAddress) {
+function insightlyOrganisationFactory(InsightlyAddress, InsightlyContactInfo) {
 
   /**
    * @class InsightlyOrganisation
@@ -35,12 +35,20 @@ function insightlyOrganisationFactory(InsightlyAddress) {
       _self.name = jsonObject.name;
 
       _self.addresses = [];
-
       if (jsonObject.addresses) {
-        for (var key in jsonObject.addresses) {
-          _self.addresses.push(new InsightlyAddress(jsonObject.addresses[key]));
+        for (var address in jsonObject.addresses) {
+          _self.addresses.push(new InsightlyAddress(jsonObject.addresses[address]));
         }
       }
+
+      _self.contactInfo = [];
+      if (jsonObject.contactInfo) {
+        for (var contact in jsonObject.contactInfo) {
+          _self.contactInfo.push(new InsightlyContactInfo(jsonObject.contactInfo[contact]));
+        }
+      }
+
+      _self.customFields = jsonObject.customFields || {};
     }
   };
 

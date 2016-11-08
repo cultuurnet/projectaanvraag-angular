@@ -5,24 +5,17 @@
         <p ng-show="$ctrl.parentCtrl.billingInformation.email.$touched && $ctrl.parentCtrl.billingInformation.email.$error.required" class="help-block">E-mailadres is verplicht.</p>
         <p ng-show="$ctrl.parentCtrl.billingInformation.email.$touched && $ctrl.parentCtrl.billingInformation.email.$error.email" class="help-block">Gelieve een geldig e-mailadres in te geven.</p>
     </div>
-    <div class="form-group required" ng-class="{'has-error' : billingInformation.name.$touched && billingInformation.name.$invalid}">
+    <div class="form-group required" ng-class="{'has-error' : $ctrl.parentCtrl.billingInformation.name.$touched && $ctrl.parentCtrl.billingInformation.name.$invalid}">
         <label for="name">Naam van bedrijf, organisatie of gemeente</label>
         <input type="text" class="form-control" id="name" name="name" ng-model="$ctrl.parentCtrl.formData.name" required>
         <p ng-show="$ctrl.parentCtrl.billingInformation.name.$touched && $ctrl.parentCtrl.billingInformation.name.$error.required" class="help-block">Naam van bedrijf, organisatie of gemeente is verplicht.</p>
     </div>
     <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-12">
             <div class="form-group required" ng-class="{'has-error' : $ctrl.parentCtrl.billingInformation.street.$touched && $ctrl.parentCtrl.billingInformation.street.$invalid}">
-                <label for="street">Straat</label>
+                <label for="street">Straat en nummer</label>
                 <input type="text" class="form-control" id="street" name="street" ng-model="$ctrl.parentCtrl.formData.street" required>
-                <p ng-show="$ctrl.parentCtrl.billingInformation.street.$touched && $ctrl.parentCtrl.billingInformation.street.$error.required" class="help-block">Straat is verplicht.</p>
-            </div>
-        </div>
-        <div class="col-xs-4">
-            <div class="form-group required" ng-class="{'has-error' : $ctrl.parentCtrl.billingInformation.number.$touched && $ctrl.parentCtrl.billingInformation.number.$invalid}">
-                <label for="number">Nummer</label>
-                <input type="text" class="form-control" id="number" name="number" ng-model="$ctrl.parentCtrl.formData.number" required>
-                <p ng-show="$ctrl.parentCtrl.billingInformation.number.$touched && $ctrl.parentCtrl.billingInformation.street.$error.required" class="help-block">Huisnummer is verplicht.</p>
+                <p ng-show="$ctrl.parentCtrl.billingInformation.street.$touched && $ctrl.parentCtrl.billingInformation.street.$error.required" class="help-block">Straat en nummer is verplicht.</p>
             </div>
         </div>
     </div>
@@ -44,7 +37,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="identifier">BTW- of ondernemingsnummer</label>
-        <input type="text" class="form-control" id="identifier" name="identifier" ng-model="$ctrl.parentCtrl.formData.identifier">
+        <label for="vat">BTW- of ondernemingsnummer</label>
+        <input type="text" class="form-control" id="vat" name="vat" ng-model="$ctrl.parentCtrl.formData.vat">
     </div>
 </form>
