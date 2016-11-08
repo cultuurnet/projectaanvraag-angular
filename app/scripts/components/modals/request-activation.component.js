@@ -44,7 +44,7 @@
         ctrl.requestActivation = function () {
 
             if (!ctrl.showCoupon && ctrl.formData.coupon) {
-                ctrl.formData.coupon = '';
+                delete ctrl.formData.coupon;
             }
 
             // Request the activation.
