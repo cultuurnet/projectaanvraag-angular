@@ -15,17 +15,18 @@
             controller: dashboardItemController,
             bindings: {
                 data: '=',
-                onDelete: '&'
+                onUpdate: '&'
             }
         });
 
     /* @ngInject */
-    function dashboardItemController(projectaanvraagApiService, ProjectStatuses, $uibModal, Messages) {
+    function dashboardItemController(projectaanvraagApiService, ProjectStatuses, $uibModal, Messages, uitidService) {
 
         /*jshint validthis: true */
         var ctrl = this;
         ctrl.fetching = true;
         ctrl.project = ctrl.data;
+        ctrl.user = uitidService.user;
 
         /**
          * Load the project when controller is loaded.
@@ -43,6 +44,14 @@
          */
         ctrl.isLive = function() {
             return ctrl.project.status.code === ProjectStatuses.ACTIVE.code;
+        };
+
+        /**
+         * Is the current project blocked.
+         * @return boolean
+         */
+        ctrl.isBlocked = function() {
+            return ctrl.project.status.code === ProjectStatuses.BLOCKED.code;
         };
 
         /**
@@ -86,12 +95,11 @@
 
             modalInstance.result.then(function() {
                 Messages.clearMessages();
-
                 // Delete the project
                 projectaanvraagApiService.deleteProject(ctrl.project.id).then(function() {
                     projectaanvraagApiService.cache.projects = {};
-                    ctrl.onDelete();
-                    Messages.addMessage('success', 'Het project "'+ctrl.project.name+'" werd correct verwijderd.');
+                    ctrl.onUpdate();
+                    Messages.addMessage('success', 'Het project "' + ctrl.project.name + '" werd correct verwijderd.');
                 }, function() {
                     Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
                 });
@@ -111,7 +119,8 @@
                 }
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function (project) {
+                ctrl.project = project;
                 Messages.clearMessages();
                 Messages.addMessage('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
             });
@@ -144,10 +153,43 @@
                 Messages.clearMessages();
 
                 // Delete the project
-                projectaanvraagApiService.blockProject(ctrl.project.id).then(function() {
-                    projectaanvraagApiService.cache.projects = {};
-                    ctrl.onDelete();
-                    Messages.addMessage('success', 'Het project "'+ctrl.project.name+'" werd correct geblokkeerd.');
+                projectaanvraagApiService.blockProject(ctrl.project.id).then(function(project) {
+                    ctrl.project = project;
+                    Messages.addMessage('success', 'Het project "' + ctrl.project.name + '" werd correct geblokkeerd.');
+                }, function() {
+                    Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
+                });
+
+            });
+        };
+
+        /**
+         * Activate the project.
+         */
+        ctrl.activateItem = function () {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                component: 'confirmationComponent',
+                resolve: {
+                    title: function () {
+                        return 'Project live zetten';
+                    },
+                    message: function () {
+                        return 'Ben je zeker dat je dit project wil live zetten?';
+                    },
+                    confirm: function () {
+                        return 'Activeren';
+                    }
+                }
+            });
+
+            modalInstance.result.then(function() {
+                Messages.clearMessages();
+
+                // Delete the project
+                projectaanvraagApiService.activateProject(ctrl.project.id).then(function(project) {
+                    ctrl.project = project;
+                    Messages.addMessage('success', 'Het project "' + ctrl.project.name + '" werd correct geactiveerd.');
                 }, function() {
                     Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
                 });

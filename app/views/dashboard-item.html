@@ -64,13 +64,13 @@
 
             </dd>
         </dl>
-        <section>
+        <section ng-show="$ctrl.user.isAdmin">
             <dl class="dl-horizontal">
                 <dt>Beheer</dt>
                 <dd>
                     <ul class="list-inline">
-                        <li ng-if="!$ctrl.isLive()"><a href="">Zet live met jaarlijks abonnement</a></li>
-                        <li><a href="#" ng-click="$ctrl.blockItem()">Blokkeren</a></li>
+                        <li ng-if="!$ctrl.isLive()"><a href="#" ng-click="$ctrl.activateItem()">Zet live met jaarlijks abonnement</a></li>
+                        <li ng-if="!$ctrl.isBlocked()"><a href="#" ng-click="$ctrl.blockItem()">Blokkeren</a></li>
                     </ul>
                 </dd>
             </dl>

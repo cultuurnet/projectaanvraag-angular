@@ -4,27 +4,57 @@ describe('Component: dashboardItemComponent', function () {
 
     beforeEach(module('projectaanvraagApp'));
 
-    var dashboardItemController, projectaanvraagApiService, defer, $q, $scope, $rootScope, modal, modalInstance, $httpBackend;
+    var dashboardItemController, projectaanvraagApiService, defer, $q, $scope, modal, Messages;
 
-    beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_, _$uibModal_) {
+    var fakeModal = {
+        result: {
+            then: function (confirmCallback, cancelCallback) {
+                this.confirmCallBack = confirmCallback;
+                this.cancelCallback = cancelCallback;
+                return this;
+            },
+            catch: function (cancelCallback) {
+                this.cancelCallback = cancelCallback;
+                return this;
+            },
+            finally: function (finallyCallback) {
+                this.finallyCallback = finallyCallback;
+                return this;
+            }
+        },
+        close: function (item) {
+            this.result.confirmCallBack(item);
+        },
+        dismiss: function (item) {
+            this.result.cancelCallback(item);
+        },
+        finally: function () {
+            this.result.finallyCallback();
+        }
+    };
+
+    beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_, _$uibModal_, _projectaanvraagApiService_, _Messages_) {
 
         $scope = _$rootScope_.$new();
-        $rootScope = _$rootScope_;
-        projectaanvraagApiService = jasmine.createSpyObj('projectaanvraagApiService', ['getProject', 'deleteProject']);
+        projectaanvraagApiService = _projectaanvraagApiService_;
+        spyOn(projectaanvraagApiService, 'getProject');
         defer = _$q_.defer();
         $q = _$q_;
 
+        // Add promise for load project.
         var promise = defer.promise;
         projectaanvraagApiService.getProject.and.returnValue(promise);
 
-        //modal = new FakeModal();
+        // Add modal mock.
         modal = _$uibModal_;
-        var original = modal.open;
-        spyOn(modal, 'open').and.callFake(function () {
-            modalInstance = original.apply(null, arguments);
-            return modalInstance;
-        });
+        spyOn(modal, 'open').and.returnValue(fakeModal);
 
+        // Add messages mock.
+        Messages = _Messages_;
+        spyOn(Messages, 'clearMessages');
+        spyOn(Messages, 'addMessage');
+
+        var onUpdate = function () {};
         dashboardItemController = _$componentController_(
             'dashboardItemComponent',
             {
@@ -32,7 +62,8 @@ describe('Component: dashboardItemComponent', function () {
                 $uibModal: modal
             },
             {
-                data: {'id': 1}
+                data: {'id': 1},
+                onUpdate: onUpdate
             }
         );
 
@@ -106,21 +137,197 @@ describe('Component: dashboardItemComponent', function () {
         expect(dashboardItemController.isInactive()).toBeFalsy();
     });
 
-    it('correctly opens the modal', function() {
+    /**
+     * Test the opening of the removal confirmation.
+     */
+    it('correctly opens the modal when requesting removal', function() {
         dashboardItemController.removeItem();
         expect(modal.open).toHaveBeenCalled();
     });
 
-    /*
-    it('correctly handles the modal close', function() {
+    /**
+     * Test the removal confirmation handling.
+     */
+    it('correctly handles the removal confirmation', function() {
+
+        // Resolve load of project.
+        defer.resolve({
+            name: 'name'
+        });
+
+        spyOn(projectaanvraagApiService, 'deleteProject');
+        var defer2 = $q.defer();
+        var promise = defer2.promise;
+        projectaanvraagApiService.deleteProject.and.returnValue(promise);
 
         dashboardItemController.removeItem();
-        $scope.digest();
-
-        console.log(modalInstance);
-        modalInstance.close();
+        spyOn(dashboardItemController, 'onUpdate');
+        fakeModal.close();
+        defer2.resolve(dashboardItemController.project);
         $scope.$digest();
 
         expect(projectaanvraagApiService.deleteProject).toHaveBeenCalled();
-    });*/
+        expect(dashboardItemController.onUpdate).toHaveBeenCalled();
+        expect(Messages.clearMessages).toHaveBeenCalled();
+        expect(Messages.addMessage).toHaveBeenCalledWith('success', 'Het project "name" werd correct verwijderd.');
+    });
+
+    /**
+     * Test the removal confirmation error handling.
+     */
+    it('shows a message when removal went wrong', function() {
+
+        // Resolve load of project.
+        defer.resolve({
+            name: 'name'
+        });
+        $scope.$digest();
+
+        spyOn(projectaanvraagApiService, 'deleteProject');
+        var defer2 = $q.defer();
+        var promise = defer2.promise;
+        projectaanvraagApiService.deleteProject.and.returnValue(promise);
+
+        // Open modal and reject removal.
+        dashboardItemController.removeItem();
+        fakeModal.close();
+        defer2.reject();
+        $scope.$digest();
+
+        expect(projectaanvraagApiService.deleteProject).toHaveBeenCalled();
+        expect(Messages.clearMessages).toHaveBeenCalled();
+        expect(Messages.addMessage).toHaveBeenCalledWith('danger', 'Er ging iets mis. Probeer het later opnieuw.');
+    });
+
+    /**
+     * Test the block confirmation handling.
+     */
+    it('correctly handles the block confirmation', function() {
+
+        // Resolve load of project.
+        var returnedProject = {
+            name: 'name2'
+        };
+        defer.resolve({
+            name: 'name'
+        });
+
+        spyOn(projectaanvraagApiService, 'blockProject');
+        var defer2 = $q.defer();
+        var promise = defer2.promise;
+        projectaanvraagApiService.blockProject.and.returnValue(promise);
+
+        dashboardItemController.blockItem();
+        spyOn(dashboardItemController, 'onUpdate');
+        fakeModal.close();
+        defer2.resolve(returnedProject);
+        $scope.$digest();
+
+        expect(projectaanvraagApiService.blockProject).toHaveBeenCalled();
+        expect(dashboardItemController.project).toEqual(returnedProject);
+        expect(Messages.clearMessages).toHaveBeenCalled();
+        expect(Messages.addMessage).toHaveBeenCalledWith('success', 'Het project "name2" werd correct geblokkeerd.');
+    });
+
+    /**
+     * Test the block confirmation error handling.
+     */
+    it('shows a message when blocking went wrong', function() {
+
+        // Resolve load of project.
+        defer.resolve({
+            name: 'name'
+        });
+        $scope.$digest();
+
+        spyOn(projectaanvraagApiService, 'blockProject');
+        var defer2 = $q.defer();
+        var promise = defer2.promise;
+        projectaanvraagApiService.blockProject.and.returnValue(promise);
+
+        // Open modal and reject block.
+        dashboardItemController.blockItem();
+        fakeModal.close();
+        defer2.reject();
+        $scope.$digest();
+
+        expect(projectaanvraagApiService.blockProject).toHaveBeenCalled();
+        expect(Messages.clearMessages).toHaveBeenCalled();
+        expect(Messages.addMessage).toHaveBeenCalledWith('danger', 'Er ging iets mis. Probeer het later opnieuw.');
+    });
+
+    /**
+     * Test the activation confirmation handling.
+     */
+    it('correctly handles the activation confirmation', function() {
+
+        // Resolve load of project.
+        var returnedProject = {
+            name: 'name2'
+        };
+        defer.resolve({
+            name: 'name'
+        });
+
+        spyOn(projectaanvraagApiService, 'activateProject');
+        var defer2 = $q.defer();
+        var promise = defer2.promise;
+        projectaanvraagApiService.activateProject.and.returnValue(promise);
+
+        dashboardItemController.activateItem();
+        fakeModal.close();
+        defer2.resolve(returnedProject);
+        $scope.$digest();
+
+        expect(projectaanvraagApiService.activateProject).toHaveBeenCalled();
+        expect(dashboardItemController.project).toEqual(returnedProject);
+        expect(Messages.clearMessages).toHaveBeenCalled();
+        expect(Messages.addMessage).toHaveBeenCalledWith('success', 'Het project "name2" werd correct geactiveerd.');
+    });
+
+    /**
+     * Test the block confirmation error handling.
+     */
+    it('shows a message when activating went wrong', function() {
+
+        // Resolve load of project.
+        defer.resolve({
+            name: 'name'
+        });
+        $scope.$digest();
+
+        spyOn(projectaanvraagApiService, 'activateProject');
+        var defer2 = $q.defer();
+        var promise = defer2.promise;
+        projectaanvraagApiService.activateProject.and.returnValue(promise);
+
+        // Open modal and reject block.
+        dashboardItemController.activateItem();
+        fakeModal.close();
+        defer2.reject();
+        $scope.$digest();
+
+        expect(projectaanvraagApiService.activateProject).toHaveBeenCalled();
+        expect(Messages.clearMessages).toHaveBeenCalled();
+        expect(Messages.addMessage).toHaveBeenCalledWith('danger', 'Er ging iets mis. Probeer het later opnieuw.');
+    });
+
+    /**
+     * Test the request activation submit handling.
+     */
+    it('correctly handles the request activation submit', function() {
+
+        // Resolve load of project.
+        var returnedProject = {
+            name: 'name2'
+        };
+
+        dashboardItemController.requestActivation();
+        fakeModal.close(returnedProject);
+        $scope.$digest();
+
+        expect(dashboardItemController.project).toEqual(returnedProject);
+        expect(Messages.clearMessages).toHaveBeenCalled();
+        expect(Messages.addMessage).toHaveBeenCalledWith('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
+    });
 });

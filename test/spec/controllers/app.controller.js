@@ -20,14 +20,6 @@ describe('Controller: AppController', function () {
     });
   }));
 
-  it('sets the user', function () {
-    var user = {
-      name: 'Nils'
-    };
-    AppController.setUser(user);
-    expect(AppController.user).toBe(user);
-  });
-
   it('logs out and redirects to login', function () {
 
     spyOn($state, 'go');
@@ -53,14 +45,9 @@ describe('Controller: AppController', function () {
   it('checks on states that require authentication and sets the user', function () {
 
     spyOn(uitid, 'getUser').and.returnValue(deferred.promise);
-    spyOn(AppController, 'setUser');
 
     $state.go('dashboard');
     expect(uitid.getUser).toHaveBeenCalled();
-
-    deferred.resolve('userinfo');
-    scope.$digest();
-    expect(AppController.setUser).toHaveBeenCalledWith('userinfo');
 
   });
 

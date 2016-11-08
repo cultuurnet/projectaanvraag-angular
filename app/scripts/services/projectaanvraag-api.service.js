@@ -142,15 +142,14 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
             .success(function (data) {
                 defer.resolve(data);
             })
-            .error(function (data) {
-                defer.reject(data);
+            .error(function () {
+                defer.reject('unable to add the project');
             });
 
         return defer.promise;
     };
 
     /**
-<<<<<<< HEAD
      * Delete a project.
      * @returns {Promise}
      *   A promise with a response.
@@ -159,11 +158,11 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         var defer = $q.defer();
 
         $http.delete(apiUrl + 'project/' + id)
-            .success(function (data) {
-                defer.resolve(data);
+            .success(function () {
+                defer.resolve();
             })
-            .error(function (data) {
-                defer.reject(data);
+            .error(function () {
+                defer.reject('unable to delete the project');
             });
 
         return defer.promise;
@@ -177,17 +176,39 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     service.blockProject = function (id) {
         var defer = $q.defer();
 
-        $http.put(apiUrl + 'project/' + id + '/block')
+        $http.get(apiUrl + 'project/' + id + '/block')
             .success(function (data) {
-                defer.resolve(data);
+                var project = new CultuurnetProject(data);
+                service.cache.projectDetails[id] = project;
+                defer.resolve(project);
             })
-            .error(function (data) {
-                defer.reject(data);
+            .error(function () {
+                defer.reject('unable to block the project');
             });
 
         return defer.promise;
     };
 
+    /**
+     * Activate a project.
+     * @returns {Promise}
+     *   A promise with a response.
+     */
+    service.activateProject = function (id) {
+        var defer = $q.defer();
+
+        $http.get(apiUrl + 'project/' + id + '/activate')
+            .success(function (data) {
+                var project = new CultuurnetProject(data);
+                service.cache.projectDetails[id] = project;
+                defer.resolve(project);
+            })
+            .error(function () {
+                defer.reject('unable to activate the project');
+            });
+
+        return defer.promise;
+    };
 
     /**
      * Request the activation of a project.
@@ -198,11 +219,13 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         var defer = $q.defer();
 
         $http.post(apiUrl + 'project/' + id + '/request-activation', formData)
-            .success(function () {
-                defer.resolve();
+            .success(function (data) {
+                var project = new CultuurnetProject(data);
+                service.cache.projectDetails[id] = project;
+                defer.resolve(project);
             })
-            .error(function (data) {
-                defer.reject(data);
+            .error(function () {
+                defer.reject('unable to request activation for the project');
             });
 
         return defer.promise;

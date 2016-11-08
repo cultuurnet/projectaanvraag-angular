@@ -9,7 +9,7 @@
     angular
         .module('projectaanvraagApp')
         .component('confirmationComponent', {
-            templateUrl: 'views/modal/confirmation.html',
+            templateUrl: 'views/modals/confirmation.html',
             controller: confirmationController,
             bindings: {
                 resolve: '<',
