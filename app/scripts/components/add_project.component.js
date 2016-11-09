@@ -14,11 +14,13 @@
     });
 
   /* @ngInject */
-  function addProjectController($scope, $state, projectaanvraagApiService, Messages) {
+  function addProjectController($state, projectaanvraagApiService, Messages, apiErrorCodes) {
     /*jshint validthis: true */
     var ctrl = this;
 
     ctrl.integrationTypes = [];
+    ctrl.useCoupon = false;
+    ctrl.formData = {};
 
     /**
      * Load the integration types and assign it to scope.
@@ -30,21 +32,31 @@
     /**
      * Handle the form
      */
-    $scope.formData = {};
-
-    // process the form
-    $scope.processForm = function($isValid) {
+    ctrl.processForm = function($isValid) {
 
       // Clear all previously set messages
       Messages.clearMessages();
 
       if ($isValid) {
-        projectaanvraagApiService.addProject($scope.formData).then(function() {
+
+        if (!ctrl.useCoupon && ctrl.formData.coupon) {
+          delete ctrl.formData.coupon;
+        }
+
+        projectaanvraagApiService.addProject(ctrl.formData).then(function() {
           // Show success message and redirect to the dashboard
           Messages.addMessage('success', 'Je project is aangemaakt. Je vindt het hieronder in de lijst terug.');
           $state.go('dashboard');
-        }, function() {
-          Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
+        }, function(result) {
+
+          // Show error label, if the code is known.
+          if (result && apiErrorCodes[result.code]) {
+            Messages.addMessage('danger', apiErrorCodes[result.code].label);
+          }
+          else {
+            Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
+          }
+
         });
       } else {
         Messages.addMessage('danger', 'Gelieve de verplichte velden in te vullen.');

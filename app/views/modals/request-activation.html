@@ -8,7 +8,7 @@
         <div class="messages" ng-show="$ctrl.error">
             <div class="alert alert-danger" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <p>Er ging iets fout tijdens het versturen van de aanvraag.</p>
+                <p ng-bind="$ctrl.error"></p>
             </div>
         </div>
 

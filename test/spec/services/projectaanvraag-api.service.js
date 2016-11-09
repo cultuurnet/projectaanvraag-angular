@@ -194,16 +194,22 @@ describe('Service: projectaanvraagApiService', function () {
      * Test if the creation of a project handles errors
      */
     it('rejects failed project creation request', function () {
+
+        var errorReturned = {
+            'code': 1
+        }
+
         var checkError = function (error) {
-            expect(error).toEqual('unable to add the project');
+            expect(error).toEqual(errorReturned);
         };
 
         var formData = {
             name: 'name'
         };
+
         $httpBackend
             .expectPOST(apiUrl + 'project/', formData)
-            .respond(403);
+            .respond(403, errorReturned);
 
         projectaanvraagApiService.addProject(formData).catch(checkError);
         $httpBackend.flush();
@@ -360,8 +366,13 @@ describe('Service: projectaanvraagApiService', function () {
      * Test if the activation of a project handles errors
      */
     it('rejects failed activation request', function () {
+
+        var errorReturned = {
+            'code': 1
+        }
+
         var checkError = function (error) {
-            expect(error).toEqual('unable to request activation for the project');
+            expect(error).toEqual(errorReturned);
         };
 
         var formData = {
@@ -370,7 +381,7 @@ describe('Service: projectaanvraagApiService', function () {
 
         $httpBackend
             .expectPOST(apiUrl + 'project/1/request-activation', formData)
-            .respond(403);
+            .respond(403, errorReturned);
 
         projectaanvraagApiService.requestActivation(1, formData).catch(checkError);
         $httpBackend.flush();

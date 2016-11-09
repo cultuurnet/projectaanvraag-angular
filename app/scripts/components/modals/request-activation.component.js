@@ -21,7 +21,7 @@
         });
 
     /* @ngInject */
-    function requestActivationController(projectaanvraagApiService, Messages) {
+    function requestActivationController(projectaanvraagApiService, Messages, apiErrorCodes) {
 
         /*jshint validthis: true */
         var ctrl = this;
@@ -29,7 +29,7 @@
         ctrl.project = ctrl.resolve.project;
         ctrl.formData = {};
         ctrl.showCoupon = false;
-        ctrl.error = false;
+        ctrl.error = '';
 
         /**
          * Toggle the coupon status.
@@ -48,7 +48,7 @@
             }
 
             // Request the activation.
-            ctrl.error = false;
+            ctrl.error = '';
             Messages.clearMessages();
             projectaanvraagApiService.requestActivation(ctrl.project.id, ctrl.formData).then(function(project) {
 
@@ -61,8 +61,15 @@
 
                 ctrl.close({$value: project});
 
-            }, function() {
-                ctrl.error = true;
+            }, function(result) {
+
+                // Show error label, if the code is known.
+                if (result && apiErrorCodes[result.code]) {
+                    ctrl.error = apiErrorCodes[result.code].label;
+                }
+                else {
+                    ctrl.error = 'Er ging iets fout tijdens het versturen van de aanvraag.';
+                }
             })
         };
     }
