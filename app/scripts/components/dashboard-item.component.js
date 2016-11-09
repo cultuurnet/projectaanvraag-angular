@@ -228,9 +228,9 @@
                 }
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function (project) {
                 Messages.clearMessages();
-                Messages.addMessage('success', 'Je facturatiegegevens werden succesvol aangepast.');
+                Messages.addMessage('success', 'De facturatiegegevens voor project "'+project.name+'" werden succesvol aangepast.');
             });
         };
     }

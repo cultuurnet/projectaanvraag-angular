@@ -49,6 +49,7 @@ function insightlyOrganisationFactory(InsightlyAddress, InsightlyContactInfo) {
       }
 
       _self.customFields = jsonObject.customFields || {};
+      _self.links = jsonObject.links || {};
     }
   };
 
