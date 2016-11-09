@@ -3,10 +3,7 @@
 
     /**
      * @ngdoc function
-     * @name projectaanvraagApp.component:loginComponent
-     * @description
-     * # loginComponent
-     * dashboard
+     * @name projectaanvraagApp.component:requestActivationComponent
      */
     angular
         .module('projectaanvraagApp')

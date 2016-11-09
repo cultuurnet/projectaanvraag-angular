@@ -386,4 +386,48 @@ describe('Service: projectaanvraagApiService', function () {
         projectaanvraagApiService.requestActivation(1, formData).catch(checkError);
         $httpBackend.flush();
     });
+
+    /**
+     * Test if the service correctly updates content filters
+     */
+    it('updates content filters', function () {
+        var response = readJSON('test/json/project.json');
+
+        var formData = {
+            contentFilter: 'filter'
+        };
+        var checkRequest = function (project) {
+            expect(project instanceof CultuurnetProject).toBeTruthy();
+            expect(project.name).toEqual('project name');
+            expect(projectaanvraagApiService.cache.projectDetails[1]).toEqual(project);
+        };
+
+        $httpBackend
+            .expectPUT(apiUrl + 'project/1/content-filter', formData)
+            .respond(200, response);
+
+        projectaanvraagApiService.updateContentFilter(1, 'filter').then(checkRequest);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the activation of a project handles errors
+     */
+    it('rejects content filter updates', function () {
+
+        var checkError = function (error) {
+            expect(error).toEqual('error updating content filter');
+        };
+
+        var formData = {
+            contentFilter: 'filter'
+        };
+
+        $httpBackend
+            .expectPUT(apiUrl + 'project/1/content-filter', formData)
+            .respond(403);
+
+        projectaanvraagApiService.updateContentFilter(1, 'filter').catch(checkError);
+        $httpBackend.flush();
+    });
 });
