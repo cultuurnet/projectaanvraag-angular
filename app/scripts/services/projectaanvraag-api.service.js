@@ -139,10 +139,11 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
 
         $http.post(apiUrl + 'project/', formData)
             .success(function (data) {
+                service.cache.projects = {};
                 defer.resolve(data);
             })
-            .error(function () {
-                defer.reject('unable to add the project');
+            .error(function (data) {
+                defer.reject(data);
             });
 
         return defer.promise;
@@ -223,8 +224,8 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                 service.cache.projectDetails[id] = project;
                 defer.resolve(project);
             })
-            .error(function () {
-                defer.reject('unable to request activation for the project');
+            .error(function (data) {
+                defer.reject(data);
             });
 
         return defer.promise;

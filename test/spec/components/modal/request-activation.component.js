@@ -4,7 +4,7 @@ describe('Component: requestActivationComponent', function () {
 
     beforeEach(module('projectaanvraagApp'));
 
-    var requestController, projectaanvraagApiService, Messages, defer, $scope;
+    var requestController, projectaanvraagApiService, Messages, defer, $scope, apiErrorCodes;
 
     beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_, _Messages_) {
 
@@ -16,11 +16,18 @@ describe('Component: requestActivationComponent', function () {
         spyOn(Messages, 'clearMessages');
         spyOn(Messages, 'addMessage');
 
+        apiErrorCodes = {
+            code: {
+                label: 'test custom error'
+            }
+        };
+
         requestController = _$componentController_(
             'requestActivationComponent',
             {
                 projectaanvraagApiService : projectaanvraagApiService,
-                Messages: Messages
+                Messages: Messages,
+                apiErrorCodes: apiErrorCodes,
             },
             {
                 resolve: {
@@ -101,15 +108,32 @@ describe('Component: requestActivationComponent', function () {
     /**
      * Test if the activation error is handled.
      */
-    it('handles activation errors', function () {
+    it('handles known activation errors', function () {
 
         expect(requestController.error).toBeFalsy();
         var promise = defer.promise;
         projectaanvraagApiService.requestActivation.and.returnValue(promise);
         requestController.requestActivation();
-        defer.reject();
+        defer.reject({
+            code: 'code'
+        });
         $scope.$digest();
 
-        expect(requestController.error).toBeTruthy();
+        expect(requestController.error).toEqual(apiErrorCodes.code.label);
+    });
+
+    /**
+     * Test if the activation error is handled.
+     */
+    it('handles general activation errors', function () {
+
+        expect(requestController.error).toBeFalsy();
+        var promise = defer.promise;
+        projectaanvraagApiService.requestActivation.and.returnValue(promise);
+        requestController.requestActivation();
+        defer.reject({});
+        $scope.$digest();
+
+        expect(requestController.error).toEqual('Er ging iets fout tijdens het versturen van de aanvraag.');
     });
 });
