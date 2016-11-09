@@ -197,7 +197,7 @@ describe('Service: projectaanvraagApiService', function () {
 
         var errorReturned = {
             'code': 1
-        }
+        };
 
         var checkError = function (error) {
             expect(error).toEqual(errorReturned);
@@ -369,7 +369,7 @@ describe('Service: projectaanvraagApiService', function () {
 
         var errorReturned = {
             'code': 1
-        }
+        };
 
         var checkError = function (error) {
             expect(error).toEqual(errorReturned);
