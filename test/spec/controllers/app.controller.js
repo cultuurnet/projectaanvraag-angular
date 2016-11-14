@@ -2,9 +2,16 @@
 
 describe('Controller: AppController', function () {
 
+  var apiUrl = 'http://example.com/';
+  var AppController, uitid, $state, deferred, scope;
+
   beforeEach(module('projectaanvraagApp'));
 
-  var AppController, uitid, $state, deferred, scope;
+  beforeEach(module('projectaanvraagApp', function($provide) {
+    $provide.constant('appConfig', {
+      apiUrl: apiUrl
+    });
+  }));
 
   beforeEach(inject(function ($controller, $rootScope, _$q_, _$state_, _uitidService_) {
     scope = $rootScope.$new();
@@ -12,6 +19,8 @@ describe('Controller: AppController', function () {
     uitid = _uitidService_;
     $state = _$state_;
     deferred = _$q_.defer();
+
+    spyOn(uitid, 'getUser').and.returnValue(deferred.promise);
 
     AppController = $controller('AppController', {
       $scope: scope,
@@ -42,35 +51,21 @@ describe('Controller: AppController', function () {
     expect($state.go).toHaveBeenCalledWith('login');
   });
 
-  it('checks on states that require authentication and sets the user', function () {
-
-    spyOn(uitid, 'getUser').and.returnValue(deferred.promise);
-
-    $state.go('dashboard');
-    expect(uitid.getUser).toHaveBeenCalled();
-
-  });
-
   it('redirects to login if authentication is required', function () {
 
-    spyOn(uitid, 'getUser').and.returnValue(deferred.promise);
     spyOn(AppController, 'redirectToLogin');
-
-    $state.go('dashboard');
-    expect(uitid.getUser).toHaveBeenCalled();
-
+    $state.go('authenticated.dashboard');
     deferred.reject();
     scope.$digest();
-    expect(AppController.redirectToLogin).toHaveBeenCalled();
 
+    expect(AppController.redirectToLogin).toHaveBeenCalled();
   });
 
-  it('skips authentictation checks for states that don\'t require it', function () {
+  it('skips authentication checks for states that don\'t require it', function () {
 
-    spyOn(uitid, 'getUser');
+    spyOn(AppController, 'redirectToLogin');
 
     $state.go('login');
-    expect(uitid.getUser).not.toHaveBeenCalled();
-
+    expect(AppController.redirectToLogin).not.toHaveBeenCalled();
   });
 });

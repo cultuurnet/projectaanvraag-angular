@@ -12,7 +12,7 @@ describe('Service: projectaanvraagApiService', function () {
 
     var $httpBackend, projectaanvraagApiService, defer, $rootScope, IntegrationType, CultuurnetProject;
 
-    beforeEach(inject(function (_$httpBackend_, _projectaanvraagApiService_, _$q_, _$rootScope_, _IntegrationType_, _CultuurnetProject_) {
+    beforeEach(inject(function (_$httpBackend_, _projectaanvraagApiService_, _$q_, _$rootScope_, _IntegrationType_, _CultuurnetProject_, _uitidService_) {
 
         $httpBackend = _$httpBackend_;
         projectaanvraagApiService = _projectaanvraagApiService_;
@@ -20,6 +20,8 @@ describe('Service: projectaanvraagApiService', function () {
         $rootScope = _$rootScope_;
         IntegrationType = _IntegrationType_;
         CultuurnetProject = _CultuurnetProject_;
+
+        spyOn(_uitidService_, 'getUser').and.returnValue(defer.promise);
 
     }));
 
