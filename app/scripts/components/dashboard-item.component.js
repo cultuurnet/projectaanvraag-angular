@@ -205,7 +205,7 @@
             modalInstance.result.then(function (project) {
                 ctrl.project = project;
             });
-        }
+        };
 
         /**
          * Change billing information.
