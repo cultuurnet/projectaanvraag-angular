@@ -12,7 +12,7 @@ describe('Service: projectaanvraagApiService', function () {
 
     var $httpBackend, projectaanvraagApiService, defer, $rootScope, IntegrationType, CultuurnetProject;
 
-    beforeEach(inject(function (_$httpBackend_, _projectaanvraagApiService_, _$q_, _$rootScope_, _IntegrationType_, _CultuurnetProject_) {
+    beforeEach(inject(function (_$httpBackend_, _projectaanvraagApiService_, _$q_, _$rootScope_, _IntegrationType_, _CultuurnetProject_, _uitidService_) {
 
         $httpBackend = _$httpBackend_;
         projectaanvraagApiService = _projectaanvraagApiService_;
@@ -20,6 +20,8 @@ describe('Service: projectaanvraagApiService', function () {
         $rootScope = _$rootScope_;
         IntegrationType = _IntegrationType_;
         CultuurnetProject = _CultuurnetProject_;
+
+        spyOn(_uitidService_, 'getUser').and.returnValue(defer.promise);
 
     }));
 
@@ -384,6 +386,50 @@ describe('Service: projectaanvraagApiService', function () {
             .respond(403, errorReturned);
 
         projectaanvraagApiService.requestActivation(1, formData).catch(checkError);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the service correctly updates content filters
+     */
+    it('updates content filters', function () {
+        var response = readJSON('test/json/project.json');
+
+        var formData = {
+            contentFilter: 'filter'
+        };
+        var checkRequest = function (project) {
+            expect(project instanceof CultuurnetProject).toBeTruthy();
+            expect(project.name).toEqual('project name');
+            expect(projectaanvraagApiService.cache.projectDetails[1]).toEqual(project);
+        };
+
+        $httpBackend
+            .expectPUT(apiUrl + 'project/1/content-filter', formData)
+            .respond(200, response);
+
+        projectaanvraagApiService.updateContentFilter(1, 'filter').then(checkRequest);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the activation of a project handles errors
+     */
+    it('rejects content filter updates', function () {
+
+        var checkError = function (error) {
+            expect(error).toEqual('error updating content filter');
+        };
+
+        var formData = {
+            contentFilter: 'filter'
+        };
+
+        $httpBackend
+            .expectPUT(apiUrl + 'project/1/content-filter', formData)
+            .respond(403);
+
+        projectaanvraagApiService.updateContentFilter(1, 'filter').catch(checkError);
         $httpBackend.flush();
     });
 });

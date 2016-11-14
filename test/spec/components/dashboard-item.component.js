@@ -95,6 +95,27 @@ describe('Component: dashboardItemComponent', function () {
         expect(dashboardItemController.fetching).toBeFalsy();
     });
 
+
+    /**
+     * Test the isBlocked method.
+     */
+    it('correctly sees a project as blocked', function () {
+        dashboardItemController.project = {
+            status: {
+                code: 'blocked'
+            }
+        };
+
+        expect(dashboardItemController.isBlocked()).toBeTruthy();
+
+        dashboardItemController.project = {
+            status: {
+                code: 'application_sent'
+            }
+        };
+        expect(dashboardItemController.isBlocked()).toBeFalsy();
+    });
+
     /**
      * Test the isLive method.
      */
@@ -308,8 +329,6 @@ describe('Component: dashboardItemComponent', function () {
         $scope.$digest();
 
         expect(projectaanvraagApiService.activateProject).toHaveBeenCalled();
-        expect(Messages.clearMessages).toHaveBeenCalled();
-        expect(Messages.addMessage).toHaveBeenCalledWith('danger', 'Er ging iets mis. Probeer het later opnieuw.');
     });
 
     /**
@@ -327,7 +346,23 @@ describe('Component: dashboardItemComponent', function () {
         $scope.$digest();
 
         expect(dashboardItemController.project).toEqual(returnedProject);
-        expect(Messages.clearMessages).toHaveBeenCalled();
-        expect(Messages.addMessage).toHaveBeenCalledWith('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
     });
+
+    /**
+     * Test the update content filter submit handling.
+     */
+    it('correctly handles the update content filter submit', function() {
+
+        // Resolve load of project.
+        var returnedProject = {
+            name: 'name2'
+        };
+
+        dashboardItemController.updateContentFilter();
+        fakeModal.close(returnedProject);
+        $scope.$digest();
+
+        expect(dashboardItemController.project).toEqual(returnedProject);
+    });
+
 });

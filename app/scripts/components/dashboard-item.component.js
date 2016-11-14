@@ -66,6 +66,7 @@
          * Remove the project.
          */
         ctrl.removeItem = function () {
+
             var modalInstance = $uibModal.open({
                 animation: true,
                 component: 'confirmationComponent',
@@ -113,8 +114,6 @@
 
             modalInstance.result.then(function (project) {
                 ctrl.project = project;
-                Messages.clearMessages();
-                Messages.addMessage('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
             });
         };
 
@@ -186,6 +185,25 @@
                     Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
                 });
 
+            });
+        };
+
+        /**
+         * Update the content filter
+         */
+        ctrl.updateContentFilter = function () {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                component: 'updateContentFilterComponent',
+                resolve: {
+                    project: function () {
+                        return ctrl.project;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (project) {
+                ctrl.project = project;
             });
         };
     }

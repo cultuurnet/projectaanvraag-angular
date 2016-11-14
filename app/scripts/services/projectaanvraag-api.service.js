@@ -230,4 +230,29 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
 
         return defer.promise;
     };
+
+    /**
+     * Update the content filter.
+     * @param id
+     * @param searchPrefixFilterQuery
+     */
+    service.updateContentFilter = function(id, contentFilter) {
+        var defer = $q.defer();
+
+        var formData = {
+            'contentFilter': contentFilter
+        };
+
+        $http.put(apiUrl + 'project/' + id + '/content-filter', formData)
+            .success(function (data) {
+                var project = new CultuurnetProject(data);
+                service.cache.projectDetails[id] = project;
+                defer.resolve(project);
+            })
+            .error(function () {
+                defer.reject('error updating content filter');
+            });
+
+        return defer.promise;
+    };
 }

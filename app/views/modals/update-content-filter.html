@@ -1,0 +1,24 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$ctrl.dismiss()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Contentfilter</h4>
+    </div>
+    <div class="modal-body">
+        <p>Met een contentfilter bepaal je welke data er opgehaald wordt. Zo kan je voor je project het getoonde aanbod filteren op gemeente of type.</p>
+        <form>
+            <div class="form-group">
+                <label for="query">Query</label>
+                <input type="text" class="form-control" id="query" ng-model="$ctrl.contentFilter">
+            </div>
+        </form>
+        <ul>
+            <li>Maak gebruik van de Search API notatie.</li>
+            <li>Je kan je query testen via uitdatabank.be. Daar vind je ook een querybouwer.</li>
+            <li>Voorbeeld: filter alle films die getoond worden in Gent <code>"category_flandersregion_name:Gent AND category_eventtype_name:Film"</code></li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss()">Annuleren</button>
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.updateContentFilter();">Bevestigen</button>
+    </div>
+</div><!-- /.modal-content -->
