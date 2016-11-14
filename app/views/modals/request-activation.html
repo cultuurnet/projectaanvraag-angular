@@ -57,6 +57,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss();">Annuleren</button>
-        <button type="button" class="btn btn-primary" ng-disabled="(!$ctrl.showCoupon && $ctrl.billingInformation.$invalid) || ($ctrl.showCoupon && $ctrl.couponForm.$invalid)" ng-click="$ctrl.requestActivation();">Bevestigen</button>
+        <button type="button" class="btn btn-primary" ng-disabled="(!$ctrl.showCoupon && $ctrl.billingInformation.$invalid) || ($ctrl.showCoupon && $ctrl.couponForm.$invalid)" ng-click="$ctrl.requestActivation();"><i ng-show="$ctrl.saving" class="fa fa-spinner fa-spin"></i> Bevestigen</button>
     </div>
 </div><!-- /.modal-content -->

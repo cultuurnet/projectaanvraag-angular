@@ -27,6 +27,7 @@
         ctrl.formData = {};
         ctrl.showCoupon = false;
         ctrl.error = '';
+        ctrl.saving = false;
 
         /**
          * Toggle the coupon status.
@@ -47,6 +48,8 @@
             // Request the activation.
             ctrl.error = '';
             Messages.clearMessages();
+            ctrl.saving = true;
+
             projectaanvraagApiService.requestActivation(ctrl.project.id, ctrl.formData).then(function(project) {
 
                 if (ctrl.formData.coupon) {
@@ -56,9 +59,12 @@
                     Messages.addMessage('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
                 }
 
+                ctrl.saving = false;
                 ctrl.close({$value: project});
 
             }, function(result) {
+
+                ctrl.saving = false;
 
                 // Show error label, if the code is known.
                 if (result && apiErrorCodes[result.code]) {

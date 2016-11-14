@@ -20,6 +20,7 @@
 
     ctrl.integrationTypes = [];
     ctrl.useCoupon = false;
+    ctrl.saving = false;
     ctrl.formData = {};
 
     /**
@@ -43,9 +44,12 @@
           delete ctrl.formData.coupon;
         }
 
+        ctrl.saving = true;
+
         projectaanvraagApiService.addProject(ctrl.formData).then(function() {
           // Show success message and redirect to the dashboard
           Messages.addMessage('success', 'Je project is aangemaakt. Je vindt het hieronder in de lijst terug.');
+          ctrl.saving = false;
           $state.go('dashboard');
         }, function(result) {
 
@@ -56,6 +60,8 @@
           else {
             Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
           }
+
+          ctrl.saving = false;
 
         });
       } else {
