@@ -63,6 +63,13 @@
         };
 
         /**
+         * Was a coupon used for this project.
+         */
+        ctrl.usedCoupon = function() {
+            return ctrl.project.coupon;
+        };
+
+        /**
          * Remove the project.
          */
         ctrl.removeItem = function () {

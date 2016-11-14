@@ -63,7 +63,7 @@ describe('Component: dashboardComponent', function () {
         });
 
         $scope.$digest();
-        expect(projectaanvraagApiService.getProjects).toHaveBeenCalledWith('test', 2, 20);
+        expect(projectaanvraagApiService.getProjects).toHaveBeenCalledWith('test', 2, 10);
 
 
     });

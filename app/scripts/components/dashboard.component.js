@@ -26,7 +26,7 @@
       ctrl.nameFilter = '';
       ctrl.currentPage = 1;
       ctrl.totalProjects = 0;
-      ctrl.itemsPerPage = 20;
+      ctrl.itemsPerPage = 10;
 
       /**
        * Redirect to the create project page.
