@@ -55,7 +55,7 @@
                     ctrl.formData.postal = parseInt(ctrl.organisation.addresses[0].postal) || '';
 
                     // Custom field: VAT
-                    if (appConfig.insightly.customFields.vat) {
+                    if (appConfig.insightly && appConfig.insightly.customFields.vat) {
                         ctrl.formData.vat = ctrl.organisation.customFields[appConfig.insightly.customFields.vat] || '';
                     }
                 }
@@ -94,7 +94,7 @@
             ctrl.organisation.addresses[0].city = ctrl.formData.city;
 
             // Custom field: VAT
-            if (appConfig.insightly.customFields.vat && ctrl.formData.vat) {
+            if (appConfig.insightly && appConfig.insightly.customFields.vat && ctrl.formData.vat) {
                 if (!ctrl.organisation.customFields) {
                     ctrl.organisation.customFields = {};
                 }
