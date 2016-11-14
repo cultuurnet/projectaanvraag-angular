@@ -222,7 +222,7 @@
 
             modalInstance.result.then(function (project) {
                 Messages.clearMessages();
-                Messages.addMessage('success', 'De facturatiegegevens voor project "'+project.name+'" werden succesvol aangepast.');
+                Messages.addMessage('success', 'De facturatiegegevens voor project "' + project.name + '" werden succesvol aangepast.');
             });
         };
     }
