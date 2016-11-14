@@ -30,19 +30,29 @@ angular
     };
     $stateProvider.state(loginState);
 
+    var rootState = {
+        name: 'authenticated',
+        abstract : true,
+        template: '<div ui-view></div>',
+        resolve: {
+            user: function (uitidService) {
+                return uitidService.getUser();
+            }
+        }
+      };
+      $stateProvider.state(rootState);
+
     var dashboardState = {
-      name: 'dashboard',
+      name: 'authenticated.dashboard',
       url: '',
-      component: 'dashboardComponent',
-      requireAuth: true
+      component: 'dashboardComponent'
     };
     $stateProvider.state(dashboardState);
 
     var addProjectState = {
-      name: 'addProject',
+      name: 'authenticated.addProject',
       url: '/projects/add',
-      component: 'addProjectComponent',
-      requireAuth: true
+      component: 'addProjectComponent'
     };
     $stateProvider.state(addProjectState);
 

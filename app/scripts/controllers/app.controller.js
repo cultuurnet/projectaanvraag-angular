@@ -36,11 +36,7 @@ function appController($scope, $transitions, $state, uitidService, Messages) {
    * Check if current state requires authentication.
    * Redirect to login if needed.
    */
-  $transitions.onBefore({}, function(trans) {
-    if (trans._targetState._definition.requireAuth) {
-      uitidService.getUser().catch(function() {
-        app.redirectToLogin();
-      });
-    }
+  $transitions.onError({to: 'authenticated.*'}, function() {
+    app.redirectToLogin();
   });
 }
