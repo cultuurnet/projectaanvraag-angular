@@ -221,6 +221,7 @@
             });
 
             modalInstance.result.then(function (project) {
+                ctrl.project = project;
                 Messages.clearMessages();
                 Messages.addMessage('success', 'De facturatiegegevens voor project "' + project.name + '" werden succesvol aangepast.');
             });

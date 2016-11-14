@@ -266,61 +266,20 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     service.getOrganisationByProject = function (id) {
         var defer = $q.defer();
 
-        $http
-            .get(apiUrl + 'project/' + id + '/organisation')
-            .success(function (data) {
-                var organisation = new InsightlyOrganisation(data);
-                service.cache.organisations[id] = organisation;
-                defer.resolve(organisation);
-            })
-            .error(function () {
-                defer.reject('unable to retrieve the organisation');
-            });
-
-        return defer.promise;
-    };
-
-    /**
-     * Update the organisation linked to a project.
-     *
-     * @returns {Promise}
-     *   A promise with a response.
-     */
-    service.updateOrganisationByProject = function (id, organisation) {
-        var defer = $q.defer();
-
-        $http.put(apiUrl + 'project/' + id + '/organisation', organisation)
-            .success(function (data) {
-                var project = new CultuurnetProject(data);
-                service.cache.projectDetails[id] = project;
-                defer.resolve(project);
-            })
-            .error(function () {
-                defer.reject('unable to update the organisation of the project');
-            });
-
-        return defer.promise;
-    };
-
-    /**
-     * Get the organisation linked to a project.
-     *
-     * @returns {Promise}
-     *   A promise with a response.
-     */
-    service.getOrganisationByProject = function (id) {
-        var defer = $q.defer();
-
-        $http
-            .get(apiUrl + 'project/' + id + '/organisation')
-            .success(function (data) {
-                var organisation = new InsightlyOrganisation(data);
-                service.cache.organisations[id] = organisation;
-                defer.resolve(organisation);
-            })
-            .error(function () {
-                defer.reject('unable to retrieve the organisation');
-            });
+        if (service.cache.organisations[id]) {
+            defer.resolve(service.cache.organisations[id]);
+        } else {
+            $http
+                .get(apiUrl + 'project/' + id + '/organisation')
+                .success(function (data) {
+                    var organisation = new InsightlyOrganisation(data);
+                    service.cache.organisations[id] = organisation;
+                    defer.resolve(organisation);
+                })
+                .error(function () {
+                    defer.reject('unable to retrieve the organisation');
+                });
+        }
 
         return defer.promise;
     };

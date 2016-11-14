@@ -21,7 +21,7 @@ angular
     'cultuurnet.uitid',
     'ui.bootstrap'
   ])
-  .config(function ($stateProvider, $httpProvider) {
+  .config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
 
     var loginState = {
       name: 'login',
@@ -44,7 +44,7 @@ angular
 
     var dashboardState = {
       name: 'authenticated.dashboard',
-      url: '',
+      url: '/',
       component: 'dashboardComponent'
     };
     $stateProvider.state(dashboardState);
@@ -60,5 +60,7 @@ angular
     $httpProvider.defaults.headers.post = {
         'Content-Type': 'application/json'
     };
+
+    $urlRouterProvider.otherwise('/');
 
   });

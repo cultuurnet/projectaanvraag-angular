@@ -29,7 +29,7 @@
 
       // send the user to somewhere that makes sense when navigating from the login page
       if ($state.current.name === 'login') {
-        destination = $state.href('dashboard', {}, {absolute: true});
+        destination = $state.href('authenticated.dashboard', {}, {absolute: true});
       }
       uitidService.login(destination, true);
     };

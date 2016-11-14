@@ -10,9 +10,9 @@ describe('Service: projectaanvraagApiService', function () {
         });
     }));
 
-    var $httpBackend, projectaanvraagApiService, defer, $rootScope, IntegrationType, CultuurnetProject;
+    var $httpBackend, projectaanvraagApiService, defer, $rootScope, IntegrationType, CultuurnetProject, InsightlyOrganisation;
 
-    beforeEach(inject(function (_$httpBackend_, _projectaanvraagApiService_, _$q_, _$rootScope_, _IntegrationType_, _CultuurnetProject_, _uitidService_) {
+    beforeEach(inject(function (_$httpBackend_, _projectaanvraagApiService_, _$q_, _$rootScope_, _IntegrationType_, _InsightlyOrganisation_, _CultuurnetProject_, _uitidService_) {
 
         $httpBackend = _$httpBackend_;
         projectaanvraagApiService = _projectaanvraagApiService_;
@@ -20,6 +20,7 @@ describe('Service: projectaanvraagApiService', function () {
         $rootScope = _$rootScope_;
         IntegrationType = _IntegrationType_;
         CultuurnetProject = _CultuurnetProject_;
+        InsightlyOrganisation = _InsightlyOrganisation_;
 
         spyOn(_uitidService_, 'getUser').and.returnValue(defer.promise);
 
@@ -430,6 +431,94 @@ describe('Service: projectaanvraagApiService', function () {
             .respond(403);
 
         projectaanvraagApiService.updateContentFilter(1, 'filter').catch(checkError);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the service correctly requests the integration types.
+     */
+    it('requests an organisation', function () {
+
+        var response = readJSON('test/json/organisation.json');
+
+        var checkCache = function (result) {
+            expect(result).toEqual('cache');
+        };
+
+        var checkRequest = function (organisation) {
+
+            expect(organisation instanceof InsightlyOrganisation).toBeTruthy();
+            expect(organisation.name).toEqual('naam bedrijfke');
+            projectaanvraagApiService.cache.organisations[1] = 'cache';
+            projectaanvraagApiService.getOrganisationByProject(1).then(checkCache);
+        };
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/organisation')
+            .respond(200, response);
+
+        projectaanvraagApiService.getOrganisationByProject(1).then(checkRequest);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the project request correctly handles errors
+     */
+    it('rejects failed organisation request', function () {
+        var checkError = function (error) {
+            expect(error).toEqual('unable to retrieve the organisation');
+        };
+
+        $httpBackend
+            .expectGET(apiUrl + 'project/1/organisation')
+            .respond(404);
+
+        projectaanvraagApiService.getOrganisationByProject(1).catch(checkError);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the service correctly updates organisation info.
+     */
+    it('updates organisation info', function () {
+        var response = readJSON('test/json/project.json');
+
+        var formData = {
+            name: 'name'
+        };
+
+        var checkRequest = function (project) {
+            expect(project instanceof CultuurnetProject).toBeTruthy();
+            expect(project.name).toEqual('project name');
+            expect(projectaanvraagApiService.cache.projectDetails[1]).toEqual(project);
+        };
+
+        $httpBackend
+            .expectPUT(apiUrl + 'project/1/organisation', formData)
+            .respond(200, response);
+
+        projectaanvraagApiService.updateOrganisationByProject(1, formData).then(checkRequest);
+        $httpBackend.flush();
+    });
+
+    /**
+     * Test if the updating of an organisation handles errors
+     */
+    it('rejects organisation info updates', function () {
+
+        var checkError = function (error) {
+            expect(error).toEqual('unable to update the organisation of the project');
+        };
+
+        var formData = {
+            name: 'name'
+        };
+
+        $httpBackend
+            .expectPUT(apiUrl + 'project/1/organisation', formData)
+            .respond(403);
+
+        projectaanvraagApiService.updateOrganisationByProject(1, formData).catch(checkError);
         $httpBackend.flush();
     });
 });

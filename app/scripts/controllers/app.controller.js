@@ -10,7 +10,7 @@ angular
   .controller('AppController', appController);
 
 /* @ngInject */
-function appController($scope, $transitions, $state, uitidService, Messages) {
+function appController($transitions, $state, uitidService, Messages) {
 
   /*jshint validthis: true */
   var app = this;

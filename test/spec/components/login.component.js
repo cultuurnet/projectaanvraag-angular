@@ -40,7 +40,7 @@ describe('Component: loginComponent', function () {
 
     loginController.login();
 
-    expect($state.href).toHaveBeenCalledWith('dashboard', {}, {absolute: true});
+    expect($state.href).toHaveBeenCalledWith('authenticated.dashboard', {}, {absolute: true});
     expect(uitidService.login).toHaveBeenCalledWith('http://www.example2.com', true);
   });
 });

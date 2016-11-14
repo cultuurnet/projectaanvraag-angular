@@ -32,7 +32,7 @@
        * Redirect to the create project page.
        */
       ctrl.redirectToCreate = function() {
-        $state.go('addProject');
+        $state.go('authenticated.addProject');
       };
 
       /**

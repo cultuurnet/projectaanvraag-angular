@@ -83,7 +83,7 @@ describe('Component: dashboardComponent', function () {
     it('redirects to create project', function () {
         spyOn($state, 'go');
         dashboardController.redirectToCreate();
-        expect($state.go).toHaveBeenCalledWith('addProject');
+        expect($state.go).toHaveBeenCalledWith('authenticated.addProject');
     });
 
 });

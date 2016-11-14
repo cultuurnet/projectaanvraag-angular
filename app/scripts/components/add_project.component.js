@@ -50,7 +50,7 @@
           // Show success message and redirect to the dashboard
           Messages.addMessage('success', 'Je project is aangemaakt. Je vindt het hieronder in de lijst terug.');
           ctrl.saving = false;
-          $state.go('dashboard');
+          $state.go('authenticated.dashboard');
         }, function(result) {
 
           // Show error label, if the code is known.
@@ -74,7 +74,7 @@
      * Redirect to the dashboard page.
      */
     ctrl.redirectToDashboard = function() {
-      $state.go('dashboard');
+      $state.go('authenticated.dashboard');
     };
 
   }

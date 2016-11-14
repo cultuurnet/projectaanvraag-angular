@@ -365,4 +365,23 @@ describe('Component: dashboardItemComponent', function () {
         expect(dashboardItemController.project).toEqual(returnedProject);
     });
 
+    /**
+     * Test the update billing information submit handling.
+     */
+    it('correctly handles the billing information submit', function() {
+
+        // Resolve load of project.
+        var returnedProject = {
+            name: 'name2'
+        };
+
+        dashboardItemController.updateBillingInformation();
+        fakeModal.close(returnedProject);
+        $scope.$digest();
+
+        expect(dashboardItemController.project).toEqual(returnedProject);
+        expect(Messages.clearMessages).toHaveBeenCalled();
+        expect(Messages.addMessage).toHaveBeenCalledWith('success', 'De facturatiegegevens voor project "name2" werden succesvol aangepast.');
+    });
+
 });

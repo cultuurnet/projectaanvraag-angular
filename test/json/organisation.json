@@ -1,0 +1,47 @@
+{
+  "id": 95591403,
+  "name": "naam bedrijfke",
+  "background": null,
+  "addresses": {
+    "0": {
+      "id": 48270160,
+      "type": "WORK",
+      "street": "straat 112",
+      "city": "Gent",
+      "postal": "8020"
+    }
+  },
+  "contactInfo": {
+    "0": {
+      "type": "EMAIL",
+      "subType": null,
+      "label": "WORK",
+      "detail": "test@test.be",
+      "id": 102388049
+    }
+  },
+  "imageUrl": null,
+  "ownerUserId": 1210621,
+  "dateCreatedUTC": {
+    "date": "2016-11-14 09:48:31.000000",
+    "timezone_type": 3,
+    "timezone": "UTC"
+  },
+  "dateUpdatedUTC": {
+    "date": "2016-11-14 09:55:06.000000",
+    "timezone_type": 3,
+    "timezone": "UTC"
+  },
+  "visibleTo": "EVERYONE",
+  "visibleTeamId": null,
+  "visibleUserIds": null,
+  "tags": {},
+  "links": {
+    "0": {
+      "id": 125674597
+    }
+  },
+  "canEdit": true,
+  "canDelete": true,
+  "customFields": []
+}
