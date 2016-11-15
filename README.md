@@ -9,8 +9,8 @@ The angular application for projectaanvraag.
 
 The absolute minimum to read before starting development are
  
- * [Structure](books/structure.md) 
- * [Configuration](books/configuration.md) 
- * [Development](books/development.md)
- * [Testing](books/unit_tests.md)
+ * [Structure](docs/structure.md) 
+ * [Configuration](docs/configuration.md) 
+ * [Development](docs/development.md)
+ * [Testing](docs/unit_tests.md)
 
