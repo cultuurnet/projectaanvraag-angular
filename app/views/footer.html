@@ -7,15 +7,15 @@
 
           <div class="col-sm-4" ng-repeat="integrationType in $ctrl.integrationTypes">
             <div class="well">
-              <h4 class="well-title" ng-bind="integrationType.name"></h4>
-              <div vertilize class="well-content">
+              <h4 ng-bind="integrationType.name"></h4>
+              <div vertilize>
                 <p ng-bind="integrationType.description"></p>
                 <ul ng-if="integrationType.extraInfo.length > 0">
                   <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
                 </ul>
                 <p><strong>vanaf {{ integrationType.price }} per jaar</strong></p>
               </div>
-              <a class="well-btn" ng-href="{{ integrationType.url }}">Meer info</a>
+              <a class="btn" ng-href="{{ integrationType.url }}">Meer info</a>
             </div>
           </div>
 
@@ -26,25 +26,24 @@
 
         <div class="col-xs-6 col-md-12">
           <p class="block-title">Documentatie</p>
-          <ul>
-            <li><a href="#">Overzicht van de omgevingen</a></li>
-            <li><a href="#">Authentificatie en autorisatie</a></li>
-            <li><a href="#">Hoe vraag ik een project aan?</a></li>
-          </ul>
+          <div class="well">
+            <ul>
+              <li><a href="#">Overzicht van de omgevingen</a></li>
+              <li><a href="#">Authentificatie en autorisatie</a></li>
+              <li><a href="#">Hoe vraag ik een project aan?</a></li>
+            </ul>
+          </div>
         </div>
 
         <div class="col-xs-6 col-md-12">
           <p class="block-title">Contact</p>
 
-          <div class="clearfix">
+          <div class="clearfix well">
             <img src="http://www.cultuurnet.be/sites/cultuurnet.be/files/team_fotos/julie.JPG" class="img-responsive pull-right" alt="Responsive image" style="width: 50px">
             <p>Julie Meiresonne<br/>
               julie@cultuurnet.be</p>
-          </div>
-
-          <div class="clearfix">
             <p>Ondersteuning nodig? Een organisatie met een hart voor cultuur en vrije tijd? Dan werken we graag een voorstel op maat uit.</p>
-            <p><a class="btn btn-default" href="mailto:">Contacteer ons</a></p>
+            <a class="btn" href="mailto:">Contacteer ons</a>
           </div>
 
         </div>
