@@ -1,20 +1,20 @@
-<header class="header-primary">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-8">
-        <p class="site-title">Een UiTagenda op je eigen site of app</p>
-      </div>
-      <div class="col-xs-4">
-        <!-- Single button -->
-        <div class="btn-group pull-right" ng-show="app.uitidService.user">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ app.uitidService.user.displayName }} <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li><a href="#" ng-click="app.logout()">Afmelden</a></li>
-          </ul>
+<header>
+    <div class="header-background"></div>
+    <div class="header-content">
+        <div class="container">
+            <div class="row">
+                <h1 class="site-title">Een UiTagenda op je eigen site of app</h1>
+                <!-- Single button -->
+                <div class="btn-group" ng-show="app.uitidService.user">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        {{ app.uitidService.user.displayName }} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#" ng-click="app.logout()">Afmelden</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>

@@ -256,7 +256,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
 
         return defer.promise;
     };
-    
+
     /**
      * Get the organisation linked to a project.
      *

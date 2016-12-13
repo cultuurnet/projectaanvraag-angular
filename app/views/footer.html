@@ -3,17 +3,19 @@
     <div class="row">
       <div class="col-sm-12 col-md-9">
         <p class="block-title">Mogelijkheden</p>
-        <div class="row">
+        <div vertilize-container class="row">
 
           <div class="col-sm-4" ng-repeat="integrationType in $ctrl.integrationTypes">
             <div class="well">
-              <h4 ng-bind="integrationType.name"></h4>
-              <p ng-bind="integrationType.description"></p>
-              <ul ng-if="integrationType.extraInfo.length > 0">
-                <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
-              </ul>
-              <p class="text-center"><strong>vanaf {{ integrationType.price }} per jaar</strong></p>
-              <p class="text-center"><a class="btn btn-default" ng-href="{{ integrationType.url }}">Meer info</a></p>
+              <h4 class="well-title" ng-bind="integrationType.name"></h4>
+              <div vertilize class="well-content">
+                <p ng-bind="integrationType.description"></p>
+                <ul ng-if="integrationType.extraInfo.length > 0">
+                  <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
+                </ul>
+                <p><strong>vanaf {{ integrationType.price }} per jaar</strong></p>
+              </div>
+              <a class="well-btn" ng-href="{{ integrationType.url }}">Meer info</a>
             </div>
           </div>
 
@@ -56,15 +58,8 @@
 <footer class="footer-secondary">
   <div class="container">
     <div class="row">
-      <div class="col-xs-6">
-        <ul>
-          <li><a href="http://www.cultuurnet.be/help">Help</a></li>
-          <li><a href="http://www.cultuurnet.be/terms">Tarieven en voorwaarden</a></li>
-        </ul>
-      </div>
-      <div class="col-xs-6">
-        <p class="text-right">Een initiatief van Cultuurnet,<br/>met de steun van de Vlaamse overheid</p>
-      </div>
+      <p class="text-center">Een initiatief van Cultuurnet met de steun van de Vlaamse overheid</p>
+      <p><a href="http://www.cultuurnet.be/help">Help</a> - <a href="http://www.cultuurnet.be/terms">Tarieven en voorwaarden</a></p>
     </div>
   </div>
 </footer>
