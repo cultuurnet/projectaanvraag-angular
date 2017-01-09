@@ -23,10 +23,15 @@
         /*jshint validthis: true */
         var ctrl = this;
 
-        ctrl.contentFilter = ctrl.resolve.project.contentFilter;
         ctrl.error = '';
         ctrl.saving = false;
 
+        /**
+         * Initialize the controller.
+         */
+        ctrl.$onInit = function() {
+            ctrl.contentFilter = ctrl.resolve.project.contentFilter;
+        };
 
         /**
          * Send the update request.

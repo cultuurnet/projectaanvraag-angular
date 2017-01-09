@@ -36,15 +36,15 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         } else {
             $http
                 .get(apiUrl + 'integration-types')
-                .success(function (data) {
+                .then(function (response) {
                     var integrationTypes = [];
-                    angular.forEach(data, function (item) {
+                    angular.forEach(response.data, function (item) {
                         integrationTypes.push(new IntegrationType(item));
                     });
                     service.cache.integrationTypes = integrationTypes;
                     defer.resolve(integrationTypes);
                 })
-                .error(function () {
+                .catch(function () {
                     defer.reject('unable to retrieve the integration types');
                 });
         }
@@ -76,9 +76,10 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                 .get(apiUrl + 'project/', {
                     params: params
                 })
-                .success(function (data) {
+                .then(function (response) {
+
                     var projects = [];
-                    angular.forEach(data.results, function (item) {
+                    angular.forEach(response.data.results, function (item) {
                         projects.push(new CultuurnetProject(item));
                     });
 
@@ -91,12 +92,13 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                     }
 
                     service.cache.projects[name][maxResults][page] = {
-                        total: parseInt(data.total),
+                        total: parseInt(response.data.total),
                         projects: projects
                     };
+
                     defer.resolve(service.cache.projects[name][maxResults][page]);
                 })
-                .error(function () {
+                .catch(function () {
                     defer.reject('unable to retrieve the projects');
                 });
         }
@@ -117,12 +119,12 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         } else {
             $http
                 .get(apiUrl + 'project/' + id)
-                .success(function (data) {
-                    var project = new CultuurnetProject(data);
+                .then(function (response) {
+                    var project = new CultuurnetProject(response.data);
                     service.cache.projectDetails[id] = project;
                     defer.resolve(project);
                 })
-                .error(function () {
+                .catch(function () {
                     defer.reject('unable to retrieve the project');
                 });
         }
@@ -139,12 +141,12 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         var defer = $q.defer();
 
         $http.post(apiUrl + 'project/', formData)
-            .success(function (data) {
+            .then(function (response) {
                 service.cache.projects = {};
-                defer.resolve(data);
+                defer.resolve(response.data);
             })
-            .error(function (data) {
-                defer.reject(data);
+            .catch(function (response) {
+                defer.reject(response.data);
             });
 
         return defer.promise;
@@ -159,10 +161,10 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         var defer = $q.defer();
 
         $http.delete(apiUrl + 'project/' + id)
-            .success(function () {
+            .then(function () {
                 defer.resolve();
             })
-            .error(function () {
+            .catch(function () {
                 defer.reject('unable to delete the project');
             });
 
@@ -178,12 +180,12 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         var defer = $q.defer();
 
         $http.get(apiUrl + 'project/' + id + '/block')
-            .success(function (data) {
-                var project = new CultuurnetProject(data);
+            .then(function (response) {
+                var project = new CultuurnetProject(response.data);
                 service.cache.projectDetails[id] = project;
                 defer.resolve(project);
             })
-            .error(function () {
+            .catch(function () {
                 defer.reject('unable to block the project');
             });
 
@@ -199,12 +201,12 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         var defer = $q.defer();
 
         $http.get(apiUrl + 'project/' + id + '/activate')
-            .success(function (data) {
-                var project = new CultuurnetProject(data);
+            .then(function (response) {
+                var project = new CultuurnetProject(response.data);
                 service.cache.projectDetails[id] = project;
                 defer.resolve(project);
             })
-            .error(function () {
+            .catch(function () {
                 defer.reject('unable to activate the project');
             });
 
@@ -220,13 +222,13 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         var defer = $q.defer();
 
         $http.post(apiUrl + 'project/' + id + '/request-activation', formData)
-            .success(function (data) {
-                var project = new CultuurnetProject(data);
+            .then(function (response) {
+                var project = new CultuurnetProject(response.data);
                 service.cache.projectDetails[id] = project;
                 defer.resolve(project);
             })
-            .error(function (data) {
-                defer.reject(data);
+            .catch(function (response) {
+                defer.reject(response.data);
             });
 
         return defer.promise;
@@ -235,7 +237,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
     /**
      * Update the content filter.
      * @param id
-     * @param searchPrefixFilterQuery
+     * @param contentFilter
      */
     service.updateContentFilter = function(id, contentFilter) {
         var defer = $q.defer();
@@ -245,12 +247,12 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         };
 
         $http.put(apiUrl + 'project/' + id + '/content-filter', formData)
-            .success(function (data) {
-                var project = new CultuurnetProject(data);
+            .then(function (response) {
+                var project = new CultuurnetProject(response.data);
                 service.cache.projectDetails[id] = project;
                 defer.resolve(project);
             })
-            .error(function () {
+            .catch(function () {
                 defer.reject('error updating content filter');
             });
 
@@ -271,12 +273,12 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         } else {
             $http
                 .get(apiUrl + 'project/' + id + '/organisation')
-                .success(function (data) {
-                    var organisation = new InsightlyOrganisation(data);
+                .then(function (response) {
+                    var organisation = new InsightlyOrganisation(response.data);
                     service.cache.organisations[id] = organisation;
                     defer.resolve(organisation);
                 })
-                .error(function () {
+                .catch(function () {
                     defer.reject('unable to retrieve the organisation');
                 });
         }
@@ -294,12 +296,12 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
         var defer = $q.defer();
 
         $http.put(apiUrl + 'project/' + id + '/organisation', organisation)
-            .success(function (data) {
-                var project = new CultuurnetProject(data);
+            .then(function (response) {
+                var project = new CultuurnetProject(response.data);
                 service.cache.projectDetails[id] = project;
                 defer.resolve(project);
             })
-            .error(function () {
+            .catch(function () {
                 defer.reject('unable to update the organisation of the project');
             });
 

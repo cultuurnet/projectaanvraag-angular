@@ -14,7 +14,7 @@
             templateUrl: 'views/dashboard-item.html',
             controller: dashboardItemController,
             bindings: {
-                data: '=',
+                detail: '<',
                 onUpdate: '&'
             }
         });
@@ -25,18 +25,26 @@
         /*jshint validthis: true */
         var ctrl = this;
         ctrl.fetching = true;
-        ctrl.project = ctrl.data;
+        ctrl.project = undefined;
         ctrl.user = uitidService.user;
 
         /**
-         * Load the project when controller is loaded.
+         * Initialize the controller.
          */
-        projectaanvraagApiService.getProject(ctrl.project.id).then(function(project) {
-            ctrl.project = project;
-            ctrl.fetching = false;
-        }, function() {
-            ctrl.fetching = false;
-        });
+        ctrl.$onInit = function() {
+            ctrl.project = this.detail;
+
+            /**
+             * Load the project when controller is loaded.
+             */
+            projectaanvraagApiService.getProject(ctrl.detail.id).then(function(project) {
+                ctrl.project = project;
+                ctrl.fetching = false;
+             }, function() {
+                ctrl.fetching = false;
+             });
+
+        };
 
         /**
          * Is the current project live.

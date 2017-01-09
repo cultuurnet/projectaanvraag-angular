@@ -21,7 +21,9 @@ angular
     'cultuurnet.uitid',
     'ui.bootstrap'
   ])
-  .config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $qProvider) {
+
+    $qProvider.errorOnUnhandledRejections(false);
 
     var loginState = {
       name: 'login',
@@ -149,4 +151,4 @@ angular
       }
     };
   }
-])
+]);

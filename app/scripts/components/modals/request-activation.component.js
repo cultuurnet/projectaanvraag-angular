@@ -23,11 +23,17 @@
         /*jshint validthis: true */
         var ctrl = this;
 
-        ctrl.project = ctrl.resolve.project;
         ctrl.formData = {};
         ctrl.showCoupon = false;
         ctrl.error = '';
         ctrl.saving = false;
+
+        /**
+         * Initialize the controller.
+         */
+        ctrl.$onInit = function() {
+            ctrl.project = ctrl.resolve.project;
+        }
 
         /**
          * Toggle the coupon status.

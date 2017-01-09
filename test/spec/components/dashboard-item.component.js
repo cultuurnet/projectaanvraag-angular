@@ -62,7 +62,7 @@ describe('Component: dashboardItemComponent', function () {
                 $uibModal: modal
             },
             {
-                data: {'id': 1},
+                detail: {'id': 1},
                 onUpdate: onUpdate
             }
         );
@@ -76,6 +76,7 @@ describe('Component: dashboardItemComponent', function () {
 
         expect(dashboardItemController.fetching).toBeTruthy();
 
+        dashboardItemController.$onInit();
         expect(projectaanvraagApiService.getProject).toHaveBeenCalled();
         defer.resolve('project');
 
@@ -89,6 +90,7 @@ describe('Component: dashboardItemComponent', function () {
      */
     it('stops loading when having a problem', function () {
 
+        dashboardItemController.$onInit();
         defer.reject();
 
         $scope.$digest();
@@ -172,6 +174,7 @@ describe('Component: dashboardItemComponent', function () {
     it('correctly handles the removal confirmation', function() {
 
         // Resolve load of project.
+        dashboardItemController.$onInit();
         defer.resolve({
             name: 'name'
         });
@@ -199,6 +202,7 @@ describe('Component: dashboardItemComponent', function () {
     it('shows a message when removal went wrong', function() {
 
         // Resolve load of project.
+        dashboardItemController.$onInit();
         defer.resolve({
             name: 'name'
         });
@@ -226,6 +230,7 @@ describe('Component: dashboardItemComponent', function () {
     it('correctly handles the block confirmation', function() {
 
         // Resolve load of project.
+        dashboardItemController.$onInit();
         var returnedProject = {
             name: 'name2'
         };
@@ -256,6 +261,7 @@ describe('Component: dashboardItemComponent', function () {
     it('shows a message when blocking went wrong', function() {
 
         // Resolve load of project.
+        dashboardItemController.$onInit();
         defer.resolve({
             name: 'name'
         });
@@ -283,6 +289,7 @@ describe('Component: dashboardItemComponent', function () {
     it('correctly handles the activation confirmation', function() {
 
         // Resolve load of project.
+        dashboardItemController.$onInit();
         var returnedProject = {
             name: 'name2'
         };
@@ -312,6 +319,7 @@ describe('Component: dashboardItemComponent', function () {
     it('shows a message when activating went wrong', function() {
 
         // Resolve load of project.
+        dashboardItemController.$onInit();
         defer.resolve({
             name: 'name'
         });
@@ -337,6 +345,7 @@ describe('Component: dashboardItemComponent', function () {
     it('correctly handles the request activation submit', function() {
 
         // Resolve load of project.
+        dashboardItemController.$onInit();
         var returnedProject = {
             name: 'name2'
         };
@@ -354,6 +363,7 @@ describe('Component: dashboardItemComponent', function () {
     it('correctly handles the update content filter submit', function() {
 
         // Resolve load of project.
+        dashboardItemController.$onInit();
         var returnedProject = {
             name: 'name2'
         };
@@ -371,6 +381,7 @@ describe('Component: dashboardItemComponent', function () {
     it('correctly handles the billing information submit', function() {
 
         // Resolve load of project.
+        dashboardItemController.$onInit();
         var returnedProject = {
             name: 'name2'
         };

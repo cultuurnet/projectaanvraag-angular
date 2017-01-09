@@ -1,5 +1,9 @@
 footer {
 
+  .btn {
+    margin: 10px 0 0 0;
+  }
+
   &.footer-primary {
     background-color: #F3F3F3;
     margin-top: 30px;
@@ -15,23 +19,5 @@ footer {
     padding-top: 15px;
   }
 
-  .btn {
-    padding: 3px 9px;
-    margin: 10px 0 0 0;
-    border: 1px solid #004F94;
-    text-decoration: none;
-    border-radius: 2px;
-    color: #004F94;
-    display: inline-block;
 
-    &:hover {
-      border-color: #00192e;
-      background-color: #004F94;
-      color: #FFF;
-      -moz-transition: all 0.15s ease-out;
-      -webkit-transition: all 0.15s ease-out;
-      -o-transition: all 0.15s ease-out;
-      transition: all 0.15s ease-out;
-    }
-  }
 }

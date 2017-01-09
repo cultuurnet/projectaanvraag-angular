@@ -23,6 +23,9 @@ describe('Component: confirmationComponent', function () {
      * Test if the confirmation texts are loaded on the controller.
      */
     it('loads the confirmation text', function () {
+
+        confirmationController.$onInit();
+
         expect(confirmationController.title).toEqual('title');
         expect(confirmationController.message).toEqual('message');
         expect(confirmationController.type).toEqual('danger');

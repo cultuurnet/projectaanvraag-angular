@@ -27,11 +27,18 @@
         ctrl.loading = true;
         ctrl.isSending = false;
 
-        ctrl.project = ctrl.resolve.project;
         ctrl.formData = {};
         ctrl.error = false;
         ctrl.apiError = false;
         ctrl.organisation = {};
+
+        /**
+         * Initialize the controller.
+         */
+        ctrl.$onInit = function() {
+            ctrl.project = ctrl.resolve.project;
+            ctrl.loadOrganisation();
+        };
 
         /**
          * Loads the linked organisation if any.
@@ -130,9 +137,6 @@
             })
         };
 
-
-        // Try to prefill the form with an organisation
-        ctrl.loadOrganisation();
     }
 
 })();

@@ -39,6 +39,7 @@ describe('Component: requestActivationComponent', function () {
             }
         );
 
+        requestController.$onInit();
         requestController.close = function() {};
         spyOn(requestController, 'close');
 

@@ -26,7 +26,7 @@
 </div>
 
 <div ng-repeat="project in $ctrl.projects">
-    <dashboard-item-component data="project" on-update="$ctrl.searchProjects();"></dashboard-item-component>
+    <dashboard-item-component detail="project" on-update="$ctrl.searchProjects();"></dashboard-item-component>
 </div>
 
 <ul uib-pagination total-items="$ctrl.totalProjects" ng-model="$ctrl.currentPage" items-per-page="$ctrl.itemsPerPage"
