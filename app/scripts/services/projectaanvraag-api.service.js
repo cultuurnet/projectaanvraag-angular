@@ -119,7 +119,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
                 .get(apiUrl + 'project/' + id)
                 .success(function (data) {
                     var project = new CultuurnetProject(data);
-                    service.cache.projectDetails.id = project;
+                    service.cache.projectDetails[id] = project;
                     defer.resolve(project);
                 })
                 .error(function () {
