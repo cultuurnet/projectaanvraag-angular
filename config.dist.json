@@ -1,5 +1,5 @@
 {
-  "apiUrl": "http://culpas-silex.dev/",
+  "apiUrl": "http://vagrant.loc/web/",
   "basePath": "/",
   "insightly": {
     "customFields": {

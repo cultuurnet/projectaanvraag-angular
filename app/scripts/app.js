@@ -21,6 +21,7 @@ angular
     'cultuurnet.uitid',
     'ui.bootstrap'
   ])
+  /* @ngInject */
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $qProvider) {
 
     $qProvider.errorOnUnhandledRejections(false);
@@ -37,6 +38,7 @@ angular
         abstract : true,
         template: '<div ui-view></div>',
         resolve: {
+            /* @ngInject */
             user: function (uitidService) {
                 return uitidService.getUser();
             }

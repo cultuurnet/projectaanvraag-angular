@@ -19,7 +19,7 @@
     "karma-read-json": "^1.1.0"
   },
   "appPath": "app",
-  "moduleName": "projectaanvraagAngularApp",
+  "moduleName": "projectaanvraagApp",
   "overrides": {
     "bootstrap": {
       "main": [
