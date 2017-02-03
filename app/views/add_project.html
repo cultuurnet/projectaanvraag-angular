@@ -1,11 +1,12 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6">
-        <p class="block-title projectheader--title">Project toevoegen</p>
+        <p class="projectheader--title">Project toevoegen</p>
     </div>
     <div class="col-xs-12 col-sm-6">
         <p class="text-right"><a class="btn btn-primary" ng-click="$ctrl.redirectToDashboard()" role="button">Terug naar dashboard</a></p>
     </div>
 </div>
+<p>Je betaalt pas wanneer je gebruik wil maken van echte data. Je probeert eerst alle mogelijkheden met testevenementen.</p>
 <form name="addProject" ng-submit="$ctrl.processForm(addProject.$valid)" novalidate>
     <div class="form-group required" ng-class="{'has-error' : addProject.name.$invalid && (!addProject.name.$pristine || addProject.$submitted) }">
         <label for="project_name" class="control-label">Naam van het project</label>
@@ -22,29 +23,15 @@
     </div>
     <div class="row">
         <div class="col-sm-8">
-            <div class="row" ng-repeat="integrationType in $ctrl.integrationTypes">
-                <div class="col-xs-1">
-                    <input type="radio" name="integrationType" id="integration_type_{{ integrationType.id }}" ng-value="integrationType.id" ng-model="$ctrl.formData.integrationType" required>
-                </div>
-                <div class="col-xs-8">
-                    <p><label for="integration_type_{{ integrationType.id }}">{{ integrationType.name }}</label><br/>
-                        <span class="text-muted">{{ integrationType.description }}
-                            <a ng-href="{{ integrationType.url }}">meer info</a>
-                        </span>
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <p class="text-right">vanaf {{ integrationType.price }} per jaar</p>
-                </div>
+            <div ng-repeat="integrationType in $ctrl.integrationTypes" class="radio">
+              <label for="integration_type_{{ integrationType.id }}">
+              </span>
+              <input type="radio" name="integrationType" id="integration_type_{{ integrationType.id }}" ng-value="integrationType.id" ng-model="$ctrl.formData.integrationType" required>
+              {{ integrationType.name }} <span class="text-muted">{{ integrationType.description }}
+             </label>
             </div>
             <div class="form-group required has-error" ng-show="addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted)">
                 <p class="help-block">Gelieve een optie te selecteren.</p>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="alert alert-info">
-                <p>Je betaalt pas wanneer je gebruik wil maken van echte data. Je probeert eerst alle mogelijkheden met
-                    testevenementen.</p>
             </div>
         </div>
     </div>
