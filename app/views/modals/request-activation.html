@@ -14,7 +14,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <p class="text-right"><a class="js-coupon" href="#" ng-click="$ctrl.toggleCoupon()">Activatie <span>met</span> coupon</a></p>
+                <p class="text-right"><a class="js-coupon" href="#" ng-click="$ctrl.toggleCoupon()">Activatie <span ng-show="$ctrl.showCoupon">zonder</span> <span ng-show="!$ctrl.showCoupon">met</span> coupon</a></p>
             </div>
         </div>
         <section class="with-coupon js-section-with-coupon" ng-show="$ctrl.showCoupon">
