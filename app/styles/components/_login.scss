@@ -1,5 +1,14 @@
-.well-login {
+.login {
   text-align: center;
+  margin-bottom: 30px;
+
+  .login-lead {
+    @extend .lead;
+    max-width: 720px;
+    margin: 0 auto 20px auto;
+    font-size: 22px;
+    font-weight: 100;
+  }
 }
 
 .integration-title {
