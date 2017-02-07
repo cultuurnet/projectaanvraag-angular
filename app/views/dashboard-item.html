@@ -11,7 +11,7 @@
             </div>
             <div class="col-sm-6">
                 <ul class="list-inline pull-right" ng-hide="$ctrl.fetching">
-                    <li><a ng-click="$ctrl.updateContentFilter()">Contentfilter</a></li>
+                    <li><a ng-click="$ctrl.updateContentFilter()" href="#">Contentfilter</a></li>
                     <li ng-if="!$ctrl.isInactive() && !$ctrl.usedCoupon()"><a href="#" ng-click="$ctrl.updateBillingInformation();">Facturatiegegevens</a></li>
                     <li><a href="#" ng-click="$ctrl.removeItem()">Verwijderen</a></li>
                 </ul>
