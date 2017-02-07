@@ -33,6 +33,13 @@ angular
     };
     $stateProvider.state(loginState);
 
+    var integrationsState = {
+      name: 'integrations',
+      url: '/integrations',
+      templateUrl: 'views/integrations.html'
+    };
+    $stateProvider.state(integrationsState);
+
     var rootState = {
         name: 'authenticated',
         abstract : true,
