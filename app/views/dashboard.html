@@ -20,9 +20,9 @@
     <i class="fa fa-spinner fa-spin loader" ng-show="$ctrl.loading"></i>
 </div>
 
-<div class="well" ng-show="$ctrl.totalProjects === 0 && !$ctrl.loading">
-    <p class="text-center lead">Je hebt nog geen projecten. <a ng-click="$ctrl.redirectToCreate()">Aan de slag</a></p>
-    <p class="text-center text-muted">Maak een project aan en probeer alles gratis uit met testevenementen.</p>
+<div class="well empty-state-projects" ng-show="$ctrl.totalProjects === 0 && !$ctrl.loading">
+    <p class="empty-state-project--title text-center">Je hebt nog geen projecten. <a ng-click="$ctrl.redirectToCreate()">Aan de slag</a></p>
+    <p class="empty-state-project--description text-center text-muted">Maak een project aan en probeer alles gratis uit met testevenementen.</p>
 </div>
 
 <div ng-repeat="project in $ctrl.projects">
