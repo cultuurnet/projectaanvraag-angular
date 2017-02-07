@@ -2,3 +2,24 @@
   <p class="lead">CultuurNet biedt een waaier van toepassingen waarmee je agenda-informatie op je website integreert. De agenda-informatie komt uit de UiTdatabank en wordt gefilterd op maat van jouw doelgroep.</p>
   <p class="text-center"><a class="btn btn-lg btn-login" ng-click="$ctrl.login()">Gratis proberen</a></p>
 </div>
+
+
+<p class="block-title">Mogelijkheden</p>
+<div vertilize-container class="row">
+
+  <div class="col-sm-4" ng-repeat="integrationType in $ctrl.integrationTypes">
+    <div class="well">
+      <h4 ng-bind="integrationType.name"></h4>
+      <p><strong>vanaf {{ integrationType.price }} EUR per jaar</strong></p>
+      <div vertilize>
+        <p ng-bind="integrationType.description"></p>
+        <ul ng-if="integrationType.extraInfo.length > 0">
+          <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
+        </ul>
+      </div>
+      <a class="btn" ng-href="{{ integrationType.url }}">Meer info</a>
+    </div>
+  </div>
+
+</div>
+</div>

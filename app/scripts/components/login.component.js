@@ -16,10 +16,19 @@
     });
 
   /* @ngInject */
-  function loginController($location, $state, uitidService) {
+  function loginController($location, $state, uitidService, projectaanvraagApiService) {
 
     /*jshint validthis: true */
     var ctrl = this;
+
+    ctrl.integrationTypes = [];
+
+    /**
+    * Load the integration types and assign it to scope.
+    */
+    projectaanvraagApiService.getIntegrationTypes().then(function(integrationTypes) {
+       ctrl.integrationTypes = integrationTypes;
+    });
 
     /**
      * Redirect to the login screen.
