@@ -3,7 +3,7 @@
         <p class="block-title projectheader--title">Projecten</p>
     </div>
     <div class="col-xs-7 col-sm-5">
-        <div class="input-group">
+        <div class="input-group" ng-show="$ctrl.totalProjects > 0">
             <input type="text" class="form-control" placeholder="Projectnaam" ng-model="$ctrl.nameFilter">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="$ctrl.searchProjects()">Zoeken</button>
