@@ -7,55 +7,55 @@
     </div>
 </div>
 <p>Je betaalt pas wanneer je gebruik wil maken van echte data. Je probeert eerst alle mogelijkheden met testevenementen.</p>
-<form name="addProject" ng-submit="$ctrl.processForm(addProject.$valid)" novalidate>
-    <div class="form-group required" ng-class="{'has-error' : addProject.name.$invalid && (!addProject.name.$pristine || addProject.$submitted) }">
-        <label for="project_name" class="control-label">Naam van het project</label>
-        <input type="text" id="project_name" class="form-control" name="name" ng-model="$ctrl.formData.name" required>
-        <p ng-show="addProject.name.$invalid && (!addProject.name.$pristine || addProject.$submitted)" class="help-block">Project naam is verplicht.</p>
+<div class="row">
+    <div class="col-sm-8">
+      <form name="addProject" ng-submit="$ctrl.processForm(addProject.$valid)" novalidate>
+          <div class="form-group required" ng-class="{'has-error' : addProject.name.$invalid && (!addProject.name.$pristine || addProject.$submitted) }">
+              <label for="project_name" class="control-label">Naam van het project</label>
+              <input type="text" id="project_name" class="form-control" name="name" ng-model="$ctrl.formData.name" required>
+              <p ng-show="addProject.name.$invalid && (!addProject.name.$pristine || addProject.$submitted)" class="help-block">Project naam is verplicht.</p>
+          </div>
+          <div class="form-group required" ng-class="{'has-error' : addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted) }">
+              <label for="project_summary" class="control-label">Doel van het project</label>
+              <input type="text" name="summary" id="project_summary" class="form-control" ng-model="$ctrl.formData.summary" required>
+              <p ng-show="addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted)" class="help-block">Doel van het project is verplicht.</p>
+          </div>
+          <div class="form-group required" ng-class="{'has-error' : addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted) }">
+              <label class="control-label">Type integratie</label>
+          </div>
+          <div ng-repeat="integrationType in $ctrl.integrationTypes" class="radio">
+            <label for="integration_type_{{ integrationType.id }}">
+            </span>
+            <input type="radio" name="integrationType" id="integration_type_{{ integrationType.id }}" ng-value="integrationType.id" ng-model="$ctrl.formData.integrationType" required>
+            {{ integrationType.name }} <span class="text-muted">{{ integrationType.description }}
+           </label>
+          </div>
+          <div class="form-group required has-error" ng-show="addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted)">
+              <p class="help-block">Gelieve een optie te selecteren.</p>
+          </div>
+          <div class="checkbox">
+              <label>
+                  <input type="checkbox" value="" class="js-check-coupon" ng-model="$ctrl.useCoupon"> Ik heb een coupon
+              </label>
+          </div>
+          <section class="js-section-coupon" ng-show="$ctrl.useCoupon">
+              <div class="panel panel-default">
+                  <div class="panel-body">
+                      <div class="form-group required" ng-class="{'has-error' : addProject.coupon_code.$invalid && (!addProject.coupon_code.$pristine || addProject.$submitted) }">
+                          <label for="coupon_code">Code</label>
+                          <input type="text" id="coupon_code" name="coupon_code" class="form-control"  ng-model="$ctrl.formData.coupon" ng-required="$ctrl.useCoupon">
+                          <p ng-show="addProject.coupon_code.$invalid && (!addProject.coupon_code.$pristine || addProject.$submitted)" class="help-block">Gelieve een geldige code in te vullen.</p>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          <div class="checkbox form-group required" ng-class="{'has-error' : addProject.terms_and_conditions.$invalid && (!addProject.terms_and_conditions.$pristine || addProject.$submitted) }">
+              <label>
+                  <input type="checkbox" name="terms_and_conditions" value="" ng-model="$ctrl.formData.termsAndConditions" required> Ik ga akkoord met de <a href="http://www.cultuurnet.be/terms" target="_blank">gebruiksvoorwaarden</a>
+              </label>
+              <p ng-show="addProject.terms_and_conditions.$invalid && (!addProject.terms_and_conditions.$pristine || addProject.$submitted)" class="help-block">Je dient akkoord te gaan met de gebruiksvoorwaarden.</p>
+          </div>
+          <button type="submit" class="btn btn-primary" ng-disabled="addProject.$invalid"><i ng-show="$ctrl.saving" class="fa fa-spinner fa-spin"></i> Versturen</button>
+      </form>
     </div>
-    <div class="form-group required" ng-class="{'has-error' : addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted) }">
-        <label for="project_summary" class="control-label">Doel van het project</label>
-        <input type="text" name="summary" id="project_summary" class="form-control" ng-model="$ctrl.formData.summary" required>
-        <p ng-show="addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted)" class="help-block">Doel van het project is verplicht.</p>
-    </div>
-    <div class="form-group required" ng-class="{'has-error' : addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted) }">
-        <label class="control-label">Type integratie</label>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <div ng-repeat="integrationType in $ctrl.integrationTypes" class="radio">
-              <label for="integration_type_{{ integrationType.id }}">
-              </span>
-              <input type="radio" name="integrationType" id="integration_type_{{ integrationType.id }}" ng-value="integrationType.id" ng-model="$ctrl.formData.integrationType" required>
-              {{ integrationType.name }} <span class="text-muted">{{ integrationType.description }}
-             </label>
-            </div>
-            <div class="form-group required has-error" ng-show="addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted)">
-                <p class="help-block">Gelieve een optie te selecteren.</p>
-            </div>
-        </div>
-    </div>
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" value="" class="js-check-coupon" ng-model="$ctrl.useCoupon"> Ik heb een coupon
-        </label>
-    </div>
-    <section class="js-section-coupon" ng-show="$ctrl.useCoupon">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="form-group required" ng-class="{'has-error' : addProject.coupon_code.$invalid && (!addProject.coupon_code.$pristine || addProject.$submitted) }">
-                    <label for="coupon_code">Code</label>
-                    <input type="text" id="coupon_code" name="coupon_code" class="form-control"  ng-model="$ctrl.formData.coupon" ng-required="$ctrl.useCoupon">
-                    <p ng-show="addProject.coupon_code.$invalid && (!addProject.coupon_code.$pristine || addProject.$submitted)" class="help-block">Gelieve een geldige code in te vullen.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="checkbox form-group required" ng-class="{'has-error' : addProject.terms_and_conditions.$invalid && (!addProject.terms_and_conditions.$pristine || addProject.$submitted) }">
-        <label>
-            <input type="checkbox" name="terms_and_conditions" value="" ng-model="$ctrl.formData.termsAndConditions" required> Ik ga akkoord met de <a href="http://www.cultuurnet.be/terms" target="_blank">gebruiksvoorwaarden</a>
-        </label>
-        <p ng-show="addProject.terms_and_conditions.$invalid && (!addProject.terms_and_conditions.$pristine || addProject.$submitted)" class="help-block">Je dient akkoord te gaan met de gebruiksvoorwaarden.</p>
-    </div>
-    <button type="submit" class="btn btn-primary" ng-disabled="addProject.$invalid"><i ng-show="$ctrl.saving" class="fa fa-spinner fa-spin"></i> Versturen</button>
-</form>
+</div>
