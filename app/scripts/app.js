@@ -36,7 +36,7 @@ angular
     var integrationsState = {
       name: 'integrations',
       url: '/integrations',
-      templateUrl: 'views/integrations.html'
+      component: 'integrationsComponent'
     };
     $stateProvider.state(integrationsState);
 
