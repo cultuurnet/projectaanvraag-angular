@@ -76,7 +76,7 @@ describe('Component: requestActivationComponent', function () {
 
         expect(projectaanvraagApiService.requestActivation).toHaveBeenCalledWith(1, {title: 'title'});
         expect(Messages.clearMessages).toHaveBeenCalled();
-        expect(Messages.addMessage).toHaveBeenCalledWith('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
+        expect(Messages.addMessage).toHaveBeenCalledWith('success', 'Je aanvraag tot activatie werd succesvol verstuurd. Na goedkeuring ontvang je een bevestiging via e-mail en kan je verder met de configuratie en installatie.');
         expect(requestController.close).toHaveBeenCalledWith({$value: project})
 
     });

@@ -62,7 +62,7 @@
                     Messages.addMessage('success', 'Je project werd succesvol geactiveerd.');
                 }
                 else {
-                    Messages.addMessage('success', 'Je aanvraag tot activatie werd succesvol verstuurd.');
+                    Messages.addMessage('success', 'Je aanvraag tot activatie werd succesvol verstuurd. Na goedkeuring ontvang je een bevestiging via e-mail en kan je verder met de configuratie en installatie.');
                 }
 
                 ctrl.saving = false;
