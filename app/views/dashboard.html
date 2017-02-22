@@ -3,12 +3,14 @@
         <p class="block-title projectheader--title">Projecten</p>
     </div>
     <div class="col-xs-7 col-sm-5">
-        <div class="input-group" ng-show="$ctrl.totalProjects > 0">
-            <input type="text" class="form-control" placeholder="Projectnaam" ng-model="$ctrl.nameFilter">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-click="$ctrl.searchProjects()">Zoeken</button>
-            </span>
-        </div>
+        <form name="name" class="form" ng-submit="ctrl.searchProjects()">
+          <div class="input-group" ng-show="$ctrl.totalProjects > 0 || $ctrl.searching">
+              <input type="text" class="form-control" placeholder="Projectnaam" ng-model="$ctrl.nameFilter">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">Zoeken</button>
+              </span>
+          </div>
+        </form>
 
     </div>
     <div class="col-xs-5 col-sm-2">
@@ -20,7 +22,11 @@
     <i class="fa fa-spinner fa-spin loader" ng-show="$ctrl.loading"></i>
 </div>
 
-<div class="well empty-state-projects" ng-show="$ctrl.totalProjects === 0 && !$ctrl.loading">
+<div class="well no-projects" ng-show="$ctrl.totalProjects === 0 && $ctrl.searching" >
+    <p class="no-projects--title text-center">Er werden geen projecten gevonden.</p>
+</div>
+
+<div class="well empty-state-projects" ng-show="$ctrl.totalProjects === 0 && !$ctrl.loading && !$ctrl.searching" >
     <p class="empty-state-project--title text-center">Je hebt nog geen projecten. <a ng-click="$ctrl.redirectToCreate()">Aan de slag</a></p>
     <p class="empty-state-project--description text-center text-muted">Maak een project aan en probeer alles gratis uit met testevenementen.</p>
 </div>

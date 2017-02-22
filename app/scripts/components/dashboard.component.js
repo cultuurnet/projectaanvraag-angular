@@ -21,6 +21,7 @@
       /*jshint validthis: true */
       var ctrl = this;
 
+      ctrl.searching = false;
       ctrl.loading = true;
       ctrl.projects = [];
       ctrl.nameFilter = '';
@@ -40,6 +41,11 @@
        */
       ctrl.searchProjects = function() {
           projectaanvraagApiService.getProjects(ctrl.nameFilter, ctrl.currentPage, ctrl.itemsPerPage).then(function(result) {
+              if(ctrl.nameFilter !== '') {
+                  ctrl.searching = true;
+              } else {
+                  ctrl.searching = false;
+              }
               ctrl.projects = result.projects;
               ctrl.totalProjects = result.total;
               ctrl.loading = false;
@@ -47,6 +53,7 @@
               Messages.clearMessages();
               Messages.addMessage('danger', 'Er ging iets fout bij het laden van je projecten. Probeer het later opnieuw.');
               ctrl.loading = false;
+              ctrl.searching = false;
           });
       };
 
