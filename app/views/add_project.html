@@ -19,6 +19,7 @@
               <label for="project_summary" class="control-label">Doel van het project</label>
               <input type="text" name="summary" id="project_summary" class="form-control" ng-model="$ctrl.formData.summary" required>
               <p ng-show="addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted)" class="help-block">Doel van het project is verplicht.</p>
+              <p class="help-block">Geef een duidelijke, gemotiveerde beschrijving van het project dat je wil aanmaken.</p>
           </div>
           <div class="form-group required" ng-class="{'has-error' : addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted) }">
               <label class="control-label">Type integratie</label>
