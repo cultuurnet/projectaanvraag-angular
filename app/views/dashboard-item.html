@@ -31,7 +31,7 @@
                 </ul>
 
                 <p ng-show="$ctrl.project.group.actionButton">
-                    <a ng-href="{{ $ctrl.project.group.actionButton.testUrl }}{{ $ctrl.project.testConsumerKey}}" class="btn btn-default" ng-bind="$ctrl.project.group.actionButton.text"></a>
+                    <a ng-href="{{ $ctrl.project.group.actionButton.testUrl }}{{ $ctrl.project.testConsumerKey}}{{ $ctrl.project.group.actionButton.urlSuffix }}" class="btn btn-default" ng-bind="$ctrl.project.group.actionButton.text"></a>
                 </p>
 
             </dd>
@@ -56,7 +56,7 @@
                     </ul>
 
                     <p ng-show="$ctrl.project.group.actionButton">
-                        <a ng-href="{{ $ctrl.project.group.actionButton.liveUrl }}{{ $ctrl.project.liveConsumerKey}}" class="btn btn-default" ng-bind="$ctrl.project.group.actionButton.text"></a>
+                        <a ng-href="{{ $ctrl.project.group.actionButton.liveUrl }}{{ $ctrl.project.liveConsumerKey}}{{ $ctrl.project.group.actionButton.urlSuffix }}" class="btn btn-default" ng-bind="$ctrl.project.group.actionButton.text"></a>
                     </p>
 
                 </div>
