@@ -27,7 +27,7 @@
 
                 <ul class="list-unstyled" ng-show="!$ctrl.project.group.actionButton && $ctrl.project.testConsumerKey">
                     <li>Key <code ng-bind="$ctrl.project.testConsumerKey"></code></li>
-                    <li ng-show="$ctrl.project.testSecret">Secret <code ng-bind="$ctrl.project.testSecret"></code></li>
+                    <li ng-show="$ctrl.project.testConsumerSecret">Secret <code ng-bind="$ctrl.project.testConsumerSecret"></code></li>
                 </ul>
 
                 <p ng-show="$ctrl.project.group.actionButton">
@@ -52,7 +52,7 @@
 
                     <ul class="list-unstyled" ng-show="!$ctrl.project.group.actionButton && $ctrl.project.liveConsumerKey">
                         <li>Key <code ng-bind="$ctrl.project.liveConsumerKey"></code></li>
-                        <li ng-show="$ctrl.project.liveSecret">Secret <code ng-bind="$ctrl.project.liveSecret"></code></li>
+                        <li ng-show="$ctrl.project.liveConsumerSecret">Secret <code ng-bind="$ctrl.project.liveConsumerSecret"></code></li>
                     </ul>
 
                     <p ng-show="$ctrl.project.group.actionButton">
