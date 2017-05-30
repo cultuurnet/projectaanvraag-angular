@@ -31,6 +31,9 @@ function cultuurnetProjectFactory(IntegrationType, ProjectStatuses) {
     parseJson: function (jsonObject) {
       this.id = jsonObject.id;
       this.name = jsonObject.name;
+      this.userId = jsonObject.userId;
+      this.created = jsonObject.created * 1000;
+      this.updated = jsonObject.updated * 1000;
       this.testConsumerKey = jsonObject.testConsumerKey || '';
       this.testConsumerSecret = jsonObject.testConsumerSecret || '';
       this.liveConsumerKey = jsonObject.liveConsumerKey || '';
