@@ -14,7 +14,7 @@
     });
 
   /* @ngInject */
-  function addProjectController($state, projectaanvraagApiService, Messages, apiErrorCodes) {
+  function addProjectController($state, projectaanvraagApiService, Messages, apiErrorCodes, $location, $anchorScroll) {
     /*jshint validthis: true */
     var ctrl = this;
 
@@ -60,6 +60,9 @@
           else {
             Messages.addMessage('danger', 'Er ging iets mis. Probeer het later opnieuw.');
           }
+
+          $location.hash('messages');
+          $anchorScroll();
 
           ctrl.saving = false;
 

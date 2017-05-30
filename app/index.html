@@ -42,7 +42,7 @@
 
     <div class="container">
 
-      <div class="messages">
+      <div class="messages" id="messages">
         <div ng-repeat="(key, messages) in app.Messages.messages" class="alert alert-{{ key }}" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <p ng-repeat="message in messages" ng-bind="message"></p>
