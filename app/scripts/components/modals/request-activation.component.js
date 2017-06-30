@@ -18,12 +18,12 @@
         });
 
     /* @ngInject */
-    function requestActivationController(projectaanvraagApiService, Messages, apiErrorCodes) {
+    function requestActivationController(projectaanvraagApiService, Messages, apiErrorCodes, uitidService) {
 
         /*jshint validthis: true */
         var ctrl = this;
-
-        ctrl.formData = {};
+        ctrl.email = uitidService.user.mbox;
+        ctrl.formData = {email: ctrl.email};
         ctrl.showCoupon = false;
         ctrl.error = '';
         ctrl.saving = false;
