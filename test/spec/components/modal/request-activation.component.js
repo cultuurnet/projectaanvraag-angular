@@ -4,7 +4,7 @@ describe('Component: requestActivationComponent', function () {
 
     beforeEach(module('projectaanvraagApp'));
 
-    var requestController, projectaanvraagApiService, Messages, defer, $scope, apiErrorCodes;
+    var requestController, projectaanvraagApiService, Messages, defer, $scope, apiErrorCodes, uitidService;
 
     beforeEach(inject(function (_$componentController_, _$q_, _$rootScope_, _Messages_) {
 
@@ -22,10 +22,17 @@ describe('Component: requestActivationComponent', function () {
             }
         };
 
+        uitidService = {
+            user: {
+                mbox: 'test@test.be'
+            }
+        };
+
         requestController = _$componentController_(
             'requestActivationComponent',
             {
                 projectaanvraagApiService : projectaanvraagApiService,
+                uitidService: uitidService,
                 Messages: Messages,
                 apiErrorCodes: apiErrorCodes,
             },
@@ -44,6 +51,13 @@ describe('Component: requestActivationComponent', function () {
         spyOn(requestController, 'close');
 
     }));
+
+    /**
+     * Test if the email field is default populated with current user.
+     */
+    it('populates the email field', function () {
+        expect(requestController.formData.email).toEqual(uitidService.user.mbox);
+    });
 
     /**
      * Test if the coupon field is toggled.
