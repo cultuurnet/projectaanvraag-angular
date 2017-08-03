@@ -35,7 +35,7 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
             defer.resolve(service.cache.integrationTypes);
         } else {
             $http
-                .get(apiUrl + 'integration-types')
+                .get(apiUrl + 'integration-types/')
                 .then(function (response) {
                     var integrationTypes = [];
                     angular.forEach(response.data, function (item) {

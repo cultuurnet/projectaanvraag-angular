@@ -45,7 +45,7 @@ describe('Service: projectaanvraagApiService', function () {
         };
 
         $httpBackend
-            .expectGET(apiUrl + 'integration-types')
+            .expectGET(apiUrl + 'integration-types/')
             .respond(200, response);
 
         projectaanvraagApiService.getIntegrationTypes().then(checkRequest);
@@ -63,7 +63,7 @@ describe('Service: projectaanvraagApiService', function () {
         };
 
         $httpBackend
-            .expectGET(apiUrl + 'integration-types')
+            .expectGET(apiUrl + 'integration-types/')
             .respond(404);
 
         projectaanvraagApiService.getIntegrationTypes().catch(checkError);
