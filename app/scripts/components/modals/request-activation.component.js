@@ -28,12 +28,16 @@
         ctrl.showCoupon = false;
         ctrl.error = '';
         ctrl.saving = false;
+        ctrl.hasInsightlyProjectId = false
 
         /**
          * Initialize the controller.
          */
         ctrl.$onInit = function() {
             ctrl.project = ctrl.resolve.project;
+            if(ctrl.project.insightlyProjectId) {
+              ctrl.hasInsightlyProjectId = true;
+            }
         }
 
         /**

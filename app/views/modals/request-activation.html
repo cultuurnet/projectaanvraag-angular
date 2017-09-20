@@ -5,57 +5,67 @@
     </div>
     <div class="modal-body">
 
-        <div class="messages" ng-show="$ctrl.error">
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <p ng-bind="$ctrl.error"></p>
-            </div>
+        <div ng-show="!$ctrl.hasInsightlyProjectId">
+          <p>Sorry, ons activatiesysteem lijkt op dit moment offline.<br/>
+          Probeer het later opnieuw of <a href="mailto:vragen@uitdatabank.be?SUBJECT=Probleem met activatie project {{$ctrl.project.id}}">contacteer onze helpdesk</a>.</p>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <p class="text-right"><a class="js-coupon" href="#" ng-click="$ctrl.toggleCoupon()">Activatie <span ng-show="$ctrl.showCoupon">zonder</span> <span ng-show="!$ctrl.showCoupon">met</span> coupon</a></p>
-            </div>
-        </div>
-        <section class="with-coupon js-section-with-coupon" ng-show="$ctrl.showCoupon">
-            <form name="$ctrl.couponForm">
-                <div class="form-group">
-                    <label for="coupon">Code</label>
-                    <input type="text" class="form-control" id="coupon" name="coupon" ng-model="$ctrl.formData.coupon" required>
-                    <p ng-show="$ctrl.couponForm.coupon.$touched && $ctrl.couponForm.coupon.$error.required" class="help-block">Code is verplicht.</p>
-                </div>
-            </form>
-        </section>
+        <div ng-show="$ctrl.hasInsightlyProjectId">
+          <div class="messages" ng-show="$ctrl.error">
+              <div class="alert alert-danger" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <p ng-bind="$ctrl.error"></p>
+              </div>
+          </div>
 
-        <section class="no-coupon js-section-no-coupon" ng-hide="$ctrl.showCoupon">
-            <div class="row">
-                <div class="col-xs-3">
-                    <p>Bedrag</p>
-                </div>
-                <div class="col-xs-5">
-                    <p>Totaalbedrag {{ $ctrl.project.group.price }}EUR</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <p>Geldig</p>
-                </div>
-                <div class="col-xs-9">
-                    <p>Eén jaar</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <p>Contact</p>
-                </div>
-                <div class="col-xs-9">
-                    <billing-information-details-form-component parent-ctrl="$ctrl" form-data="$ctrl.formData"></billing-information-details-form-component>
-                </div>
-            </div>
-        </section>
+          <div class="row">
+              <div class="col-xs-12">
+                  <p class="text-right"><a class="js-coupon" href="#" ng-click="$ctrl.toggleCoupon()">Activatie <span ng-show="$ctrl.showCoupon">zonder</span> <span ng-show="!$ctrl.showCoupon">met</span> coupon</a></p>
+              </div>
+          </div>
+          <section class="with-coupon js-section-with-coupon" ng-show="$ctrl.showCoupon">
+              <form name="$ctrl.couponForm">
+                  <div class="form-group">
+                      <label for="coupon">Code</label>
+                      <input type="text" class="form-control" id="coupon" name="coupon" ng-model="$ctrl.formData.coupon" required>
+                      <p ng-show="$ctrl.couponForm.coupon.$touched && $ctrl.couponForm.coupon.$error.required" class="help-block">Code is verplicht.</p>
+                  </div>
+              </form>
+          </section>
 
+          <section class="no-coupon js-section-no-coupon" ng-hide="$ctrl.showCoupon">
+              <div class="row">
+                  <div class="col-xs-3">
+                      <p>Bedrag</p>
+                  </div>
+                  <div class="col-xs-5">
+                      <p>Totaalbedrag {{ $ctrl.project.group.price }}EUR</p>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-3">
+                      <p>Geldig</p>
+                  </div>
+                  <div class="col-xs-9">
+                      <p>Eén jaar</p>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-3">
+                      <p>Contact</p>
+                  </div>
+                  <div class="col-xs-9">
+                      <billing-information-details-form-component parent-ctrl="$ctrl" form-data="$ctrl.formData"></billing-information-details-form-component>
+                  </div>
+              </div>
+          </section>
+
+      </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer" ng-show="!$ctrl.hasInsightlyProjectId">
+      <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss();">Annuleren</button>
+    </div>
+    <div class="modal-footer" ng-show="$ctrl.hasInsightlyProjectId">
         <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss();">Annuleren</button>
         <button type="button" class="btn btn-primary" ng-disabled="(!$ctrl.showCoupon && $ctrl.billingInformation.$invalid) || ($ctrl.showCoupon && $ctrl.couponForm.$invalid)" ng-click="$ctrl.requestActivation();"><i ng-show="$ctrl.saving" class="fa fa-spinner fa-spin"></i> Bevestigen</button>
     </div>
