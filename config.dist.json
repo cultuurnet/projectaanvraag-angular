@@ -1,5 +1,7 @@
 {
   "apiUrl": "http://vagrant.loc/web/",
+  "widgetsApplicationUrlLive" : "http://localhost:4200",
+  "widgetsApplicationUrlTest" : "http://localhost:4200",
   "basePath": "/",
   "insightly": {
     "customFields": {

@@ -20,13 +20,16 @@
         });
 
     /* @ngInject */
-    function dashboardItemController(projectaanvraagApiService, ProjectStatuses, $uibModal, Messages, uitidService) {
+    function dashboardItemController(projectaanvraagApiService, ProjectStatuses, $uibModal, Messages, uitidService, appConfig) {
 
         /*jshint validthis: true */
         var ctrl = this;
         ctrl.fetching = true;
         ctrl.project = undefined;
         ctrl.user = uitidService.user;
+        ctrl.actionButtonLinkLive = '';
+        ctrl.actionButtonLinkTest = '';
+        ctrl.actionButtonText = '';
 
         /**
          * Initialize the controller.
@@ -40,6 +43,7 @@
             projectaanvraagApiService.getProject(ctrl.detail.id).then(function(project) {
                 ctrl.project = project;
                 ctrl.fetching = false;
+                ctrl.setActionButton();
              }, function() {
                 ctrl.fetching = false;
              });
@@ -75,6 +79,38 @@
          */
         ctrl.usedCoupon = function() {
             return ctrl.project.coupon;
+        };
+
+        /**
+         * Set the action button for this project.
+         */
+        ctrl.setActionButton = function() {
+            if (!ctrl.project.group.actionButton) {
+                ctrl.actionButtonLink = '';
+                ctrl.actionButtonText = '';
+            }
+
+            switch (ctrl.project.group.actionButton) {
+
+                case 'widgets':
+                    if (ctrl.project.totalWidgets > 0) {
+                        ctrl.actionButtonText = 'Widgets bouwen';
+                        ctrl.actionButtonLinkLive = appConfig.widgetsApplicationUrl + '/project/' + ctrl.project.id;
+                        ctrl.actionButtonLinkTest = appConfig.widgetsApplicationUrlTest + '/project/' + ctrl.project.id;
+                    }
+                    else {
+                        ctrl.actionButtonText = 'Bouw je eerste widget';
+                        ctrl.actionButtonLinkLive = appConfig.widgetsApplicationUrlLive + '/project/' + ctrl.project.id + '/page/add';
+                        ctrl.actionButtonLinkTest = appConfig.widgetsApplicationUrlTest + '/project/' + ctrl.project.id + '/page/add';
+                    }
+
+                    break;
+
+                default:
+                    ctrl.actionButtonLink = '';
+                    ctrl.actionButtonText = '';
+
+            }
         };
 
         /**
