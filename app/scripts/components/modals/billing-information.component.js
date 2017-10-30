@@ -20,7 +20,7 @@
         });
 
     /* @ngInject */
-    function billingInformationController(projectaanvraagApiService, appConfig, Messages, InsightlyAddress, InsightlyContactInfo) {
+    function billingInformationController(projectaanvraagApiService, appConfig, Messages, InsightlyAddress) {
         /*jshint validthis: true */
         var ctrl = this;
 
@@ -49,11 +49,8 @@
                 ctrl.formData.name = ctrl.organisation.name || '';
 
                 // Email
-                for (var key in ctrl.organisation.contactInfo) {
-                    var contactInfo = ctrl.organisation.contactInfo[key];
-                    if (contactInfo.type === 'EMAIL') {
-                        ctrl.formData.email = contactInfo.detail;
-                    }
+                if (appConfig.insightly && appConfig.insightly.customFields.payment) {
+                    ctrl.formData.email = ctrl.organisation.customFields[appConfig.insightly.customFields.payment] || '';
                 }
 
                 if (ctrl.organisation.addresses.length) {
@@ -109,23 +106,13 @@
                 ctrl.organisation.customFields[appConfig.insightly.customFields.vat] = ctrl.formData.vat;
             }
 
-            // If no contactInfo exists, create a new one
-            if (!ctrl.organisation.contactInfo) {
-                ctrl.organisation.contactInfo = [];
-                ctrl.organisation.contactInfo[0] = new InsightlyContactInfo({
-                    id: null,
-                    type: 'EMAIL',
-                    label: null,
-                    detail: null
-                });
-            }
-
-            // Assign the new ContactInfo values to the first entry with type 'EMAIL'
-            for (var key in ctrl.organisation.contactInfo) {
-                var contactInfo = ctrl.organisation.contactInfo[key];
-                if (contactInfo.type === 'EMAIL') {
-                    ctrl.organisation.contactInfo[key].detail = ctrl.formData.email;
+            // Custom field: payment
+            if (appConfig.insightly && appConfig.insightly.customFields.payment && ctrl.formData.email) {
+                if (!ctrl.organisation.customFields) {
+                    ctrl.organisation.customFields = {};
                 }
+
+                ctrl.organisation.customFields[appConfig.insightly.customFields.payment] = ctrl.formData.email;
             }
 
             // Send the request
