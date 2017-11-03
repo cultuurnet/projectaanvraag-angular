@@ -43,6 +43,7 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-uitid-service/src/uitid.module.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/Snap.svg/dist/snap.svg-min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/karma-read-json/karma-read-json.js',
       // endbower

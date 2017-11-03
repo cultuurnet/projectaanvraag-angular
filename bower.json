@@ -12,7 +12,8 @@
     "angular-touch": "^1.4.0",
     "angular-uitid-service": "cultuurnet/angular-uitid-service",
     "components-font-awesome": "^4.7.0",
-    "angular-bootstrap": "^2.2.0"
+    "angular-bootstrap": "^2.2.0",
+    "Snap.svg": "latest"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0",
