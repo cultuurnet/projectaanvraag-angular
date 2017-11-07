@@ -1,3 +1,4 @@
+$light:   #9CA6B1;
 .login {
   text-align: center;
   margin-bottom: 30px;
@@ -181,7 +182,8 @@
 
   100% {
     opacity: 1;
-    fill: #F8EC65;
+    fill: $light;
+    //stroke: #FFF;
   }
 }
 @keyframes flicker-in-2 {
@@ -307,7 +309,8 @@
 
   100% {
     opacity: 1;
-    fill: #F8EC65;
+    fill: $light;
+    //stroke: #FFF;
   }
 }
 
@@ -318,4 +321,8 @@
 
 .site-title {
   font-weight: 600;
+}
+
+.hero {
+  background-color: #F3F3F3;
 }

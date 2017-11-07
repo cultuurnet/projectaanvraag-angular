@@ -1,28 +1,35 @@
-<div class="login">
-  <projectaanvraag-homepage-splash></projectaanvraag-homepage-splash>
-  <h1 class="site-title">Een UiTagenda op je eigen site of app</h1>
-  <p class="login-lead">publiq biedt een waaier van toepassingen waarmee je agenda-informatie op je website integreert. De agenda-informatie komt uit de UiTdatabank en wordt gefilterd op maat van jouw doelgroep.</p>
-  <p class="text-center"><a class="btn btn-primary btn-lg btn-login" ng-click="$ctrl.login()">Gratis proberen</a></p>
+<div class="hero">
+  <div class="container">
+    <projectaanvraag-homepage-splash></projectaanvraag-homepage-splash>
+  </div>
 </div>
 
-<p class="block-title">Mogelijkheden</p>
-<div vertilize-container class="row">
+<div class="container">
+  <div class="login">
+    <h1 class="site-title">Een UiTagenda op je eigen site of app</h1>
+    <p class="login-lead">publiq biedt een waaier van toepassingen waarmee je agenda-informatie op je website integreert. De agenda-informatie komt uit de UiTdatabank en wordt gefilterd op maat van jouw doelgroep.</p>
+    <p class="text-center"><a class="btn btn-primary btn-lg btn-login" ng-click="$ctrl.login()">Gratis proberen</a></p>
+  </div>
+</div>
 
-  <div class="col-sm-4" ng-repeat="integrationType in $ctrl.integrationTypes">
-    <div class="well">
-      <a ng-href="{{ integrationType.url }}">
-        <h4 class="integration-title" ng-bind="integrationType.name"></h4>
-      </a>
-      <p class="integration-price">vanaf {{ integrationType.price }} EUR per jaar</p>
-      <div vertilize>
-        <p ng-bind="integrationType.description" class="integration-description"></p>
-        <ul ng-if="integrationType.extraInfo.length > 0" class="integration-benefits">
-          <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
-        </ul>
+<div class="container">
+  <p class="block-title">Mogelijkheden</p>
+  <div vertilize-container class="row">
+
+    <div class="col-sm-4" ng-repeat="integrationType in $ctrl.integrationTypes">
+      <div class="well">
+        <a ng-href="{{ integrationType.url }}">
+          <h4 class="integration-title" ng-bind="integrationType.name"></h4>
+        </a>
+        <p class="integration-price">vanaf {{ integrationType.price }} EUR per jaar</p>
+        <div vertilize>
+          <p ng-bind="integrationType.description" class="integration-description"></p>
+          <ul ng-if="integrationType.extraInfo.length > 0" class="integration-benefits">
+            <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
+          </ul>
+        </div>
+        <a class="btn" ng-href="{{ integrationType.url }}">Meer info</a>
       </div>
-      <a class="btn" ng-href="{{ integrationType.url }}">Meer info</a>
     </div>
   </div>
-
-</div>
 </div>
