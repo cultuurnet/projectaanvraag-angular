@@ -15,7 +15,7 @@ header {
   }
 
   .header-content {
-    padding: 1em;
+    padding: 0.5em;
 
     .row {
       position: relative;
@@ -24,7 +24,8 @@ header {
         font-size: 2em;
         font-weight: 600;
         color: #2F3B4D;
-        margin: 20px 0;
+        margin: 20px 0 20px 15px;
+        text-align: left;
       }
 
       p {

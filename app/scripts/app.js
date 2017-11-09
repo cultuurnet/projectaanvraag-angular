@@ -40,13 +40,6 @@ angular
     };
     $stateProvider.state(integrationsState);
 
-    var termsState = {
-      name: 'terms',
-      url: '/terms',
-      templateUrl: 'views/terms.html'
-    };
-    $stateProvider.state(termsState);
-
     var rootState = {
         name: 'authenticated',
         abstract : true,
