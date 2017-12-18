@@ -71,6 +71,13 @@
         };
 
         /**
+         * Is the current project a widgets project.
+         */
+        ctrl.isWidgetsProject = function () {
+            return ctrl.project.group.actionButton === 'widgets';
+        };
+
+        /**
          * Was a coupon used for this project.
          */
         ctrl.usedCoupon = function() {

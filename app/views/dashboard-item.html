@@ -22,8 +22,8 @@
 
         <dl class="dl-horizontal">
 
-            <dt>Test</dt>
-            <dd>
+            <dt ng-show="!$ctrl.project.group.actionButton || ($ctrl.isWidgetsProject() && !$ctrl.project.liveConsumerKey)">Test</dt>
+            <dd ng-show="!$ctrl.project.group.actionButton || ($ctrl.isWidgetsProject() && !$ctrl.project.liveConsumerKey)">
 
                 <ul class="list-unstyled" ng-show="!$ctrl.project.group.actionButton && $ctrl.project.testConsumerKey">
                     <li>Key <code ng-bind="$ctrl.project.testConsumerKey"></code></li>
