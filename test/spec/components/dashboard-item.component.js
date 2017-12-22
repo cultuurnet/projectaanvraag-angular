@@ -2,7 +2,12 @@
 
 describe('Component: dashboardItemComponent', function () {
 
-    beforeEach(module('projectaanvraagApp'));
+    beforeEach(module('projectaanvraagApp', function($provide) {
+        $provide.constant('appConfig', {
+            'widgetsApplicationUrlLive' : 'http://localhost:4200',
+            'widgetsApplicationUrlTest' : 'http://localhost:4200',
+        });
+    }));
 
     var dashboardItemController, projectaanvraagApiService, defer, $q, $scope, modal, Messages;
 
@@ -59,7 +64,7 @@ describe('Component: dashboardItemComponent', function () {
             'dashboardItemComponent',
             {
                 projectaanvraagApiService : projectaanvraagApiService,
-                $uibModal: modal
+                $uibModal: modal,
             },
             {
                 detail: {'id': 1},
