@@ -22,8 +22,8 @@
 
         <dl class="dl-horizontal">
 
-            <dt>Test</dt>
-            <dd>
+            <dt ng-show="!$ctrl.project.group.actionButton || ($ctrl.isWidgetsProject() && !$ctrl.project.liveConsumerKey)">Test</dt>
+            <dd ng-show="!$ctrl.project.group.actionButton || ($ctrl.isWidgetsProject() && !$ctrl.project.liveConsumerKey)">
 
                 <ul class="list-unstyled" ng-show="!$ctrl.project.group.actionButton && $ctrl.project.testConsumerKey">
                     <li>Key <code ng-bind="$ctrl.project.testConsumerKey"></code></li>
@@ -31,7 +31,9 @@
                 </ul>
 
                 <p ng-show="$ctrl.project.group.actionButton">
-                    <a ng-href="{{ $ctrl.project.group.actionButton.testUrl }}{{ $ctrl.project.testConsumerKey}}{{ $ctrl.project.group.actionButton.urlSuffix }}" class="btn btn-default" ng-bind="$ctrl.project.group.actionButton.text"></a>
+                <p ng-show="$ctrl.actionButtonLinkTest">
+                    <a ng-href="{{ $ctrl.actionButtonLinkTest }}" class="btn btn-default" ng-bind="$ctrl.actionButtonText"></a>
+                </p>
                 </p>
 
             </dd>
@@ -55,8 +57,8 @@
                         <li ng-show="$ctrl.project.liveConsumerSecret">Secret <code ng-bind="$ctrl.project.liveConsumerSecret"></code></li>
                     </ul>
 
-                    <p ng-show="$ctrl.project.group.actionButton">
-                        <a ng-href="{{ $ctrl.project.group.actionButton.liveUrl }}{{ $ctrl.project.liveConsumerKey}}{{ $ctrl.project.group.actionButton.urlSuffix }}" class="btn btn-default" ng-bind="$ctrl.project.group.actionButton.text"></a>
+                    <p ng-show="$ctrl.actionButtonLinkLive">
+                        <a ng-href="{{ $ctrl.actionButtonLinkLive }}" class="btn btn-default" ng-bind="$ctrl.actionButtonText"></a>
                     </p>
 
                 </div>

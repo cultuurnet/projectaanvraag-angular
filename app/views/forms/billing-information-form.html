@@ -1,8 +1,7 @@
 <form name="$ctrl.parentCtrl.billingInformation" novalidate>
     <div class="form-group required" ng-class="{'has-error' : $ctrl.parentCtrl.billingInformation.email.$touched && $ctrl.parentCtrl.billingInformation.email.$invalid}">
-        <input type="email" name="email" required class="form-control" placeholder="E-mailadres" ng-model="$ctrl.parentCtrl.formData.email">
+        <input type="email" name="email" class="form-control" placeholder="E-mailadres" ng-model="$ctrl.parentCtrl.formData.email">
         <span id="helpBlock" class="help-block">Dit adres ontvangt de betalingsinstructies, -herinneringen en de factuur.</span>
-        <p ng-show="$ctrl.parentCtrl.billingInformation.email.$touched && $ctrl.parentCtrl.billingInformation.email.$error.required" class="help-block">E-mailadres is verplicht.</p>
         <p ng-show="$ctrl.parentCtrl.billingInformation.email.$touched && $ctrl.parentCtrl.billingInformation.email.$error.email" class="help-block">Gelieve een geldig e-mailadres in te geven.</p>
     </div>
     <div class="form-group required" ng-class="{'has-error' : $ctrl.parentCtrl.billingInformation.name.$touched && $ctrl.parentCtrl.billingInformation.name.$invalid}">
