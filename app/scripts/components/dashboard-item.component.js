@@ -102,7 +102,7 @@
                 case 'widgets':
                     if (ctrl.project.totalWidgets > 0) {
                         ctrl.actionButtonText = 'Widgets bouwen';
-                        ctrl.actionButtonLinkLive = appConfig.widgetsApplicationUrl + '/project/' + ctrl.project.id;
+                        ctrl.actionButtonLinkLive = appConfig.widgetsApplicationUrlLive + '/project/' + ctrl.project.id;
                         ctrl.actionButtonLinkTest = appConfig.widgetsApplicationUrlTest + '/project/' + ctrl.project.id;
                     }
                     else {
