@@ -18,9 +18,9 @@
           </div>
           <div class="form-group required" ng-class="{'has-error' : addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted) }">
               <label for="project_summary" class="control-label">Doel van het project</label>
-              <textarea name="summary" id="project_summary" class="form-control" ng-model="$ctrl.formData.summary" required></textarea>
+              <textarea name="summary" id="project_summary" class="form-control" ng-model="$ctrl.formData.summary" required maxlength="200"></textarea>
               <p ng-show="addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted)" class="help-block">Doel van het project is verplicht.</p>
-              <p class="help-block">Geef een duidelijke, gemotiveerde beschrijving van het project dat je wil aanmaken.</p>
+              <p class="help-block">Geef een duidelijke, gemotiveerde beschrijving van het project dat je wil aanmaken <small>(max. 200 karakters)</small>.</p>
           </div>
           <div class="form-group required" ng-class="{'has-error' : addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted) }">
               <label class="control-label">Type integratie</label>
