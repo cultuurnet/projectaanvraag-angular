@@ -38,10 +38,12 @@ function cultuurnetProjectFactory(IntegrationType, ProjectStatuses) {
       this.testConsumerSecret = jsonObject.testConsumerSecret || '';
       this.liveConsumerKey = jsonObject.liveConsumerKey || '';
       this.liveConsumerSecret = jsonObject.liveConsumerSecret || '';
-      this.contentFilter = jsonObject.contentFilter || '';
+      this.testSearchApi3Key = jsonObject.testSearchApi3Key || '';
       this.coupon = jsonObject.coupon;
       this.insightlyProjectId = jsonObject.insightlyProjectId;
       this.totalWidgets = jsonObject.totalWidgets || 0;
+      this.sapiVersion = jsonObject.sapiVersion || '2';
+      this.contentFilter = jsonObject.contentFilter || '';
 
       if (jsonObject.status && ProjectStatuses[jsonObject.status.toUpperCase()]) {
         jsonObject.status = ProjectStatuses[jsonObject.status.toUpperCase()];
