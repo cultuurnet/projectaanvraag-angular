@@ -46,6 +46,7 @@ describe('Component: updateContentFilterComponent', function () {
             name: 'name'
         };
         updateController.contentFilter = 'test';
+        updateController.sapiVersion = '3';
 
         var promise = defer.promise;
         projectaanvraagApiService.updateContentFilter.and.returnValue(promise);
