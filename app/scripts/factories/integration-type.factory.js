@@ -34,6 +34,7 @@ function integrationTypeFactory() {
       this.description = jsonObject.description;
       this.price = jsonObject.price;
       this.url = jsonObject.url;
+      this.getStartedUrl = jsonObject.getStartedUrl;
       this.extraInfo = jsonObject.extraInfo;
       this.groupId = jsonObject.groupId;
 
