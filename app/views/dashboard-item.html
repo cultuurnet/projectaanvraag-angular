@@ -65,6 +65,10 @@
 
             </dd>
         </dl>
+        <dl class="dl-horizontal" ng-show="$ctrl.project.group.getStartedUrl">
+          <dt>Documentatie</dt>
+          <dd><a ng-href="{{$ctrl.project.group.getStartedUrl}}" target="_blank">Aan de slag met {{$ctrl.project.group.name}}</a></dd>
+        </dl>
         <section ng-show="$ctrl.user.isAdmin">
             <dl class="dl-horizontal">
                 <dt>Beheer</dt>
