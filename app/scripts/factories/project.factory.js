@@ -38,7 +38,9 @@ function cultuurnetProjectFactory(IntegrationType, ProjectStatuses) {
       this.testConsumerSecret = jsonObject.testConsumerSecret || '';
       this.liveConsumerKey = jsonObject.liveConsumerKey || '';
       this.liveConsumerSecret = jsonObject.liveConsumerSecret || '';
-      this.testSearchApi3Key = jsonObject.testSearchApi3Key || '';
+      this.testApiKeySapi3 = jsonObject.testApiKeySapi3 || '';
+      this.liveApiKeySapi3 = jsonObject.liveApiKeySapi3 || '';
+      this.contentFilter = jsonObject.contentFilter || '';
       this.coupon = jsonObject.coupon;
       this.insightlyProjectId = jsonObject.insightlyProjectId;
       this.totalWidgets = jsonObject.totalWidgets || 0;
