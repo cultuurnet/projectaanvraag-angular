@@ -30,6 +30,7 @@
          * Initialize the controller.
          */
         ctrl.$onInit = function() {
+            ctrl.sapiVersion = ctrl.resolve.project.sapiVersion;
             ctrl.contentFilter = ctrl.resolve.project.contentFilter;
         };
 

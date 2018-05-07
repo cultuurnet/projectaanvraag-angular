@@ -37,6 +37,7 @@ function integrationTypeFactory() {
       this.getStartedUrl = jsonObject.getStartedUrl;
       this.extraInfo = jsonObject.extraInfo;
       this.groupId = jsonObject.groupId;
+      this.sapiVersion = jsonObject.sapiVersion;
 
       if (jsonObject.actionButton) {
         this.actionButton = jsonObject.actionButton;

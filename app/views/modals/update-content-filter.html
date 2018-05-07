@@ -11,11 +11,18 @@
                 <textarea class="form-control" id="query" ng-model="$ctrl.contentFilter" style="resize: vertical;"></textarea>
             </div>
         </form>
-        <ul>
+
+        <ul ng-show="$ctrl.sapiVersion == '2'">
             <li>Maak gebruik van de <a href="http://documentatie.uitdatabank.be/content/search_api/latest/search_api/" target="_blank">Search API notatie</a>.</li>
             <li>Je kan je query testen via uitdatabank.be. Daar vind je ook een querybouwer.</li>
-            <li>Voorbeeld: filter alle films die getoond worden in Gent <code>"category_flandersregion_name:Gent AND category_eventtype_name:Film"</code></li>
+            <li>Voorbeeld: filter alle films die getoond worden in Gent <code>category_flandersregion_name:Gent AND category_eventtype_name:Film</code></li>
         </ul>
+
+        <ul ng-show="$ctrl.sapiVersion == '3'">
+            <li>Maak gebruik van de <a href="http://documentatie.uitdatabank.be/content/search_api_3/latest/index.html" target="_blank">Search API3 notatie</a> voor 'advanced queries'.</li>
+            <li>Voorbeeld: filter alle films die getoond worden in Gent <code>address.\*.postalCode:3000 AND terms.id:0.50.6.0.0</code></li>
+        </ul>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss()">Annuleren</button>

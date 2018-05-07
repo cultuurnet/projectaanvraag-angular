@@ -15,8 +15,7 @@
 <div class="container">
   <p class="block-title">Mogelijkheden</p>
   <div vertilize-container class="row">
-
-    <div class="col-sm-4" ng-repeat="integrationType in $ctrl.integrationTypes">
+    <div class="col-sm-3" ng-repeat="integrationType in $ctrl.integrationTypes | orderBy: 'name'">
       <div class="well">
         <a ng-href="{{ integrationType.url }}">
           <h4 class="integration-title" ng-bind="integrationType.name"></h4>

@@ -26,8 +26,9 @@
             <dd ng-show="!$ctrl.project.group.actionButton || ($ctrl.isWidgetsProject() && !$ctrl.project.liveConsumerKey)">
 
                 <ul class="list-unstyled" ng-show="!$ctrl.project.group.actionButton && $ctrl.project.testConsumerKey">
-                    <li>Key <code ng-bind="$ctrl.project.testConsumerKey"></code></li>
-                    <li ng-show="$ctrl.project.testConsumerSecret">Secret <code ng-bind="$ctrl.project.testConsumerSecret"></code></li>
+                    <li ng-show="$ctrl.project.group.sapiVersion == 2">Key <code ng-bind="$ctrl.project.testConsumerKey"></code></li>
+                    <li ng-show="$ctrl.project.testConsumerSecret && $ctrl.project.group.sapiVersion == 2">Secret <code ng-bind="$ctrl.project.testConsumerSecret"></code></li>
+                    <li ng-show="$ctrl.project.group.sapiVersion == 3">Key <code ng-bind="$ctrl.project.testApiKeySapi3"></code></li>
                 </ul>
 
                 <p ng-show="$ctrl.project.group.actionButton">
@@ -53,8 +54,9 @@
                 <div ng-show="$ctrl.isLive()">
 
                     <ul class="list-unstyled" ng-show="!$ctrl.project.group.actionButton && $ctrl.project.liveConsumerKey">
-                        <li>Key <code ng-bind="$ctrl.project.liveConsumerKey"></code></li>
-                        <li ng-show="$ctrl.project.liveConsumerSecret">Secret <code ng-bind="$ctrl.project.liveConsumerSecret"></code></li>
+                        <li ng-show="$ctrl.project.group.sapiVersion == 2">Key <code ng-bind="$ctrl.project.liveConsumerKey"></code></li>
+                        <li ng-show="$ctrl.project.liveConsumerSecret && $ctrl.project.group.sapiVersion == 2">Secret <code ng-bind="$ctrl.project.liveConsumerSecret"></code></li>
+                        <li ng-show="$ctrl.project.group.sapiVersion == 3">Key <code ng-bind="$ctrl.project.liveApiKeySapi3"></code></li>
                     </ul>
 
                     <p ng-show="$ctrl.actionButtonLinkLive">
