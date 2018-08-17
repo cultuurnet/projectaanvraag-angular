@@ -44,6 +44,8 @@
           delete ctrl.formData.coupon;
         }
 
+        ctrl.formData.integrationType = ctrl.formData.integration.id;
+
         ctrl.saving = true;
 
         projectaanvraagApiService.addProject(ctrl.formData).then(function() {
