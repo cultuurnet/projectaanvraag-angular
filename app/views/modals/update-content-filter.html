@@ -16,11 +16,13 @@
             <li>Maak gebruik van de <a href="https://documentatie.uitdatabank.be/content/search_api/latest/basisquery.html" target="_blank">Search API notatie</a>.</li>
             <li>Je kan je query testen via uitdatabank.be. Daar vind je ook een querybouwer.</li>
             <li>Voorbeeld: filter alle films die getoond worden in Gent <code> category_eventtype_name:Film AND category_flandersregion_name:Gent</code></li>
+            <li>Om enkel Belgisch of Nederlands aanbod te doorzoeken voeg je <code>country:BE</code> of <code>country:NL</code> toe aan je query.</li>
         </ul>
 
         <ul ng-show="$ctrl.sapiVersion == '3'">
             <li>Maak gebruik van 'advanced queries' binnen de <a href="http://documentatie.uitdatabank.be/content/search_api_3/latest/index.html" target="_blank">Search API3 notatie</a>. Je hoeft de <code>q=</code>niet te vermelden.</li>
             <li>Voorbeeld: filter alle films die getoond worden in Gent <code>terms.id:0.50.6.0.0 AND address.\*.postalCode:3000</code></li>
+            <li>Om enkel Belgisch of Nederlands aanbod te doorzoeken voeg je <code>address.\*.addressCountry:BE</code> of <code>address.\*.addressCountry:NL</code> toe aan je query.</li>
         </ul>
 
     </div>
