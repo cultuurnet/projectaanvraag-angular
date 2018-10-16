@@ -13,20 +13,29 @@
 </div>
 
 <div class="container">
-  <p class="block-title">Mogelijkheden</p>
   <div class="row">
-    <div class="integration-types">
-      <div ng-class="$ctrl.integrationTypes.length > 3 ? 'col-sm-3' : 'col-sm-4'" ng-repeat="integrationType in $ctrl.integrationTypes | orderBy: 'name'">
-        <div class="integration-type">
-          <a ng-href="{{ integrationType.url }}">
-            <h4 class="integration-title" ng-bind="integrationType.name"></h4>
-          </a>
-          <p class="integration-price">vanaf {{ integrationType.price }} EUR per jaar</p>
-          <p ng-bind="integrationType.description" class="integration-description"></p>
-          <ul ng-if="integrationType.extraInfo.length > 0" class="integration-benefits">
-            <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
-          </ul>
-          <a class="btn" ng-href="{{ integrationType.url }}">Meer info</a>
+    <div class="col-xs-12">
+      <p class="block-title">Mogelijkheden</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 integration-types">
+      <div ng-repeat="(key, value) in $ctrl.integrationTypes | groupBy: 'type'">
+        <h2 class="type-title">{{key}} <span class="muted">{{$ctrl.integrationTypeDescription[key]}}</span></h2>
+        <div class="integration-type" ng-repeat="integrationType in value | orderBy: 'name'">
+          <div class="integration-header">
+            <a ng-href="{{ integrationType.url }}">
+              <h4 class="integration-title" ng-bind="integrationType.name"></h4>
+            </a>
+            <p class="integration-price" ng-show="integrationType.price > 0">vanaf {{ integrationType.price }} EUR per jaar</p>
+          </div>
+          <div class="integration-content">
+            <p ng-bind="integrationType.description" class="integration-description"></p>
+            <ul ng-if="integrationType.extraInfo.length > 0" class="integration-benefits">
+              <li ng-repeat="extraInfo in integrationType.extraInfo" ng-bind="extraInfo"></li>
+            </ul>
+            <a class="btn" ng-href="{{ integrationType.url }}">Meer info</a>
+          </div>
         </div>
       </div>
     </div>

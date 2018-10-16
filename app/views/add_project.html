@@ -28,9 +28,8 @@
           </div>
           <div ng-repeat="integrationType in $ctrl.integrationTypes | orderBy: 'name'" class="radio">
             <label for="integration_type_{{ integrationType.id }}">
-            </span>
             <input type="radio" name="integration" id="integration_type_{{ integrationType.id }}" ng-value="integrationType" ng-model="$ctrl.formData.integration" required>
-            {{ integrationType.name }} <span class="text-muted">{{ integrationType.description }}
+            {{ integrationType.name }} <span class="text-muted">{{ integrationType.description }}</span>
            </label>
           </div>
           <div class="form-group required has-error" ng-show="addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted)">
@@ -57,6 +56,9 @@
                   <input type="checkbox" name="terms_and_conditions" value="" ng-model="$ctrl.formData.termsAndConditions" required> Ik ga akkoord met de <a href="http://documentatie.uitdatabank.be/content/integratie-op-je-eigen-website/latest/gebruiksvoorwaarden/" target="_blank">gebruiksvoorwaarden</a>
               </label>
               <p ng-show="addProject.terms_and_conditions.$invalid && (!addProject.terms_and_conditions.$pristine || addProject.$submitted)" class="help-block">Je dient akkoord te gaan met de gebruiksvoorwaarden.</p>
+          </div>
+          <div ng-show="$ctrl.formData.integration && !$ctrl.formData.integration.selfService">
+            <p>Voor de live-integratie van dit project is goedkeuring van publiq noodzakelijk.</p>
           </div>
           <button type="submit" class="btn btn-primary" ng-disabled="addProject.$invalid"><i ng-show="$ctrl.saving" class="fa fa-spinner fa-spin"></i> Versturen</button>
       </form>

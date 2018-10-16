@@ -10,6 +10,7 @@
     "angular-route": "1.6.10",
     "angular-sanitize": "1.6.10",
     "angular-touch": "1.6.10",
+    "angular-filter": "^0.5.17 ",
     "angular-uitid-service": "cultuurnet/angular-uitid-service",
     "components-font-awesome": "^4.7.0",
     "angular-bootstrap": "^2.2.0",

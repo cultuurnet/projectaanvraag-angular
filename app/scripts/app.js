@@ -19,7 +19,8 @@ angular
     'ngTouch',
     'ui.router',
     'cultuurnet.uitid',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angular.filter'
   ])
   /* @ngInject */
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $qProvider) {

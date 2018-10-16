@@ -39,6 +39,7 @@ function integrationTypeFactory() {
       this.groupId = jsonObject.groupId;
       this.sapiVersion = jsonObject.sapiVersion;
       this.selfService = jsonObject.selfService;
+      this.type = jsonObject.type;
 
       if (jsonObject.actionButton) {
         this.actionButton = jsonObject.actionButton;

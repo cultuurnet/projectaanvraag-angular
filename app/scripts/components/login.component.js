@@ -23,6 +23,8 @@
 
     ctrl.integrationTypes = [];
 
+    ctrl.integrationTypeDescription = {'input': 'neem data af van de uitdatabank', 'output': 'data versturen naar uitdatabank'};
+
     /**
     * Load the integration types and assign it to scope.
     */
