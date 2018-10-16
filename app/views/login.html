@@ -20,7 +20,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 integration-types">
-      <div ng-repeat="(key, value) in $ctrl.integrationTypes | groupBy: 'type'">
+      <div ng-repeat="(key, value) in $ctrl.integrationTypes | orderBy: '-type' | groupBy: 'type' ">
         <h2 class="type-title">{{key}} <span class="muted">{{$ctrl.integrationTypeDescription[key]}}</span></h2>
         <div class="integration-type" ng-repeat="integrationType in value | orderBy: 'name'">
           <div class="integration-header">
