@@ -12,10 +12,10 @@
     <div class="col-sm-8">
       <form name="addProject" ng-submit="$ctrl.processForm(addProject.$valid)" novalidate>
           <div class="form-group required" ng-class="{'has-error' : addProject.name.$invalid && (!addProject.name.$pristine || addProject.$submitted) }">
-              <label for="project_name" class="control-label">Naam van het project</label>
+              <label for="project_name" class="control-label">Naam van de organisatie of website waarop je de agenda wil integreren</label>
               <input type="text" id="project_name" class="form-control" name="name" ng-model="$ctrl.formData.name" required>
               <p ng-show="addProject.name.$invalid && (!addProject.name.$pristine || addProject.$submitted)" class="help-block">Project naam is verplicht.</p>
-              <p class="help-block">Geef een sprekende titel aan het project en vermeld de naam van de organisatie.</p>
+              <p class="help-block">Geef een duidelijke titel aan het project en vermeld de naam van de organisatie.</p>
           </div>
           <div class="form-group required" ng-class="{'has-error' : addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted) }">
               <label for="project_summary" class="control-label">Doel van het project</label>
