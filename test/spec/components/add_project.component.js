@@ -59,6 +59,7 @@ describe('Component: addProjectComponent', function () {
 
         spyOn($state, 'go');
         controller.formData = {
+            integration: {id: 1},
             name: 'name'
         };
 
@@ -78,12 +79,15 @@ describe('Component: addProjectComponent', function () {
      */
     it('submits the form', function () {
 
+        var sampleIntegration = {id: 1};
+
         var defer2 = $q.defer();
         var promise = defer2.promise;
         projectaanvraagApiService.addProject.and.returnValue(promise);
 
         spyOn($state, 'go');
         controller.formData = {
+            integration: sampleIntegration,
             coupon: 'coupon',
             name: 'name',
         };
@@ -93,7 +97,7 @@ describe('Component: addProjectComponent', function () {
         defer2.resolve();
         $scope.$digest();
 
-        expect(projectaanvraagApiService.addProject).toHaveBeenCalledWith({name: 'name'});
+        expect(projectaanvraagApiService.addProject).toHaveBeenCalledWith({integration: sampleIntegration, name: 'name', integrationType: sampleIntegration.id});
     });
 
     /**
@@ -106,6 +110,7 @@ describe('Component: addProjectComponent', function () {
         projectaanvraagApiService.addProject.and.returnValue(promise);
 
         controller.formData = {
+            integration: {id: 1},
             coupon: 'coupon',
             name: 'name',
         };
@@ -127,6 +132,7 @@ describe('Component: addProjectComponent', function () {
         projectaanvraagApiService.addProject.and.returnValue(promise);
 
         controller.formData = {
+            integration: {id: 1},
             coupon: 'coupon',
             name: 'name',
         };

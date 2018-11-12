@@ -23,6 +23,8 @@
 
     ctrl.integrationTypes = [];
 
+    ctrl.integrationTypeDescription = {'output': 'Evenementinformatie ophalen van UiTdatabank', 'input': 'Evenementinformatie versturen naar UiTdatabank'};
+
     /**
     * Load the integration types and assign it to scope.
     */

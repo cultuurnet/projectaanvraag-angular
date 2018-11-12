@@ -23,20 +23,19 @@
               <p ng-show="addProject.summary.$invalid && (!addProject.summary.$pristine || addProject.$submitted)" class="help-block">Doel van het project is verplicht.</p>
               <p class="help-block">Geef een duidelijke, gemotiveerde beschrijving van het project dat je wil aanmaken <small>(max. 200 karakters)</small>.</p>
           </div>
-          <div class="form-group required" ng-class="{'has-error' : addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted) }">
+          <div class="form-group required" ng-class="{'has-error' : addProject.integration.$invalid && (!addProject.integration.$pristine || addProject.$submitted) }">
               <label class="control-label">Type integratie</label>
           </div>
           <div ng-repeat="integrationType in $ctrl.integrationTypes | orderBy: 'name'" class="radio">
             <label for="integration_type_{{ integrationType.id }}">
-            </span>
-            <input type="radio" name="integrationType" id="integration_type_{{ integrationType.id }}" ng-value="integrationType.id" ng-model="$ctrl.formData.integrationType" required>
-            {{ integrationType.name }} <span class="text-muted">{{ integrationType.description }}
+            <input type="radio" name="integration" id="integration_type_{{ integrationType.id }}" ng-value="integrationType" ng-model="$ctrl.formData.integration" required>
+            {{ integrationType.name }} <span class="text-muted">{{ integrationType.description }}</span>
            </label>
           </div>
           <div class="form-group required has-error" ng-show="addProject.integrationType.$invalid && (!addProject.integrationType.$pristine || addProject.$submitted)">
               <p class="help-block">Gelieve een optie te selecteren.</p>
           </div>
-          <div class="checkbox">
+          <div class="checkbox" ng-show="$ctrl.formData.integration.selfService">
               <label>
                   <input type="checkbox" value="" class="js-check-coupon" ng-model="$ctrl.useCoupon"> Ik heb een coupon
               </label>
@@ -57,6 +56,9 @@
                   <input type="checkbox" name="terms_and_conditions" value="" ng-model="$ctrl.formData.termsAndConditions" required> Ik ga akkoord met de <a href="http://documentatie.uitdatabank.be/content/integratie-op-je-eigen-website/latest/gebruiksvoorwaarden/" target="_blank">gebruiksvoorwaarden</a>
               </label>
               <p ng-show="addProject.terms_and_conditions.$invalid && (!addProject.terms_and_conditions.$pristine || addProject.$submitted)" class="help-block">Je dient akkoord te gaan met de gebruiksvoorwaarden.</p>
+          </div>
+          <div ng-show="$ctrl.formData.integration && !$ctrl.formData.integration.selfService">
+            <p>Voor de live-integratie van dit project is goedkeuring van publiq noodzakelijk.</p>
           </div>
           <button type="submit" class="btn btn-primary" ng-disabled="addProject.$invalid"><i ng-show="$ctrl.saving" class="fa fa-spinner fa-spin"></i> Versturen</button>
       </form>

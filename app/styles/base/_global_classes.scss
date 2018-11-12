@@ -30,35 +30,42 @@ body {
   display: none !important;
 }
 
-@media only screen and (min-width: 766px) {
-  .integration-types {
-   display: flex;
-  }
-}
-
 .integration-type {
-  background-color: #FFF;
+  background-color: #F3F3F3;
   border: 1px solid #ccc;
-  padding: 1em 1em 4rem 1em;
+  padding: 1em;
   border-radius: 0;
   color: #777;
   width: 100%;
   height: 100%;
   margin-bottom: 15px;
+  display: flex;
 
   h4 {
     color: #004F94;
     font-size: 1.2em;
     font-weight: bold;
-    margin-bottom: 20px;
+    width: 25%;
   }
 
-  .btn {
-    position: absolute;
-    bottom: 1em;
+  .integration-header {
+    width: 25%;
+    padding-right: 15px;
   }
 }
 
 a {
   color: $brand-primary;
+}
+
+.type-title {
+  font-size: 20px;
+  text-transform: capitalize;
+
+  .muted {
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: #333;
+    text-transform: none;
+  }
 }

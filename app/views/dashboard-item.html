@@ -44,11 +44,15 @@
 
                 <p ng-show="$ctrl.project.status.code"><span class="state" ng-class="$ctrl.project.status.class" ng-bind="$ctrl.project.status.label"></span></p>
 
-                <div ng-show="$ctrl.isInactive()">
+                <div ng-show="$ctrl.isInactive() && $ctrl.project.group.selfService">
                     <p ng-show="$ctrl.isInactive()">Aan de slag met echte data en evenementen?<br>Activeer je project ({{ $ctrl.project.group.price }} euro per jaar)</p>
                     <p ng-show="$ctrl.isInactive()">
                         <a class="btn btn-primary" ng-click="$ctrl.requestActivation();">Activeren</a>
                     </p>
+                </div>
+
+                <div ng-show="$ctrl.isInactive() && !$ctrl.project.group.selfService">
+                  Voor de live-integratie van dit project is goedkeuring van publiq noodzakelijk. Neem hiervoor contact op met corneel@publiq.be .
                 </div>
 
                 <div ng-show="$ctrl.isLive()">
