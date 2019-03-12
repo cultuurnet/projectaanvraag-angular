@@ -42,6 +42,8 @@ module.exports = function (grunt) {
     basePath: loadConfig().appConfig.basePath || '/'
   };
 
+  var serveStatic = require('serve-static');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -97,20 +99,20 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
+              serveStatic('.tmp'),
               connect().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                  serveStatic('./bower_components')
               ),
               connect().use(
                 '/app/styles',
-                connect.static('./app/styles')
+                  serveStatic('./app/styles')
               ),
               connect().use(
                 '/node_modules',
-                connect.static('./node_modules')
+                  serveStatic('./node_modules')
               ),
-              connect.static(appConfig.app)
+              serveStatic(appConfig.app)
             ];
           }
         }
@@ -120,13 +122,13 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
-              connect.static('test'),
+              serveStatic('.tmp'),
+              serveStatic('test'),
               connect().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                  serveStatic('./bower_components')
               ),
-              connect.static(appConfig.app)
+              serveStatic(appConfig.app)
             ];
           }
         }
