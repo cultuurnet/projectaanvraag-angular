@@ -40,6 +40,7 @@ function integrationTypeFactory() {
       this.sapiVersion = jsonObject.sapiVersion;
       this.selfService = jsonObject.selfService;
       this.type = jsonObject.type;
+      this.enableActivation = jsonObject.enableActivation;
 
       if (jsonObject.actionButton) {
         this.actionButton = jsonObject.actionButton;
