@@ -26,7 +26,7 @@
           <div class="form-group required" ng-class="{'has-error' : addProject.integration.$invalid && (!addProject.integration.$pristine || addProject.$submitted) }">
               <label class="control-label">Type integratie</label>
           </div>
-          <div ng-repeat="integrationType in $ctrl.integrationTypes | orderBy: 'name'" class="radio">
+          <div ng-repeat="integrationType in $ctrl.integrationTypes | filter: {'enableActivation': true} | orderBy: 'name'" class="radio">
             <label for="integration_type_{{ integrationType.id }}">
             <input type="radio" name="integration" id="integration_type_{{ integrationType.id }}" ng-value="integrationType" ng-model="$ctrl.formData.integration" required>
             {{ integrationType.name }} <span class="text-muted">{{ integrationType.description }}</span>

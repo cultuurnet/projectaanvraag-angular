@@ -22,7 +22,7 @@
     <div class="col-xs-12 integration-types">
       <div ng-repeat="(key, value) in $ctrl.integrationTypes | orderBy: '-type' | groupBy: 'type' ">
         <h2 class="type-title">{{key}} <span class="muted">{{$ctrl.integrationTypeDescription[key]}}</span></h2>
-        <div class="integration-type" ng-repeat="integrationType in value | orderBy: 'name'">
+        <div class="integration-type" ng-repeat="integrationType in value | filter: {'enableActivation': true} | orderBy: 'name'">
           <div class="integration-header">
             <a ng-href="{{ integrationType.url }}">
               <h4 class="integration-title" ng-bind="integrationType.name"></h4>
