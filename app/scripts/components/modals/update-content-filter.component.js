@@ -39,7 +39,6 @@
          * Send the update request.
          */
         ctrl.updateContentFilter = function () {
-            console.log(lineBreakRegex);
             ctrl.error = '';
             ctrl.saving = true;
             ctrl.contentFilter = ctrl.contentFilter.replace(lineBreakRegex,'');
