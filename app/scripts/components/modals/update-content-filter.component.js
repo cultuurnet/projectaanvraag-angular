@@ -41,7 +41,9 @@
         ctrl.updateContentFilter = function () {
             ctrl.error = '';
             ctrl.saving = true;
-            ctrl.contentFilter = ctrl.contentFilter.replace(lineBreakRegex,'');
+            if(ctrl.contentFilter){
+              ctrl.contentFilter = ctrl.contentFilter.replace(lineBreakRegex,'');
+            }
             Messages.clearMessages();
 
             projectaanvraagApiService.updateContentFilter(ctrl.resolve.project.id, ctrl.contentFilter).then(function(project) {
