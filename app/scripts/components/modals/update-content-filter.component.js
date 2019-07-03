@@ -31,6 +31,7 @@
          */
         ctrl.$onInit = function() {
             ctrl.sapiVersion = ctrl.resolve.project.sapiVersion;
+            console.log('sapiversion', ctrl.sapiVersion);
             ctrl.contentFilter = ctrl.resolve.project.contentFilter;
         };
 
@@ -45,6 +46,7 @@
 
             projectaanvraagApiService.updateContentFilter(ctrl.resolve.project.id, ctrl.contentFilter).then(function(project) {
                 Messages.addMessage('success', 'De content filter werd succesvol aangepast.');
+                projectaanvraagApiService.clearSearchCache(project.testApiKeySapi3);
                 ctrl.close({$value: project});
                 ctrl.saving = false;
 

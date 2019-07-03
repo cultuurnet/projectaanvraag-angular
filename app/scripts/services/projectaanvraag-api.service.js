@@ -307,4 +307,31 @@ function projectaanvraagApiService($q, $http, appConfig, IntegrationType, Cultuu
 
         return defer.promise;
     };
+
+    /**
+     * Clears the search cache linked to an api-key
+     *
+     * @returns {Promise}
+     *   A promise with a response.
+     */
+    service.clearSearchCache = function (apikey) {
+      var defer = $q.defer();
+      var searchApiUrl = 'https://search.uitdatabank.be/';
+      var req = {
+       method: 'DELETE',
+       url: searchApiUrl + 'api-keys/cache/' + apikey,
+       headers: {
+         'x-api-key': '0a5a9ce4-7066-11e7-a783-0271c1cbe993'
+       }
+     };
+      $http(req)
+        .then(function () {
+          defer.resolve();
+        })
+        .catch(function () {
+          defer.reject('unable to clear search cache');
+        });
+
+      return defer.promise;
+    };
 }
