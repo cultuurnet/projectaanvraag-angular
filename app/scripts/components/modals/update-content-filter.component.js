@@ -22,6 +22,7 @@
 
         /*jshint validthis: true */
         var ctrl = this;
+        var lineBreakRegex = new RegExp(/\r?\n|\r/g);
 
         ctrl.error = '';
         ctrl.saving = false;
@@ -38,9 +39,11 @@
          * Send the update request.
          */
         ctrl.updateContentFilter = function () {
-
             ctrl.error = '';
             ctrl.saving = true;
+            if(ctrl.contentFilter){
+              ctrl.contentFilter = ctrl.contentFilter.replace(lineBreakRegex,'');
+            }
             Messages.clearMessages();
 
             projectaanvraagApiService.updateContentFilter(ctrl.resolve.project.id, ctrl.contentFilter).then(function(project) {
