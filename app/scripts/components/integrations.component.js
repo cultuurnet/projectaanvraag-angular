@@ -16,16 +16,22 @@
     });
 
   /* @ngInject */
-  function integrationsController($location, $state) {
+  function integrationsController($location, uitidService, $state) {
 
     /*jshint validthis: true */
     var ctrl = this;
 
     /**
-     * Redirect to the add project page.
+     * Redirect to the login screen.
      */
-    ctrl.redirectToAddProject = function() {
-      $state.go('authenticated.addProject');
+    ctrl.login = function() {
+      var destination = $location.absUrl();
+
+      // send the user to somewhere that makes sense when navigating from the login page
+      if ($state.current.name === 'login') {
+        destination = $state.href('authenticated.dashboard', {}, {absolute: true});
+      }
+      uitidService.login(destination, true);
     };
   }
 
