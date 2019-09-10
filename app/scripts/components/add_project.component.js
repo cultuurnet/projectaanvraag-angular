@@ -14,7 +14,7 @@
     });
 
   /* @ngInject */
-  function addProjectController($state, projectaanvraagApiService, Messages, apiErrorCodes, $location, $anchorScroll) {
+  function addProjectController($state, $timeout, projectaanvraagApiService, Messages, apiErrorCodes, $location, $anchorScroll) {
     /*jshint validthis: true */
     var ctrl = this;
 
@@ -53,8 +53,10 @@
           projectaanvraagApiService.addProject(ctrl.formData).then(function() {
             // Show success message and redirect to the dashboard
             Messages.addMessage('success', 'Je project is aangemaakt. Je vindt het hieronder in de lijst terug.');
-            ctrl.saving = false;
-            $state.go('authenticated.dashboard');
+              $timeout(function(){
+                ctrl.saving = false;
+                $state.go('authenticated.dashboard');
+              }, 500);
           }, function(result) {
 
             // Show error label, if the code is known.
