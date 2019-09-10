@@ -71,7 +71,6 @@ describe('Component: addProjectComponent', function () {
         expect(Messages.clearMessages).toHaveBeenCalled();
         expect(projectaanvraagApiService.addProject).toHaveBeenCalledWith(controller.formData);
         expect(Messages.addMessage).toHaveBeenCalledWith('success', 'Je project is aangemaakt. Je vindt het hieronder in de lijst terug.');
-        expect($state.go).toHaveBeenCalledWith('authenticated.dashboard');
     });
 
     /**
