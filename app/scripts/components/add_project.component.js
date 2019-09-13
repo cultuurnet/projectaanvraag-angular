@@ -56,7 +56,7 @@
               $timeout(function(){
                 ctrl.saving = false;
                 $state.go('authenticated.dashboard');
-              }, 500);
+              }, 1000);
           }, function(result) {
 
             // Show error label, if the code is known.
