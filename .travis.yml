@@ -7,7 +7,7 @@ before_install:
   - npm install -g grunt@1.0.3 grunt-cli@1.2.0
   - npm install -g bower
 install:
-  - npm install
+  - npm ci
   - bower install
 script:
   - grunt --version
