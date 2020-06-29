@@ -9,4 +9,4 @@ before_install:
 install:
   - npm install
   - bower install
-script: grunt && grunt test && grunt coveralls
+script: grunt -v && grunt && grunt test && grunt coveralls
