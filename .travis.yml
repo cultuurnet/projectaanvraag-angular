@@ -9,7 +9,7 @@ cache:
 
 before_install:
   - gem install compass
-  - npm install -g npm@2
+  - npm install -g npm@6.9.0
   - npm install -g grunt@1.0.3 grunt-cli@1.2.0
   - npm install -g bower
 
