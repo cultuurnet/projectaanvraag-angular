@@ -6,8 +6,7 @@
     <div class="modal-body">
 
         <div ng-show="!$ctrl.hasInsightlyProjectId">
-          <p>Sorry, ons activatiesysteem lijkt op dit moment offline.<br/>
-          Probeer het later opnieuw of <a href="mailto:vragen@uitdatabank.be?SUBJECT=Probleem met activatie project {{$ctrl.project.id}}">contacteer onze helpdesk</a>.</p>
+            <p>Sorry, ons activatiesysteem lijkt op dit moment offline.<br><a onclick="window.location.reload();">Probeer opnieuw</a>.</p>
         </div>
 
         <div ng-show="$ctrl.hasInsightlyProjectId">
