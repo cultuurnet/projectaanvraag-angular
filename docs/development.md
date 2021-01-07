@@ -14,4 +14,4 @@ Install other dependencies using `npm i` and then `npm run bower -- install`.
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma.
+Running `npm run test` will run the unit tests with karma.
