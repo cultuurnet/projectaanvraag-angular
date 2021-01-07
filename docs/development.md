@@ -1,12 +1,14 @@
 # Development
 
-[Grunt](http://gruntjs.com) is used to build and serve the app.
+You will need to install [Compass](http://compass-style.org/install/) on your local system.
 
-`grunt serve`
+Install other dependencies using `npm i` and then `npm run bower -- install`.
+
+`npm run serve`
 * Serves the app on http://localhost:9999
 * Livereload is added to reload the browser after file changes.
 
-`grunt build`
+`npm run build`
 * Builds the app to the `dist` folder.
 * This process resembles the process for production the most.
 
