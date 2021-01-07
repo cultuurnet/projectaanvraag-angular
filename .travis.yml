@@ -8,6 +8,9 @@ node_js:
 cache:
   npm: false
 
+before_install:
+  - gem install compass
+
 install:
   - npm ci
   - npm run bower -- install
