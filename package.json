@@ -52,7 +52,9 @@
   },
   "scripts": {
     "build": "grunt build",
+    "test": "grunt test",
     "serve": "grunt serve",
+    "coveralls": "grunt coveralls",
     "bower": "bower"
   }
 }
