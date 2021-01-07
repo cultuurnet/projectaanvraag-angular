@@ -21,7 +21,6 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-coveralls": "^2.0.0",
     "grunt-filerev": "^2.1.2",
-    "grunt-google-cdn": "^0.4.3",
     "grunt-jscs": "^3.0.1",
     "grunt-karma": "^3.0.1",
     "grunt-karma-coveralls": "^2.5.4",
