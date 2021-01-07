@@ -50,5 +50,10 @@
   "dependencies": {
     "angular": "^1.8.0",
     "angular-ui-router": "^1.0.22"
+  },
+  "scripts": {
+    "build": "grunt build",
+    "serve": "grunt serve",
+    "bower": "bower"
   }
 }
