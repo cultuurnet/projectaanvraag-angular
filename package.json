@@ -2,6 +2,7 @@
   "name": "projectaanvraagangular",
   "private": true,
   "devDependencies": {
+    "bower": "^1.8.8",
     "autoprefixer": "^9.4.10",
     "grunt": "1.0.4",
     "grunt-angular-templates": "^1.1.0",
@@ -20,7 +21,6 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-coveralls": "^2.0.0",
     "grunt-filerev": "^2.1.2",
-    "grunt-google-cdn": "^0.4.3",
     "grunt-jscs": "^3.0.1",
     "grunt-karma": "^3.0.1",
     "grunt-karma-coveralls": "^2.5.4",
@@ -49,5 +49,12 @@
   "dependencies": {
     "angular": "^1.8.0",
     "angular-ui-router": "^1.0.22"
+  },
+  "scripts": {
+    "build": "grunt build",
+    "test": "grunt test",
+    "serve": "grunt serve",
+    "coveralls": "grunt coveralls",
+    "bower": "bower"
   }
 }

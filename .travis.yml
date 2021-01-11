@@ -1,24 +1,15 @@
 language: node_js
 node_js:
-  - "6"
-
-# Disable npm cache to make npm ci work reliably
-# See https://travis-ci.community/t/npm-ci-will-fail-if-cached-dependency-includes-npm/4203/2
-cache:
-  npm: false
+  - "14"
 
 before_install:
   - gem install compass
-  - npm install -g npm@6.9.0
-  - npm install -g grunt@1.0.3 grunt-cli@1.2.0
-  - npm install -g bower
 
 install:
-  - npm ci
-  - bower install
+  - npm install
+  - npm run bower -- install
 
 script:
-  - grunt --version
-  - grunt
-  - grunt test
-  - grunt coveralls
+  - npm run build
+  - npm run test
+  - npm run coveralls
