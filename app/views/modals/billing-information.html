@@ -17,7 +17,7 @@
         </div>
 
         <div class="loader">
-            <i class="fa fa-spinner fa-spin loader" ng-show="$ctrl.loading"></i>
+            <i class="fas fa-spinner fa-spin loader" ng-show="$ctrl.loading"></i>
         </div>
 
         <fieldset ng-disabled="$ctrl.isSending">
@@ -27,6 +27,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-link" ng-click="$ctrl.dismiss();">Annuleren</button>
-        <button type="button" class="btn btn-primary" ng-if="!$ctrl.apiError" ng-disabled="$ctrl.billingInformation.$invalid || $ctrl.isSending" ng-click="$ctrl.updateBillingInformation();"><i ng-show="$ctrl.isSending" class="fa fa-spinner fa-spin"></i> Bevestigen</button>
+        <button type="button" class="btn btn-primary" ng-if="!$ctrl.apiError" ng-disabled="$ctrl.billingInformation.$invalid || $ctrl.isSending" ng-click="$ctrl.updateBillingInformation();"><i ng-show="$ctrl.isSending" class="fas fa-spinner fa-spin"></i> Bevestigen</button>
     </div>
 </div><!-- /.modal-content -->
