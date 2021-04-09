@@ -12,7 +12,7 @@
     "angular-touch": "1.6.10",
     "angular-filter": "^0.5.17 ",
     "angular-uitid-service": "cultuurnet/angular-uitid-service",
-    "components-font-awesome": "^5.15.0",
+    "components-font-awesome": "^5.15.3",
     "angular-bootstrap": "^2.2.0",
     "Snap.svg": "latest"
   },
