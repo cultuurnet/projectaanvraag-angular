@@ -47,6 +47,14 @@ function cultuurnetProjectFactory(IntegrationType, ProjectStatuses) {
       this.sapiVersion = jsonObject.sapiVersion || '2';
       this.contentFilter = jsonObject.contentFilter || '';
 
+      this.insightlyUrl = 'https://crm.na1.insightly.com/details/Project/' + this.insightlyProjectId;
+      if (jsonObject.projectIdInsightly) {
+        this.insightlyUrl = 'https://crm.na1.insightly.com/details/Project/' + this.projectIdInsightly;
+      }
+      if (jsonObject.opportunityIdInsightly && !jsonObject.projectIdInsightly) {
+        this.insightlyUrl = 'https://crm.na1.insightly.com/details/Opportunity/' + this.opportunityIdInsightly;
+      }
+
       if (jsonObject.status && ProjectStatuses[jsonObject.status.toUpperCase()]) {
         jsonObject.status = ProjectStatuses[jsonObject.status.toUpperCase()];
       }
