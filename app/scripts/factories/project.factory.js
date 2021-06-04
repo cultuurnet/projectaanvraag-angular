@@ -49,10 +49,10 @@ function cultuurnetProjectFactory(IntegrationType, ProjectStatuses) {
 
       this.insightlyUrl = 'https://crm.na1.insightly.com/details/Project/' + this.insightlyProjectId;
       if (jsonObject.projectIdInsightly) {
-        this.insightlyUrl = 'https://crm.na1.insightly.com/details/Project/' + this.projectIdInsightly;
+        this.insightlyUrl = 'https://crm.na1.insightly.com/details/Project/' + jsonObject.projectIdInsightly;
       }
       if (jsonObject.opportunityIdInsightly && !jsonObject.projectIdInsightly) {
-        this.insightlyUrl = 'https://crm.na1.insightly.com/details/Opportunity/' + this.opportunityIdInsightly;
+        this.insightlyUrl = 'https://crm.na1.insightly.com/details/Opportunity/' + jsonObject.opportunityIdInsightly;
       }
 
       if (jsonObject.status && ProjectStatuses[jsonObject.status.toUpperCase()]) {
