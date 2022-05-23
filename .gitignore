@@ -8,3 +8,6 @@ config.json
 /app/scripts/config.js
 .DS_Store
 /app/fonts/fa-*
+/pkg
+/vendor
+.bundle
