@@ -16,7 +16,7 @@ namespace 'projectaanvraag-frontend' do
 
     system("fpm -s dir -t deb -n #{artifact_name} -v #{version} -a all -p pkg \
       --prefix /var/www/projectaanvraag-frontend \
-      --before-remove prerm -C dist \
+      --before-remove lib/tasks/projectaanvraag-frontend/prerm -C dist \
       --depends rubygem-angular-config \
       --deb-user www-data --deb-group www-data \
       --description '#{description}' --url '#{source}' --vendor '#{vendor}' \
