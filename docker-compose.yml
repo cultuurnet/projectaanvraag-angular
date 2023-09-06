@@ -5,6 +5,15 @@ services:
   node:
     build: docker/node
     hostname: 'projectaanvraag-frontend.local'
+    volumes:
+      - .:/var/www/html:cached
+    working_dir: /var/www/html/app
     container_name: node.projectaanvraag
     ports:
       - '9999:9999'
+    networks:
+      - projectaanvraag
+
+networks:
+  projectaanvraag:
+    driver: bridge
