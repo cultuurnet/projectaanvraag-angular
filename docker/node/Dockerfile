@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl gnupg
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl gnupg vim libffi-dev
 
 RUN mkdir -p /etc/apt/keyrings
 
@@ -10,6 +10,6 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 
 RUN apt-get update && apt-get install -y --no-install-recommends nodejs
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+RUN npm run serve
 
 
