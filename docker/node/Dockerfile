@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl gnupg vim libffi-dev
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl gnupg vim libffi-dev git
 
 RUN mkdir -p /etc/apt/keyrings
 
@@ -10,6 +10,12 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 
 RUN apt-get update && apt-get install -y --no-install-recommends nodejs
 
-RUN npm run serve
+RUN npm i &
 
+RUN npm run bower -- install &
 
+RUN npm run build &
+
+RUN npm run serve &
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]

@@ -7,7 +7,7 @@ services:
     hostname: 'projectaanvraag-frontend.local'
     volumes:
       - .:/var/www/html:cached
-    working_dir: /var/www/html/app
+    working_dir: /var/www/html
     container_name: node.projectaanvraag
     ports:
       - '9999:9999'
