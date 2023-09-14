@@ -1,4 +1,4 @@
-.PHONY: up down bash
+.PHONY: up down bash serve
 
 up:
 	docker-compose up -d
@@ -8,3 +8,6 @@ down:
 
 bash:
 	docker exec -it node.projectaanvraag bash
+
+serve:
+	docker exec -d node.projectaanvraag npm run serve
