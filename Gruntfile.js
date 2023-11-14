@@ -7,17 +7,21 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+const sass = require('node-sass');
+
 module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+
+  require('load-grunt-tasks')(grunt);
 
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
     coveralls: 'grunt-karma-coveralls',
-    ngconstant: 'grunt-ng-constant'
+    ngconstant: 'grunt-ng-constant',
   });
 
   var loadConfig = function() {
@@ -249,11 +253,12 @@ module.exports = function (grunt) {
 
     sass: {
       options: {
-        sourceMap: true
+        implementation: sass,
+        sourceMap: false
       },
       dist: {
         files: {
-          'main.css': 'main.scss'
+          'app/styles/projectaanvraag.css': 'app/styles/projectaanvraag.scss'
         }
       }
     },
@@ -469,6 +474,7 @@ module.exports = function (grunt) {
         'copy:fonts'
       ],
       dist: [
+        'sass',
         'imagemin',
         'svgmin',
         'copy:fonts'
