@@ -14,8 +14,4 @@ RUN npm i &
 
 RUN npm run bower -- install &
 
-RUN npm run build &
-
-RUN npm run serve &
-
 ENTRYPOINT ["tail", "-f", "/dev/null"]

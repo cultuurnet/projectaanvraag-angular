@@ -10,4 +10,4 @@ bash:
 	docker exec -it node.projectaanvraag bash
 
 serve:
-	docker exec -d node.projectaanvraag npm run serve
+	docker exec -d node.projectaanvraag npm run serve:docker
