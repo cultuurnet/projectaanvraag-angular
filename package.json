@@ -2,9 +2,9 @@
   "name": "projectaanvraagangular",
   "private": true,
   "devDependencies": {
-    "bower": "^1.8.8",
     "autoprefixer": "^9.4.10",
-    "grunt": "1.0.4",
+    "bower": "^1.8.8",
+    "grunt": "^1.0.4",
     "grunt-angular-templates": "^1.1.0",
     "grunt-concurrent": "^2.3.1",
     "grunt-contrib-clean": "^2.0.0",
@@ -35,10 +35,6 @@
     "jasmine-core": "^3.3.0",
     "jit-grunt": "^0.10.0",
     "jshint-stylish": "^2.2.1",
-    "karma": "^3.1.4",
-    "karma-coverage": "^1.1.2",
-    "karma-jasmine": "^2.0.1",
-    "karma-phantomjs-launcher": "^1.0.2",
     "npm": "^6.14.6",
     "serve-static": "^1.13.2",
     "time-grunt": "^2.0.0"
@@ -54,6 +50,7 @@
     "build": "grunt build",
     "test": "grunt test",
     "serve": "grunt serve",
+    "serve:docker": "grunt serve --hostname 0.0.0.0",
     "coveralls": "grunt coveralls",
     "bower": "bower"
   }

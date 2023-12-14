@@ -90,7 +90,7 @@ module.exports = function (grunt) {
       options: {
         port: 9999,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -463,15 +463,12 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'compass:server',
         'copy:fonts'
       ],
       test: [
-        'compass',
         'copy:fonts'
       ],
       dist: [
-        'compass:dist',
         'imagemin',
         'svgmin',
         'copy:fonts'
